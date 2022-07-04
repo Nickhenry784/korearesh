@@ -121,7 +121,7 @@ export default function App() {
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
       {isLoading ? (
-        <ActivityIndicator size="small" />
+        <ActivityIndicator size="large" />
       ) : (
         <>
           <Text style={styles.labelText}>In-app Purchase</Text>
