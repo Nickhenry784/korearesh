@@ -5,6 +5,7 @@ import {
   Text, Dimensions,
   ImageBackground, 
   Image,
+  Animated,
   TextInput, 
   Alert  } from "react-native";
 import React, {useEffect, useState} from 'react';
@@ -12,8 +13,6 @@ import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets";
-import CheckBox from "@react-native-community/checkbox";
-import { de } from "date-fns/locale";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -24,17 +23,23 @@ const HomeScreen = () => {
   const points = useSelector(state => state.points);
   const [modalState, setModalState] = useState(false);
   const [time, setTime] = useState(0);
+  const [randomClound, setRandomClound] = useState([15,8]);
+  const [randomAstro, setRandomAstro] = useState(10);
+  const [randomRotate, setRandomRotate] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [second, setSecond] = useState(0);
   const [start, setStart] = useState(false);
   const dispatch = useDispatch();
-  const [isSelected, setSelection] = useState(false);
 
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
       if(start && second > 0 && minutes >= 0 && time >= 0 ){
         setSecond(second - 1);
+        setRandomAstro(Math.floor(7 + Math.random() * 8));
+        randomClound[0] = Math.floor(10 + Math.random() * 20);
+        randomClound[1] = Math.floor(5 + Math.random() * 12);
+        setRandomRotate(Math.floor(Math.random() * 360));
       };
       if(start && second === 0 && minutes > 0 && time >= 0 ){
         setSecond(60);
@@ -64,13 +69,26 @@ const HomeScreen = () => {
       Alert.alert("Please buy more turn!");
       return false;
     }
-    dispatch(decrement());
-    setModalState(true);
+    if(minutes === 0){
+      setModalState(true);
+    } else{
+      setStart(true);
+    }
+    
   }
 
   const onClickOKButton = () => {
     setModalState(false);
+    dispatch(decrement());
     setStart(true);
+  }
+
+  const onClickBackButton = () => {
+    setModalState(false);
+  }
+
+  const onClickPauseBtn = () => {
+    setStart(!start);
   }
 
 
@@ -79,36 +97,55 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buy_icon} style={appStyle.buyImage} />
+            <Image source={images.buy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <Text style={appStyle.labelText1}>Set Time</Text>
       <View style={appStyle.centerView}>
-        <Image source={images.clock} style={appStyle.scoreStyle} />
-        <CheckBox
-          value={isSelected}
-          onValueChange={setSelection}
-          style={appStyle.checkbox}
-        />
-        <Text style={appStyle.labelText}>Minutes</Text>
+        <Animated.Image source={images.astronaut} style={[appStyle.sunImage,{
+          position: 'absolute',
+          top: `${randomAstro} %`,
+        }]} />
+        <Animated.Image source={images.sun} style={[appStyle.sunImage, {
+          position: 'absolute',
+          top: `${randomClound[0]} %`,
+          right: `${randomClound[1]} %`,
+        }]} />
+        <Animated.Image source={images.cloud} style={[appStyle.sunImage, {
+          position: 'absolute',
+          top: `${randomClound[0]} %`,
+          left: `${randomClound[1]} %`,
+        }]} />
+        <Animated.Image source={images.earth} style={[appStyle.earthImage,{
+          position: 'absolute',
+          top: '30%',
+          transform: [{
+            rotate: `${randomRotate} deg`
+          }]
+        }]} />
+        {start && <Text style={appStyle.timeText}>{`${time} : ${minutes} : ${second}`}</Text>}
       </View>
-      <TouchableOpacity onPress={onClickStartButton}>
-        <Image source={images.start} style={appStyle.createButton} />
+      <TouchableOpacity onPress={start ? onClickPauseBtn : onClickStartButton}>
+        <Image source={start ? images.stop : images.play} style={appStyle.createButton} />
       </TouchableOpacity>
-      {start && <Text style={appStyle.timeText}>{`${time} : ${minutes} : ${second}`}</Text>}
       <View style={appStyle.bottomView}>
-        <Image style={appStyle.logoImage} source={start ? images.teeth_start : images.teeth_ok} />
+        <Image style={appStyle.logoImage} source={images.clouds} />
       </View>
       {modalState && <View style={appStyle.modalView}>
-          <View style={appStyle.panelModal}>
-            <Text style={appStyle.labelText}>Time:</Text>
+          <ImageBackground style={appStyle.panelModal} source={images.popup}>
             <View style={appStyle.timeInput}>
               <TextInput
               style={appStyle.input}
-              onChangeText={isSelected ? setMinutes : setTime}
-              value={isSelected ? minutes : time}
+              onChangeText={setTime}
+              value={time}
+              keyboardType="numeric"
+              />
+              <Text style={appStyle.labelText}>:</Text>
+              <TextInput
+              style={appStyle.input}
+              onChangeText={setMinutes}
+              value={minutes}
               keyboardType="numeric"
               />
               <Text style={appStyle.labelText}>:</Text>
@@ -119,10 +156,15 @@ const HomeScreen = () => {
               keyboardType="numeric"
               />
             </View>
-            <TouchableOpacity onPress={onClickOKButton}>
-              <Image source={images.start} style={appStyle.createButton} />
-            </TouchableOpacity>
-          </View>
+            <View style={appStyle.timeInput}>
+              <TouchableOpacity onPress={onClickOKButton}>
+                <Image source={images.ok} style={appStyle.createButton} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={onClickBackButton}>
+                <Image source={images.back} style={appStyle.createButton} />
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>}
     </ImageBackground>
   );
@@ -139,9 +181,9 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'cover',
   },
   logoImage: {
-    width: windowWidth * 0.5,
-    height: windowWidth * 0.7,
-    resizeMode: 'contain',
+    width: windowWidth,
+    height: windowWidth * 0.2,
+    resizeMode: 'cover',
   },
   modalView: {
     width: '100%',
@@ -157,35 +199,32 @@ export const appStyle = StyleSheet.create({
   },
   panelModal: {
     width: windowWidth * 0.8,
-    height: windowHeight * 0.3,
-    backgroundColor: 'white',
+    height: windowHeight * 0.4,
+    resizeMode: 'contain',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     paddingVertical: 20,
   },
   timeInput: {
-    width: '50%',
-    height: windowHeight * 0.08,
+    width: '80%',
+    height: windowHeight * 0.15,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  checkbox: {
-    alignSelf: "center",
+  appBar: {
+    flex: 0.1,
+    paddingRight: 20,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-  },
-  appBar: {
-    flex: 0.4,
-    paddingRight: 20,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
   },
   turnView: {
     flexDirection: 'row',
@@ -219,7 +258,7 @@ export const appStyle = StyleSheet.create({
     fontWeight: 'bold',
   },
   labelText: {
-    fontSize: windowWidth > 640 ? 30 : 20,
+    fontSize: windowWidth > 640 ? 50 : 30,
     color: 'black',
     fontWeight: 'bold',
   },
@@ -234,29 +273,33 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   centerView: {
-    flex: 0.2,
-    flexDirection: 'row',
-    width: '50%',
+    flex: 0.8,
+    width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginVertical: 20,
+    justifyContent: 'flex-end',
+    marginTop: 20,
+    paddingVertical: 20,
   },
   bottomView: {
-    marginTop: windowHeight * 0.2,
-    flex: 0.4,
-    justifyContent: 'center',
-    alignItems: 'center',
     width: '100%',
-    marginBottom: windowHeight * 0.1,
+    height: windowHeight * 0.1,
+    position: 'absolute',
+    bottom: '0%',
+    left: '0%',
   },
   createButton: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.1,
-    resizeMode: 'contain',
-  },
-  backStyle: {
     width: windowWidth * 0.2,
     height: windowWidth * 0.2,
+    resizeMode: 'contain',
+  },
+  sunImage: {
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
+    resizeMode: 'contain',
+  },
+  earthImage: {
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.6,
     resizeMode: 'contain',
   },
 });
