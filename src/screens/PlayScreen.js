@@ -17,10 +17,6 @@ const PlayScreen = ({navigation, route}) => {
   const [positionImage, setPositionImage] = useState([]);
   const [clickState, setClickState] = useState(false);
 
-  useEffect(() => {
-    console.log(image);
-  },[]);
-
   const handlePress = evt => {
     setClickState(true);
     const list = [...positionImage];

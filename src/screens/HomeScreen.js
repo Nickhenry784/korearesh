@@ -17,12 +17,12 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.broken1},
-  {id: 2, image: images.broken2},
-  {id: 3, image: images.broken3},
-  {id: 4, image: images.broken4},
-  {id: 5, image: images.broken5},
-  {id: 6, image: null},
+  {id: 1, image: images.hole},
+  {id: 2, image: images.hole2},
+  {id: 3, image: images.hole3},
+  {id: 4, image: images.hole4},
+  {id: 5, image: images.hole5},
+  {id: 6, image: images.questionmark},
 ];
 
 const numCol = 2;
@@ -63,7 +63,7 @@ const HomeScreen = () => {
     <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
-          <Image source={images.shop} style={appStyle.buyImage} />
+          <Image source={images.buy} style={appStyle.buyImage} />
         </TouchableOpacity>
         <View style={appStyle.turnView}>
           <Image source={images.turn} style={appStyle.buyImage} />
@@ -71,7 +71,6 @@ const HomeScreen = () => {
         </View>
       </View>
       <View style={appStyle.centerView}>
-        <Image source={images.phone} style={appStyle.phoneImage} />
         <FlatList 
           data={brokenData}
           scrollEnabled={false}
@@ -86,7 +85,7 @@ const HomeScreen = () => {
         />
       </View>
       <TouchableOpacity onPress={onClickStartButton}>
-        <Image source={images.play} style={appStyle.brokenImage} />
+        <Image source={images.ok} style={appStyle.brokenImage} />
       </TouchableOpacity>
     </ImageBackground>
   );
@@ -121,15 +120,15 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   buyImage: {
-    width: windowWidth * 0.1,
-    height: windowWidth * 0.1,
+    width: windowWidth * 0.15,
+    height: windowWidth * 0.15,
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.2,
+    width: windowWidth * 0.4,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
@@ -137,7 +136,7 @@ export const appStyle = StyleSheet.create({
     width: windowWidth * 0.3,
     height: windowWidth * 0.3,
     resizeMode: 'contain',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(255,255,255,0.7)',
     margin: 20,
     alignItems: 'center',
     justifyContent: 'center',

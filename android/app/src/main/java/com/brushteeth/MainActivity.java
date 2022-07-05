@@ -1,4 +1,4 @@
-package com.amazon.cusbrokenstylle;
+package com.amazon.holeinpapersimula;
 
 import com.facebook.react.ReactActivity;
 
