@@ -17,15 +17,12 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.hole},
-  {id: 2, image: images.hole2},
-  {id: 3, image: images.hole3},
-  {id: 4, image: images.hole4},
-  {id: 5, image: images.hole5},
-  {id: 6, image: images.questionmark},
+  {id: 1, image: images.tents, background: images.tentsInfo},
+  {id: 2, image: images.ambulanceBag, background: images.ambulanceinfo},
+  {id: 3, image: images.food, background: images.foodInfo},
+  {id: 4, image: images.consumingItem, background: images.clinfo},
+  {id: 5, image: images.foldingtablesandchairs, background: images.artboard},
 ];
-
-const numCol = 2;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -34,28 +31,19 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch();
 
-  const [itemBroken, setItemBroken] = useState(null);
-
   const onClickTurnButton = () => {
     navigation.navigate("BUY");
   }
 
-  const onClickStartButton = () => {
+  const onClickStartButton = (backgrou) => {
     if(points.value <= 0){
       Alert.alert("Please buy more turn!");
       return false;
     }
     dispatch(decrement());
-    if(itemBroken === null) {
-      setItemBroken(brokenData[Math.floor(Math.random() * 4)]);
-    }
-    navigation.navigate("Play", {
-      image: itemBroken.image,
+    navigation.navigate("Item", {
+      background: backgrou,
     });
-  }
-
-  const onClickItemButton = (item) => {
-    setItemBroken(item);
   }
 
 
@@ -63,30 +51,23 @@ const HomeScreen = () => {
     <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
-          <Image source={images.buy} style={appStyle.buyImage} />
+          <View style={appStyle.turnView}>
+            <Image source={images.buy} style={appStyle.buyImage} />
+            <Text style={appStyle.turnText}>{points.value}</Text>
+          </View>
         </TouchableOpacity>
-        <View style={appStyle.turnView}>
-          <Image source={images.turn} style={appStyle.buyImage} />
-          <Text style={appStyle.turnText}>{points.value}</Text>
-        </View>
       </View>
       <View style={appStyle.centerView}>
         <FlatList 
           data={brokenData}
           scrollEnabled={false}
-          numColumns={numCol}
           renderItem={({item}) => (
-            <TouchableOpacity onPress={() => onClickItemButton(item)}>
-              <View style={appStyle.itemView}>
-                {item.image === null ? <Text style={appStyle.text}>Random</Text> : <Image source={item.image} style={appStyle.brokenImage} />}
-              </View>
+            <TouchableOpacity onPress={() => onClickStartButton(item.background)}>
+              <Image source={item.image} style={appStyle.itemView} />
             </TouchableOpacity>
           )}
         />
       </View>
-      <TouchableOpacity onPress={onClickStartButton}>
-        <Image source={images.ok} style={appStyle.brokenImage} />
-      </TouchableOpacity>
     </ImageBackground>
   );
 };
@@ -111,8 +92,7 @@ export const appStyle = StyleSheet.create({
   },
   turnView: {
     flexDirection: 'row',
-    width: windowWidth * 0.15,
-    marginRight: 10,
+    width: windowWidth * 0.2,
     height: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -123,8 +103,8 @@ export const appStyle = StyleSheet.create({
     color: 'black',
   },
   buyImage: {
-    width: windowWidth * 0.15,
-    height: windowWidth * 0.15,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   brokenImage: {
@@ -133,13 +113,10 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   itemView: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.3,
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    margin: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 10,
   },
   text: {
     fontSize: windowWidth > 640 ? 30 : 25,

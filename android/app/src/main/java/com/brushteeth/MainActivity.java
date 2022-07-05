@@ -1,4 +1,4 @@
-package com.amazon.holeinpapersimula;
+package com.amazon.skilllcampping;
 
 import com.facebook.react.ReactActivity;
 
