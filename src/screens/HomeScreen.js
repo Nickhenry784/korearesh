@@ -17,11 +17,10 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.tents, background: images.tentsInfo},
-  {id: 2, image: images.ambulanceBag, background: images.ambulanceinfo},
-  {id: 3, image: images.food, background: images.foodInfo},
-  {id: 4, image: images.consumingItem, background: images.clinfo},
-  {id: 5, image: images.foldingtablesandchairs, background: images.artboard},
+  {id: 1, image: images.chuseokDay, background: images.chuseokInfo},
+  {id: 2, image: images.ginseng, background: images.ginsengInfo},
+  {id: 3, image: images.hanbok, background: images.hanbokInfo},
+  {id: 4, image: images.kimchi, background: images.kimchiInfo},
 ];
 
 const HomeScreen = () => {
@@ -57,6 +56,7 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
+      <Image source={images.wellcomeToKorea} style={appStyle.itemView} />
       <View style={appStyle.centerView}>
         <FlatList 
           data={brokenData}

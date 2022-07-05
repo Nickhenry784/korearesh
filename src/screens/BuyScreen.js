@@ -8,6 +8,7 @@ import {
   Button,
   TouchableOpacity,
   View,
+  ImageBackground,
 } from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import RNIap, {
@@ -18,6 +19,7 @@ import RNIap, {
 
 import {items, subs} from '../conf';
 import { useDispatch } from 'react-redux';
+import { images } from '../assets';
 
 let purchaseUpdateSubscription;
 let purchaseErrorSubscription;
@@ -117,6 +119,7 @@ export default function App() {
   };
 
   return (
+    <ImageBackground source={images.background} style={styles.homeView}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
@@ -131,7 +134,6 @@ export default function App() {
                 <TouchableOpacity
                   onPress={() => handleRequestBuy(product.productId)}
                   style={styles.item3Content}>
-                  {/* <Image source={turnlogo} style={styles.d} /> */}
                   <Text style={styles.price}>{product.localizedPrice}</Text>
                   <Text style={styles.descr}>{product.description}</Text>
                 </TouchableOpacity>
@@ -145,7 +147,6 @@ export default function App() {
                 <TouchableOpacity
                   onPress={() => handleRequestBuy(product.productId)}
                   style={styles.item3Content}>
-                  {/* <Image source={turnlogo} style={styles.d} /> */}
                   <Text style={styles.price}>{product.localizedPrice}</Text>
                   <Text style={styles.descr}>{product.description}</Text>
                 </TouchableOpacity>
@@ -156,10 +157,19 @@ export default function App() {
       )}
 
     </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  homeView: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    resizeMode: 'cover',
+  },
   items: {
     marginTop: 20,
     flexDirection: 'row',
@@ -245,7 +255,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 2,
     marginBottom: 10,
-
+    borderWidth: 2,
+    borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'space-between',
   },

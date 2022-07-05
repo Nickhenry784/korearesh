@@ -1,4 +1,4 @@
-package com.amazon.skilllcampping;
+package com.amazon.researdxxkorea;
 
 import com.facebook.react.ReactActivity;
 

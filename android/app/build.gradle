@@ -140,7 +140,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.amazon.skilllcampping"
+        applicationId "com.amazon.researdxxkorea"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
