@@ -17,11 +17,15 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.chuseokDay, background: images.chuseokInfo},
-  {id: 2, image: images.ginseng, background: images.ginsengInfo},
-  {id: 3, image: images.hanbok, background: images.hanbokInfo},
-  {id: 4, image: images.kimchi, background: images.kimchiInfo},
+  {id: 1, image: images.apollo, background: images.apolloinfo},
+  {id: 2, image: images.ares, background: images.aresinfo},
+  {id: 3, image: images.demeter, background: images.demeterinfo},
+  {id: 4, image: images.hades, background: images.hadesinfo},
+  {id: 5, image: images.poseidon, background: images.poseidoninfo},
+  {id: 6, image: images.zeus, background: images.zeusinfo},
 ];
+
+const numCol = 2;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -56,11 +60,12 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.wellcomeToKorea} style={appStyle.itemView} />
+      <Image source={images.button} style={appStyle.labelImage} />
       <View style={appStyle.centerView}>
         <FlatList 
           data={brokenData}
           scrollEnabled={false}
+          numColumns={numCol}
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => onClickStartButton(item.background)}>
               <Image source={item.image} style={appStyle.itemView} />
@@ -113,15 +118,20 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   itemView: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
-    marginBottom: 10,
+    margin: 10,
   },
   text: {
     fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
     color: 'white',
+  },
+  labelImage: {
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.2,
+    resizeMode: 'contain',
   },
   centerView: {
     flex: 0.9,
@@ -129,13 +139,6 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     resizeMode: 'cover',
-  },
-  phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
-    resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
   },
 });
 

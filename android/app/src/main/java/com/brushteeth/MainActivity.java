@@ -1,4 +1,4 @@
-package com.amazon.researdxxkorea;
+package com.amazon.greeklegendinformation;
 
 import com.facebook.react.ReactActivity;
 
