@@ -1,4 +1,4 @@
-package com.amazon.researdxxkorea;
+package com.amazon.inforspainlive;
 
 import com.facebook.react.ReactActivity;
 
