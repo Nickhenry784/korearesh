@@ -1,4 +1,4 @@
-package com.amazon.welcometojapan;
+package com.amazon.loliloyogaapp;
 
 import com.facebook.react.ReactActivity;
 

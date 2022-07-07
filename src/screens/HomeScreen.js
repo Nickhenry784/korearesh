@@ -26,15 +26,13 @@ const Home = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
-  const dispatch = useDispatch();
 
   const onClickStartButton = (item) => {
     if (points.value === 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
-    dispatch(decrement());
-    navigation.navigate("Item", {background: item});
+    navigation.navigate("List");
   }
 
 
@@ -48,21 +46,21 @@ const Home = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buy} style={appStyle.scoreStyle} />
+            <Image source={images.logo114} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <FlatList 
-        data={dataButton}
-        style={{paddingTop: windowHeight * 0.2}}
-        scrollEnabled={false}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => onClickStartButton(item.background)} key={item.id}>
-            <Image source={item.image} style={appStyle.successImage} />
-          </TouchableOpacity>
-        )}
-      />
+      <View style={appStyle.centerView}>
+        <Image source={images.bg} style={appStyle.bullImage} />
+        <Text style={appStyle.labelText}>Loli Love</Text>
+        <Text style={appStyle.labelText}>Yoga</Text>
+      </View>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={onClickStartButton}>
+          <Image source={images.start} style={appStyle.startBtn} />
+        </TouchableOpacity>
+      </View>
     </ImageBackground>
   );
 };
@@ -74,12 +72,11 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     resizeMode: 'cover',
   },
   appBar: {
-    paddingTop: 10,
-    flex: 0.2,
+    flex: 0.1,
     width: '100%',
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -87,13 +84,16 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   bottomView: {
-    height: windowHeight * 0.2,
-    position: 'absolute',
-    bottom: '0%',
-    width: '70%',
-    flexDirection: 'row',
+    flex: 0.5,
+    width: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+  },
+  centerView: {
+    flex: 0.4,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   turnView: {
     width: windowWidth * 0.15,
@@ -102,31 +102,29 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  welcomeImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.1,
-    resizeMode: 'cover',
-  },
   bullImage: {
     width: windowWidth * 0.4,
     height: windowWidth * 0.4,
     resizeMode: 'contain',
   },
-  successImage: {
-    width: windowWidth * 0.6,
+  startBtn: {
+    width: windowWidth * 0.3,
     height: windowHeight * 0.1,
-    marginVertical: 10,
     resizeMode: 'contain',
   },
   scoreStyle: {
     width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
-    alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 20,
-    color: '#0a98c9',
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  labelText: {
+    fontSize: 20,
+    color: 'black',
     fontWeight: 'bold',
   },
 });
