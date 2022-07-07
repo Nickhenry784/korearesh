@@ -16,10 +16,10 @@ import { images } from "../assets";
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 const dataButton = [
-  {id: 1, image: images.bullhead, background: images.bullheadinfo}, 
-  {id: 2, image: images.flamenco, background: images.flamencoinfo}, 
-  {id: 3, image: images.georgeday, background: images.georgeinfo}, 
-  {id: 4, image: images.Tapas, background: images.tapasinfo}
+  {id: 1, image: images.teaceremony, background: images.teamau}, 
+  {id: 2, image: images.sakura, background: images.sakuramau}, 
+  {id: 3, image: images.phusimoutain, background: images.mautea}, 
+  {id: 4, image: images.kimono, background: images.kimonobackground}
 ];
 
 const Home = () => {
@@ -53,9 +53,9 @@ const Home = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.SPAIN} style={appStyle.welcomeImage} />
       <FlatList 
         data={dataButton}
+        style={{paddingTop: windowHeight * 0.2}}
         scrollEnabled={false}
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => onClickStartButton(item.background)} key={item.id}>
@@ -63,10 +63,6 @@ const Home = () => {
           </TouchableOpacity>
         )}
       />
-      <View style={appStyle.bottomView}>
-          <Image source={images.bull} style={appStyle.bullImage} />
-          <Image source={images.fighter} style={appStyle.bullImage} />
-      </View>
     </ImageBackground>
   );
 };
@@ -78,7 +74,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
   appBar: {

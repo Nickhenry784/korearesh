@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.spainwaxns_10',
+    sku: 'com.amazon.japancoin_1',
     value: 50,
   },
   {
-    sku: 'com.amazon.spainwaxns_20',
+    sku: 'com.amazon.japancoin_2',
     value: 100,
   },
   {
-    sku: 'com.amazon.spainwaxns_30',
+    sku: 'com.amazon.japancoin_3',
     value: 200,
   },
   {
-    sku: 'com.amazon.spainwaxns_40',
+    sku: 'com.amazon.japancoin_4',
     value: 300,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_spainwaxns_100',
+    sku: 'com.amazon.weekly_japancoin_1',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_spainwaxns_200',
+    sku: 'com.amazon.weekly_japancoin_2',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_spainwaxns_400',
+    sku: 'com.amazon.monthly_japancoin_1',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_spainwaxns_700',
+    sku: 'com.amazon.monthly_japancoin_2',
     value: 700,
   },
 ];

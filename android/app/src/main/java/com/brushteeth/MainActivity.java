@@ -1,4 +1,4 @@
-package com.amazon.inforspainlive;
+package com.amazon.welcometojapan;
 
 import com.facebook.react.ReactActivity;
 
