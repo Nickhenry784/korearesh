@@ -1,4 +1,4 @@
-package com.amazon.loliloyogaapp;
+package com.amazon.fablesstory;
 
 import com.facebook.react.ReactActivity;
 
