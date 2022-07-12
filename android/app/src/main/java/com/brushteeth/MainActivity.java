@@ -1,4 +1,4 @@
-package com.amazon.astronautstopwatchcute;
+package com.amazon.koistopwatchbeauapp;
 
 import com.facebook.react.ReactActivity;
 

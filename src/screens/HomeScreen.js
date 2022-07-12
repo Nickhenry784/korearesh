@@ -23,7 +23,7 @@ const HomeScreen = () => {
   const points = useSelector(state => state.points);
   const [modalState, setModalState] = useState(false);
   const [time, setTime] = useState(0);
-  const [randomClound, setRandomClound] = useState([15,8]);
+  const [randomClound, setRandomClound] = useState([70,8]);
   const [randomAstro, setRandomAstro] = useState(10);
   const [randomRotate, setRandomRotate] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -37,7 +37,7 @@ const HomeScreen = () => {
       if(start && second > 0 && minutes >= 0 && time >= 0 ){
         setSecond(second - 1);
         setRandomAstro(Math.floor(7 + Math.random() * 8));
-        randomClound[0] = Math.floor(10 + Math.random() * 20);
+        randomClound[0] = Math.floor(70 + Math.random() * 10);
         randomClound[1] = Math.floor(5 + Math.random() * 12);
         setRandomRotate(Math.floor(Math.random() * 360));
       };
@@ -52,6 +52,7 @@ const HomeScreen = () => {
       }
       if(start && second === 0 && minutes === 0 && time === 0 ){
         setStart(false);
+        clearTimeout(timeOut);
       };
     },1000);
 
@@ -97,71 +98,73 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buy} style={appStyle.buyImage} />
+            <Image source={images.clockbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View style={appStyle.centerView}>
-        <Animated.Image source={images.astronaut} style={[appStyle.sunImage,{
+        <Animated.Image source={images.bottleBig} style={[appStyle.sunImage,{
           position: 'absolute',
           top: `${randomAstro} %`,
+          transform: [
+            {
+              rotate: '180deg',
+            }
+          ]
         }]} />
-        <Animated.Image source={images.sun} style={[appStyle.sunImage, {
-          position: 'absolute',
-          top: `${randomClound[0]} %`,
-          right: `${randomClound[1]} %`,
-        }]} />
-        <Animated.Image source={images.cloud} style={[appStyle.sunImage, {
-          position: 'absolute',
-          top: `${randomClound[0]} %`,
-          left: `${randomClound[1]} %`,
-        }]} />
-        <Animated.Image source={images.earth} style={[appStyle.earthImage,{
+        <Animated.Image source={images.koicricle} style={[appStyle.earthImage,{
           position: 'absolute',
           top: '30%',
           transform: [{
             rotate: `${randomRotate} deg`
-          }]
+          }],
+        }]} />
+        <Animated.Image source={images.koi2} style={[appStyle.sunImage, {
+          position: 'absolute',
+          top: `${randomClound[0]} %`,
+          right: `${randomClound[1]} %`,
+        }]} />
+        <Animated.Image source={images.koi1} style={[appStyle.sunImage, {
+          position: 'absolute',
+          top: `${randomClound[0]} %`,
+          left: `${randomClound[1]} %`,
         }]} />
         {start && <Text style={appStyle.timeText}>{`${time} : ${minutes} : ${second}`}</Text>}
       </View>
       <TouchableOpacity onPress={start ? onClickPauseBtn : onClickStartButton}>
-        <Image source={start ? images.stop : images.play} style={appStyle.createButton} />
+        <Image source={start ? images.stop : images.start} style={appStyle.createButton} />
       </TouchableOpacity>
-      <View style={appStyle.bottomView}>
-        <Image style={appStyle.logoImage} source={images.clouds} />
-      </View>
       {modalState && <View style={appStyle.modalView}>
           <ImageBackground style={appStyle.panelModal} source={images.popup}>
             <View style={appStyle.timeInput}>
               <TextInput
               style={appStyle.input}
               onChangeText={setTime}
-              value={time}
+              value={time.toString()}
               keyboardType="numeric"
               />
               <Text style={appStyle.labelText}>:</Text>
               <TextInput
               style={appStyle.input}
               onChangeText={setMinutes}
-              value={minutes}
+              value={minutes.toString()}
               keyboardType="numeric"
               />
               <Text style={appStyle.labelText}>:</Text>
               <TextInput
               style={appStyle.input}
               onChangeText={setSecond}
-              value={second}
+              value={second.toString()}
               keyboardType="numeric"
               />
             </View>
-            <View style={appStyle.timeInput}>
+            <View style={appStyle.btnPanel}>
               <TouchableOpacity onPress={onClickOKButton}>
                 <Image source={images.ok} style={appStyle.createButton} />
               </TouchableOpacity>
               <TouchableOpacity onPress={onClickBackButton}>
-                <Image source={images.back} style={appStyle.createButton} />
+                <Image source={images.backback} style={appStyle.createButton} />
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -198,19 +201,28 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   panelModal: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     paddingVertical: 20,
   },
   timeInput: {
     width: '80%',
     height: windowHeight * 0.15,
+    paddingTop: windowHeight * 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  btnPanel: {
+    width: '80%',
+    height: windowHeight * 0.15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 50,
   },
   appBar: {
     flex: 0.1,
@@ -247,25 +259,25 @@ export const appStyle = StyleSheet.create({
     margin: 8,
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'black',
+    fontSize: 30,
+    fontFamily: 'REGISTER',
+    color: 'white',
   },
   labelText1: {
     marginTop: 30,
-    fontSize: windowWidth > 640 ? 30 : 20,
-    color: 'black',
-    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'white',
+    fontFamily: 'REGISTER',
   },
   labelText: {
-    fontSize: windowWidth > 640 ? 50 : 30,
-    color: 'black',
-    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'white',
+    fontFamily: 'REGISTER',
   },
   timeText: {
-    fontSize: windowWidth > 640 ? 40 : 30,
-    color: 'black',
-    fontWeight: 'bold',
+    fontSize: 40,
+    color: 'white',
+    fontFamily: 'REGISTER',
   },
   buyImage: {
     width: windowWidth * 0.1,
