@@ -224,30 +224,13 @@ const styles = StyleSheet.create({
     color: '#212121',
     fontWeight: '500',
   },
-  itemList: {},
-  item2: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 3,
-    elevation: 2,
-    marginBottom: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  item2Body: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
   itemList3: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginHorizontal: -5,
   },
   item3: {
-    width: '50%',
+    width: '80%',
     padding: 5,
   },
   item3Content: {

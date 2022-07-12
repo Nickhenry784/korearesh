@@ -23,9 +23,11 @@ const HomeScreen = () => {
   const points = useSelector(state => state.points);
   const [modalState, setModalState] = useState(false);
   const [time, setTime] = useState(0);
-  const [randomClound, setRandomClound] = useState([70,8]);
-  const [randomAstro, setRandomAstro] = useState(10);
-  const [randomRotate, setRandomRotate] = useState(0);
+  const [position1, setPosition1] = useState([10,20]);
+  const [position2, setPosition2] = useState([10,60]);
+  const [position3, setPosition3] = useState([40,20]);
+  const [position4, setPosition4] = useState([40,60]);
+  const [rotateDeg, setRotateDeg] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [second, setSecond] = useState(0);
   const [start, setStart] = useState(false);
@@ -36,10 +38,11 @@ const HomeScreen = () => {
     const timeOut = setTimeout(() => {
       if(start && second > 0 && minutes >= 0 && time >= 0 ){
         setSecond(second - 1);
-        setRandomAstro(Math.floor(7 + Math.random() * 8));
-        randomClound[0] = Math.floor(70 + Math.random() * 10);
-        randomClound[1] = Math.floor(5 + Math.random() * 12);
-        setRandomRotate(Math.floor(Math.random() * 360));
+        var temp = position1
+        setPosition1(position2);
+        setPosition2(position3);
+        setPosition3(position4);
+        setPosition4(temp);
       };
       if(start && second === 0 && minutes > 0 && time >= 0 ){
         setSecond(60);
@@ -98,37 +101,31 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.clockbuy} style={appStyle.buyImage} />
+            <Image source={images.buyclock} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View style={appStyle.centerView}>
-        <Animated.Image source={images.bottleBig} style={[appStyle.sunImage,{
+        <Animated.Image source={images.s1} style={[appStyle.sunImage,{
           position: 'absolute',
-          top: `${randomAstro} %`,
-          transform: [
-            {
-              rotate: '180deg',
-            }
-          ]
+          top: `${position1[0]} %`,
+          left: `${position1[1]} %`,
         }]} />
-        <Animated.Image source={images.koicricle} style={[appStyle.earthImage,{
+        <Animated.Image source={images.s2} style={[appStyle.sunImage,{
           position: 'absolute',
-          top: '30%',
-          transform: [{
-            rotate: `${randomRotate} deg`
-          }],
+          top: `${position2[0]} %`,
+          left: `${position2[1]} %`,
         }]} />
-        <Animated.Image source={images.koi2} style={[appStyle.sunImage, {
+        <Animated.Image source={images.s3} style={[appStyle.sunImage, {
           position: 'absolute',
-          top: `${randomClound[0]} %`,
-          right: `${randomClound[1]} %`,
+          top: `${position3[0]} %`,
+          left: `${position3[1]} %`,
         }]} />
-        <Animated.Image source={images.koi1} style={[appStyle.sunImage, {
+        <Animated.Image source={images.s4} style={[appStyle.sunImage, {
           position: 'absolute',
-          top: `${randomClound[0]} %`,
-          left: `${randomClound[1]} %`,
+          top: `${position4[0]} %`,
+          left: `${position4[1]} %`,
         }]} />
         {start && <Text style={appStyle.timeText}>{`${time} : ${minutes} : ${second}`}</Text>}
       </View>
@@ -136,7 +133,8 @@ const HomeScreen = () => {
         <Image source={start ? images.stop : images.start} style={appStyle.createButton} />
       </TouchableOpacity>
       {modalState && <View style={appStyle.modalView}>
-          <ImageBackground style={appStyle.panelModal} source={images.popup}>
+          <ImageBackground style={appStyle.panelModal} source={images.popupc}>
+            <Text style={appStyle.timeText}>Time:</Text>
             <View style={appStyle.timeInput}>
               <TextInput
               style={appStyle.input}
@@ -164,7 +162,7 @@ const HomeScreen = () => {
                 <Image source={images.ok} style={appStyle.createButton} />
               </TouchableOpacity>
               <TouchableOpacity onPress={onClickBackButton}>
-                <Image source={images.backback} style={appStyle.createButton} />
+                <Image source={images.backc} style={appStyle.createButton} />
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -211,7 +209,7 @@ export const appStyle = StyleSheet.create({
   timeInput: {
     width: '80%',
     height: windowHeight * 0.15,
-    paddingTop: windowHeight * 0.2,
+    paddingTop: windowHeight * 0.1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -226,11 +224,11 @@ export const appStyle = StyleSheet.create({
   },
   appBar: {
     flex: 0.1,
-    paddingRight: 20,
+    paddingLeft: 20,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   input: {
     height: 40,
@@ -260,24 +258,13 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'REGISTER',
-    color: 'white',
-  },
-  labelText1: {
-    marginTop: 30,
-    fontSize: 30,
-    color: 'white',
-    fontFamily: 'REGISTER',
-  },
-  labelText: {
-    fontSize: 30,
-    color: 'white',
-    fontFamily: 'REGISTER',
+    fontWeight: 'bold',
+    color: 'black',
   },
   timeText: {
     fontSize: 40,
-    color: 'white',
-    fontFamily: 'REGISTER',
+    color: 'black',
+    fontWeight: 'bold',
   },
   buyImage: {
     width: windowWidth * 0.1,

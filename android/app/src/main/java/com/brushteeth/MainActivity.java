@@ -1,4 +1,4 @@
-package com.amazon.koistopwatchbeauapp;
+package com.amazon.kutecookingstowatchapp;
 
 import com.facebook.react.ReactActivity;
 
