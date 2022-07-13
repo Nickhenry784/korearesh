@@ -1,4 +1,4 @@
-package com.amazon.patternmaker;
+package com.amazon.fastspeculate;
 
 import com.facebook.react.ReactActivity;
 

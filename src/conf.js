@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.ternma_1',
-    value: 50,
-  },
-  {
-    sku: 'com.amazon.ternma_2',
+    sku: 'com.amazon.speculate_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.ternma_3',
+    sku: 'com.amazon.speculate_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.ternma_4',
+    sku: 'com.amazon.speculate_300',
     value: 300,
+  },
+  {
+    sku: 'com.amazon.speculate_400',
+    value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_ternma_1',
+    sku: 'com.amazon.weekly_speculate_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_ternma_2',
+    sku: 'com.amazon.weekly_speculate_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_ternma_1',
+    sku: 'com.amazon.monthly_speculate_400',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_ternma_2',
+    sku: 'com.amazon.monthly_speculate_700',
     value: 700,
   },
 ];
