@@ -1,4 +1,4 @@
-package com.amazon.welcometojapan;
+package com.amazon.patternmaker;
 
 import com.facebook.react.ReactActivity;
 
