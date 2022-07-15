@@ -6,7 +6,8 @@ import {
   ImageBackground, 
   Image,
   FlatList, 
-  Alert  } from "react-native";
+  Alert,  
+  ScrollView} from "react-native";
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
@@ -16,10 +17,11 @@ import { images } from "../assets";
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 const dataButton = [
-  {id: 1, image: images.teaceremony, background: images.teamau}, 
-  {id: 2, image: images.sakura, background: images.sakuramau}, 
-  {id: 3, image: images.phusimoutain, background: images.mautea}, 
-  {id: 4, image: images.kimono, background: images.kimonobackground}
+  {id: 0, image: images.background}, 
+  {id: 1, image: images.babysleep}, 
+  {id: 2, image: images.camera}, 
+  {id: 3, image: images.clothesbaby}, 
+  {id: 4, image: images.sleep2}
 ];
 
 const Home = () => {
@@ -28,13 +30,21 @@ const Home = () => {
   const points = useSelector(state => state.points);
   const dispatch = useDispatch();
 
+  const [index, setIndex] = useState(0);
+
   const onClickStartButton = (item) => {
     if (points.value === 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
-    dispatch(decrement());
-    navigation.navigate("Item", {background: item});
+    if(index === 0){
+      dispatch(decrement());
+      setIndex(index + 1);
+    } else if(index === 4){
+      setIndex(0);
+    } else{
+      setIndex(index + 1);
+    }
   }
 
 
@@ -43,28 +53,33 @@ const Home = () => {
   }
 
 
-  return (
+  return index === 0 ? 
     <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buy} style={appStyle.scoreStyle} />
+            <Image source={images.shoppingicon} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <FlatList 
-        data={dataButton}
-        style={{paddingTop: windowHeight * 0.2}}
-        scrollEnabled={false}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => onClickStartButton(item.background)} key={item.id}>
-            <Image source={item.image} style={appStyle.successImage} />
-          </TouchableOpacity>
-        )}
-      />
+      <Text style={appStyle.labelText}>CHILD CARE EXPERIENCE</Text>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.buttonnext} style={appStyle.successImage} />
+        </TouchableOpacity>
+      </View>
     </ImageBackground>
-  );
+  : <View style={appStyle.homeView}>
+      <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+        <Image style={appStyle.image} source={dataButton[index].image} />
+      </ScrollView>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.buttonnext} style={appStyle.successImage} />
+        </TouchableOpacity>
+      </View>
+    </View>;
 };
 
 
@@ -74,12 +89,12 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    resizeMode: 'cover',
+    justifyContent: 'flex-start',
+    resizeMode: 'contain',
   },
   appBar: {
     paddingTop: 10,
-    flex: 0.2,
+    flex: 0.1,
     width: '100%',
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -93,7 +108,22 @@ export const appStyle = StyleSheet.create({
     width: '70%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+  },
+  scoreStyle: {
+    height: windowWidth * 0.1,
+    width: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
+  successImage: {
+    height: windowWidth * 0.2,
+    width: windowWidth * 0.2,
+    resizeMode: 'contain',
+  },
+  image: {
+    height: windowHeight * 1.1,
+    width: windowWidth,
+    resizeMode: 'cover',
   },
   turnView: {
     width: windowWidth * 0.15,
@@ -102,33 +132,16 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  welcomeImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.1,
-    resizeMode: 'cover',
-  },
-  bullImage: {
-    width: windowWidth * 0.4,
-    height: windowWidth * 0.4,
-    resizeMode: 'contain',
-  },
-  successImage: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.1,
-    marginVertical: 10,
-    resizeMode: 'contain',
-  },
-  scoreStyle: {
-    width: windowWidth * 0.1,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
-    alignItems: 'center',
-  },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 20,
+    fontSize: 30,
     color: '#0a98c9',
     fontWeight: 'bold',
   },
+  labelText: {
+    fontSize: 40,
+    color: '#0a98c9',
+    fontWeight: 'bold',
+  }
 });
 
 export default Home;

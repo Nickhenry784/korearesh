@@ -1,4 +1,4 @@
-package com.amazon.welcometojapan;
+package com.amazon.childcareexp;
 
 import com.facebook.react.ReactActivity;
 
