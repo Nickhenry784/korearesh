@@ -1,4 +1,4 @@
-package com.amazon.fastspeculate;
+package com.amazon.gamememoryfoodezg;
 
 import com.facebook.react.ReactActivity;
 

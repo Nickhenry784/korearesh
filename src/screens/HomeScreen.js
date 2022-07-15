@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity,Text, Dimensions, FlatList, Image, Alert, ImageBackground  } from "react-native";
+import { View, StyleSheet, TouchableOpacity,Text, Dimensions, FlatList, Image, Alert, ImageBackground, ScrollView  } from "react-native";
 import React, {useEffect, useState} from 'react';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
@@ -7,8 +7,24 @@ import { images } from "../assets";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-const numCol = 2;
-const dataList = [{id: 1, image: images.v1},{id: 2, image: images.v2},{id: 3, image: images.v3},{id: 4, image: images.v4},{id: 5, image: images.v5},{id: 6, image: images.v6}, {id: 7, image: images.v7}, {id: 8, image: images.v8}  ];
+const dataList = [
+  {id: 1, name: 'Tomato Soup'},
+  {id: 2, name: 'French Onion Soup'},
+  {id: 3, name: 'Tomato Salad'},
+  {id: 4, name: 'Chicken Salad'},
+  {id: 5, name: 'German sausage and chips'},
+  {id: 6, name: 'Grilled fish and potatoes'}, 
+  {id: 7, name: 'Italian cheese & Tomato pizza'}, 
+  {id: 8, name: 'Thai chicken and rice'},
+  {id: 9, name: 'Vegetable pasta'},  
+  {id: 10, name: 'Snacks'},    
+  {id: 11, name: 'Pizzas'},  
+  {id: 12, name: 'Sandwiches'},
+  {id: 13, name: 'Chicken saandwich'}, 
+  {id: 14, name: 'Cheese omelette'},
+  {id: 15, name: 'Meat pizza'},   
+  {id: 16, name: 'Seafood pizza'},      
+];
 
 const Home = () => {
   const navigation = useNavigation();
@@ -36,7 +52,13 @@ const Home = () => {
     }
     const list = [];
     for (let index = 0; index < dataList.length; index++) {
-      const element = {id: index + 1, price: priceItem[index]};
+      const element = {id: index + 1,result: priceItem[index], price: [priceItem[index],getRandomNumberBetween(10,100), getRandomNumberBetween(10, 100), getRandomNumberBetween(10,100)]};
+      for (let i = 0; i < element.price.length; i++) {
+        const random = getRandomNumberBetween(0,3);
+        const el = element.price[i];
+        element.price.splice(i,1);
+        element.price.splice(random,0,el);
+      }
       list.push(element);
     }
     if(!showPrice){
@@ -60,26 +82,27 @@ const Home = () => {
           <Image source={images.buy} style={appStyle.buyImage}/>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => setShowPrice(true)}>
-        <ImageBackground source={images.shopvar} style={appStyle.shopImage}>
-          <FlatList 
-            data={dataList} 
-            scrollEnabled={false}
-            style={{marginTop: 20}}
-            numColumns={numCol} 
-            renderItem={({item, index}) => (<View style={appStyle.itemView} key={item.id}>
-              {showPrice && <Text style={appStyle.itemText}>{`$${priceItem[index]}`}</Text>}
-              <Image source={item.image} style={appStyle.itemImage} />
-            </View>)} 
-            />
-        </ImageBackground>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={clickStartButton}
-        style={appStyle.buttonStyle}>
-          <Image source={images.startbutton} style={appStyle.buttonStyle} />
-      </TouchableOpacity>
+      <Text style={appStyle.labelText}>Menu Memory</Text>
+      <Image source={images.e4} style={appStyle.e4Image}/>
+      <Image source={images.e3} style={appStyle.e3Image} />
+      <Image source={images.e1} style={appStyle.e1Image} />
+      <Image source={images.e2} style={appStyle.e2Image} />
+      <ImageBackground source={images.frame} style={appStyle.frameImage}>
+        <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+        {dataList.map((item, index) => (
+          <View style={appStyle.itemView} key={item.id} >
+            <Text style={appStyle.itemText} >{item.name}</Text>
+            {showPrice && <Text style={appStyle.priceText} >{`$${priceItem[index]}`}</Text>}
+          </View>
+          
+        ))}
+        <TouchableOpacity
+          onPress={clickStartButton}
+          style={appStyle.buttonStyle}>
+            <Image source={images.play} style={appStyle.buttonStyle} />
+        </TouchableOpacity>
+        </ScrollView>
+      </ImageBackground>
     </ImageBackground>
   );
 };
@@ -106,7 +129,49 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
+  },
+  e4Image: {
+    width: windowWidth * 0.2,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '10%',
+    right: '0%',
+  },
+  e3Image: {
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.2,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '30%',
+    left: '0%',
+  },
+  e1Image: {
+    width: windowWidth * 0.1,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '50%',
+    left: '0%',
+  },
+  e2Image: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.2,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '70%',
+    left: '10%',
+  },
+  frameImage: {
+    width: windowWidth * 0.43,
+    height: windowHeight * 0.63,
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: '30%',
+    right: '5%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   shopImage: {
     width: windowWidth * 0.7,
@@ -117,16 +182,33 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   itemText: {
-    fontSize: windowWidth > 640 ? 30 : 16,
+    fontSize: 30,
     color: 'white',
     fontWeight: 'bold',
   },
+  itemText: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+    width: windowWidth * 0.3,
+  },
+  priceText: {
+    fontSize: 18,
+    color: 'red',
+    fontWeight: 'bold',
+  },
+  labelText: {
+    fontSize: 50,
+    color: 'white',
+    fontWeight: 'bold',
+    width: '50%',
+    textAlign: 'center',
+  },
   itemView: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.15,
-    marginBottom: 5,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    width: windowWidth * 0.4,
   },
   itemImage: {
     width: windowWidth * 0.1,

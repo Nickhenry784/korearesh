@@ -3,20 +3,38 @@ import React, {useEffect, useState} from 'react';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets";
+import { useRef } from "react";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-const numCol = 4;
-const dataList = [{id: 1, image: images.v1},{id: 2, image: images.v2},{id: 3, image: images.v3},{id: 4, image: images.v4},{id: 5, image: images.v5},{id: 6, image: images.v6}, {id: 7, image: images.v7}, {id: 8, image: images.v8}  ];
+const dataList = [
+  {id: 1, name: 'Tomato Soup'},
+  {id: 2, name: 'French Onion Soup'},
+  {id: 3, name: 'Tomato Salad'},
+  {id: 4, name: 'Chicken Salad'},
+  {id: 5, name: 'German sausage and chips'},
+  {id: 6, name: 'Grilled fish and potatoes'}, 
+  {id: 7, name: 'Italian cheese & Tomato pizza'}, 
+  {id: 8, name: 'Thai chicken and rice'},
+  {id: 9, name: 'Vegetable pasta'},  
+  {id: 10, name: 'Snacks'},    
+  {id: 11, name: 'Pizzas'},  
+  {id: 12, name: 'Sandwiches'},
+  {id: 13, name: 'Chicken saandwich'}, 
+  {id: 14, name: 'Cheese omelette'},
+  {id: 15, name: 'Meat pizza'},   
+  {id: 16, name: 'Seafood pizza'},      
+];
+
+const numCol = 2;
 
 const Home = ({navigation, route}) => {
   const {listPrice} = route.params;
   const [time, setTime] = useState(10);
-  const [index, setIndex] = useState(null);
-  const [id, setId] = useState(null);
   const [score, setScore] = useState(0);
+  const [price, setPrice] = useState(0);
   const [play, setPlay] = useState(true);
-  const [randomPrice, setRandomPrice] = useState(getRandomNumberBetween(0,7));
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -24,14 +42,16 @@ const Home = ({navigation, route}) => {
         setTime(time - 1);
       }
       if(play && time === 0){
-        if(id === listPrice[randomPrice].id){
-          setScore(score + 10);
-          setRandomPrice(getRandomNumberBetween(0,7));
-          setTime(10);
-          setId(null);
-          setIndex(null);
-        }else{
+        if(index === 15){
           setPlay(false);
+        }else{
+          if(price === listPrice[index].result){
+            setScore(score + 10);
+            setTime(10);
+            setIndex(index + 1);
+          }else{
+            setPlay(false);
+          }
         }
         clearTimeout(timeOut);
       }
@@ -41,43 +61,33 @@ const Home = ({navigation, route}) => {
     }
   },[time]);
 
-  const clickOkeButton = () => {
-    setId(index);
-    setTime(0);
-  }
-
   return (
     <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.turnView}>
           <Text style={appStyle.turnText}>{`Score: ${score}`}</Text>
       </View>
       <Text style={appStyle.timeText}>{`${time}s`}</Text>
-      <Text style={appStyle.priceText}>{`$${listPrice[randomPrice].price}`}</Text>
+      <Text style={appStyle.priceText}>{dataList[index].name}</Text>
       <Text style={appStyle.label}>CHOOSE YOUR ANSWER</Text>
       <FlatList 
-        data={dataList} 
+        data={listPrice[index].price}
         scrollEnabled={false}
-        style={{marginTop: 20}}
-        numColumns={numCol} 
+        numColumns={numCol}
         renderItem={({item}) => (
-        <TouchableOpacity
-          onPress={() => setIndex(item.id)}
-          style={itemStyle(item.id, index)}>
-          <Image source={item.image} style={appStyle.itemImage} />
-        </TouchableOpacity>)} 
-        />
-      <TouchableOpacity
-        onPress={() => clickOkeButton()}
-        style={appStyle.buttonStyle}>
-          <Image source={images.ok} style={appStyle.buttonStyle} />
-      </TouchableOpacity>
+          <TouchableOpacity onPress={() => setPrice(item)}>
+            <View style={appStyle.answerView}>
+              <Text style={appStyle.price}>{`$ ${item}`}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
       {!play && <View style={appStyle.scoreView}>
-          <ImageBackground source={images.yourscore} style={appStyle.scoreImage}>
+          <ImageBackground source={images.popupwin} style={appStyle.scoreImage}>
             <TouchableOpacity
               onPress={() => navigation.goBack()} style={appStyle.exitButton}>
               <Image source={images.close} style={appStyle.exitImage} />
             </TouchableOpacity>
-            <Text style={appStyle.priceText}>{`Your Score: ${score}`}</Text>
+            <Text style={appStyle.price}>{`Your Score: ${score}`}</Text>
           </ImageBackground>
       </View>}
     </ImageBackground>
@@ -87,17 +97,6 @@ const Home = ({navigation, route}) => {
 export const getRandomNumberBetween = (min,max) => {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
-
-export const itemStyle = (a,b) =>  StyleSheet.create({
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    resizeMode: 'contain',
-    margin: 10,
-    borderColor: 'black',
-    borderWidth: a === b  ? 5 : 0,
-});
 
 
 export const appStyle = StyleSheet.create({
@@ -115,9 +114,9 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 50 : 30,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   exitButton: {
     width: windowWidth * 0.1,
@@ -148,8 +147,8 @@ export const appStyle = StyleSheet.create({
     color: 'red',
   },
   scoreImage: {
-    width: windowWidth * 0.7,
-    height: windowWidth > 640 ? windowHeight * 0.5 : windowHeight * 0.4,
+    width: windowWidth * 0.73,
+    height: windowHeight * 0.6,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
@@ -158,13 +157,31 @@ export const appStyle = StyleSheet.create({
     fontSize: windowWidth > 640 ? 60 : 40,
     marginTop: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
+    textAlign: 'center',
   },
-  label: {
-    fontSize: windowWidth > 640 ? 50 : 30,
-    marginVertical: 40,
+  price: {
+    fontSize: windowWidth > 640 ? 60 : 40,
+    marginTop: 20,
     fontWeight: 'bold',
     color: 'black',
+  },
+  answerView: {
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    borderColor: 'black',
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
+  label: {
+    fontSize: 30,
+    marginVertical: 40,
+    fontWeight: 'bold',
+    color: 'white',
   },
   itemImage: {
     width: windowWidth * 0.15,

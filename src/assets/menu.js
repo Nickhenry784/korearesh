@@ -1,0 +1,18 @@
+export const listMenu = [
+  'Tomato Soup',
+  'French Onion Soup',
+  'Tomato Salad',
+  'Chicken Salad',
+  'German sausage and chips',
+  'Grilled fish and potatoes',
+  'Italian cheese & Tomato pizza',
+  'Thai chicken and rice',
+  'Vegetable pasta',
+  'Snacks',
+  'Pizzas',
+  'Sandwiches',
+  'Chicken saandwich',
+  'Cheese omelette',
+  'Meat pizza',
+  'Seafood pizza',
+];
