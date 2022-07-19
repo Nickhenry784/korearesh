@@ -36,7 +36,7 @@ export default function App() {
             <Stack.Screen
               name="Item"
               component={ItemScreen}
-              options={{title: 'Information Screen'}}
+              options={{title: 'Background Screen'}}
             />
           </Stack.Navigator>
         </NavigationContainer>
