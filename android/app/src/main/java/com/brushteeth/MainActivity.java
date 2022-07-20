@@ -1,4 +1,4 @@
-package com.amazon.citywallpaperls;
+package com.amazon.catwallpaperln;
 
 import com.facebook.react.ReactActivity;
 

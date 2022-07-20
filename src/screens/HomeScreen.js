@@ -97,8 +97,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   itemView: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   text: {
