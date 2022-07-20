@@ -1,4 +1,4 @@
-package com.amazon.flowerwallpaperks;
+package com.amazon.shortstorycsm;
 
 import com.facebook.react.ReactActivity;
 

@@ -27,33 +27,43 @@ const dataBg = [
 
 const ItemScreen = ({navigation, route}) => {
 
+
+  const {background} = route.params;
   const [index, setIndex] = useState(0);
 
   const onClickNextBtn = () => {
-    if(index !== 9){
-      setIndex(index + 1);
+    if(background.length !== index + 1){
+      setIndex(index + 1)
     }
   }
 
   const onClickBackBtn = () => {
-    if(index !== 0){
-      setIndex(index - 1);
-    }else{
-      navigation.goBack();
-    }
+    if(background.length !== index + 1){
+      setIndex(index - 1)
+    } 
+  }
+
+  const onClickHomeBtn = () => {
+    navigation.goBack();
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+    <View style={appStyle.homeView}>
+      <ScrollView style={{width: windowWidth}} contentContainerStyle={{alignItems: 'center'}}>
+        <Image style={appStyle.imgBook} source={background[index]}/>
+      </ScrollView>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
           <Image source={images.back} style={appStyle.btn} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onClickHomeBtn()}>
+          <Image source={images.home} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickNextBtn()}>
           <Image source={images.next} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -63,8 +73,13 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  imgBook: {
+    width: windowWidth,
+    height: windowHeight * 1.2,
+    resizeMode: 'contain',
   },
   btn: {
     width: windowWidth * 0.3,
@@ -73,7 +88,7 @@ export const appStyle = StyleSheet.create({
   },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.15,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
