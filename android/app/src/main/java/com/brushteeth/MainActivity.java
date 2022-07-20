@@ -1,4 +1,4 @@
-package com.amazon.beachwallpapermb;
+package com.amazon.flowerwallpaperks;
 
 import com.facebook.react.ReactActivity;
 
