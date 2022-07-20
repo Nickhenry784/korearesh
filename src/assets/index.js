@@ -1,9 +1,8 @@
 export const images = {
   back: require('./images/back.png'),
-  view: require('./images/view.png'),
+  buyy: require('./images/buyy.png'),
   next: require('./images/next.png'),
-  start: require('./images/start.png'),
-  bg1: require('./images/img/bg1.png'),
+  start: require('./images/Start.png'),
   bg2: require('./images/img/bg2.png'),
   bg3: require('./images/img/bg3.png'),
   bg4: require('./images/img/bg4.png'),
@@ -13,4 +12,5 @@ export const images = {
   bg8: require('./images/img/bg8.png'),
   bg9: require('./images/img/bg9.png'),
   bg10: require('./images/img/bg10.png'),
+  bg11: require('./images/img/bg11.png'),
 }
