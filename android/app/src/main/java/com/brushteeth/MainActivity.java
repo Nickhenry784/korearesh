@@ -1,4 +1,4 @@
-package com.amazon.universewallvs;
+package com.amazon.citywallpaperls;
 
 import com.facebook.react.ReactActivity;
 

@@ -38,6 +38,8 @@ const ItemScreen = ({navigation, route}) => {
   const onClickBackBtn = () => {
     if(index !== 0){
       setIndex(index - 1);
+    }else{
+      navigation.goBack();
     }
   }
 
