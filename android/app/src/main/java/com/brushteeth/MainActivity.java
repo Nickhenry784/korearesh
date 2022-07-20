@@ -1,4 +1,4 @@
-package com.amazon.zodiacwallpro;
+package com.amazon.universewallvs;
 
 import com.facebook.react.ReactActivity;
 
