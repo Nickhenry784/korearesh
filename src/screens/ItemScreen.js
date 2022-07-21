@@ -13,7 +13,7 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bg11},
+  {id: 1, bg: images.bg1},
   {id: 2, bg: images.bg2},
   {id: 3, bg: images.bg3},
   {id: 4, bg: images.bg4},

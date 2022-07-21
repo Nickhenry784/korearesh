@@ -38,18 +38,18 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg5}>
+    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buyy} style={appStyle.buyImage} />
+            <Image source={images.view} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.start} style={appStyle.itemView} />
+          <Image source={images.watch} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
