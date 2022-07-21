@@ -13,16 +13,16 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bg11},
-  {id: 2, bg: images.bg2},
-  {id: 3, bg: images.bg3},
-  {id: 4, bg: images.bg4},
-  {id: 5, bg: images.bg5},
-  {id: 6, bg: images.bg6},
-  {id: 7, bg: images.bg7},
-  {id: 8, bg: images.bg8},
-  {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
+  {id: 1, bg: images.img1},
+  {id: 2, bg: images.img2},
+  {id: 3, bg: images.img3},
+  {id: 4, bg: images.img4},
+  {id: 5, bg: images.img5},
+  {id: 6, bg: images.img6},
+  {id: 7, bg: images.img7},
+  {id: 8, bg: images.img8},
+  {id: 9, bg: images.img9},
+  {id: 10, bg: images.img10},
 ]
 
 const ItemScreen = ({navigation, route}) => {

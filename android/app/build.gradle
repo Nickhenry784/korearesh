@@ -140,7 +140,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.amazon.phototravelgreen"
+        applicationId "com.amazon.buildingpcappca"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

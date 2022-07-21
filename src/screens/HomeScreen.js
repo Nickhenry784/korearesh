@@ -21,6 +21,8 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
+  const [popup, setPopup] = useState(false);
+
   const dispatch = useDispatch();
 
   const onClickTurnButton = () => {
@@ -37,21 +39,34 @@ const HomeScreen = () => {
   }
 
 
+
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg5}>
+    <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buyy} style={appStyle.buyImage} />
+            <Image source={images.view} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-      </View>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.start} style={appStyle.itemView} />
+        <TouchableOpacity onPress={() => setPopup(true)}>
+          <Image source={images.buttonnote} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
+      <Image source={images.buidingpc} style={appStyle.brokenImage} />
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.watchnow} style={appStyle.itemView} />
+        </TouchableOpacity>
+      </View>
+      {popup && (
+      <View style={appStyle.popupView}>
+        <ImageBackground style={appStyle.popupImage} source={images.bangnote}>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.buttonok} style={appStyle.okBtn} />
+          </TouchableOpacity>
+        </ImageBackground>
+      </View>)}
     </ImageBackground>
   );
 };
@@ -65,6 +80,29 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     resizeMode: 'cover',
+  },
+  popupImage: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.2,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  popupView: {
+    width: windowWidth,
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(1, 1, 1, 0.7)',
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+  },
+  okBtn: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
   },
   appBar: {
     flex: 0.1,
@@ -92,8 +130,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.4,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   itemView: {
@@ -102,7 +140,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   text: {
-    fontSize: windowWidth > 640 ? 30 : 25,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
   },

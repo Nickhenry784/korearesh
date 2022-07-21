@@ -1,4 +1,4 @@
-package com.amazon.phototravelgreen;
+package com.amazon.buildingpcappca;
 
 import com.facebook.react.ReactActivity;
 
