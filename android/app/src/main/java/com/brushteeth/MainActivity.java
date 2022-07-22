@@ -1,4 +1,4 @@
-package com.amazon.funnycatwallpapers;
+package com.amazon.mysterioustreasure;
 
 import com.facebook.react.ReactActivity;
 

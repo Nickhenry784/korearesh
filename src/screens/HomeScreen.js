@@ -50,25 +50,20 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
+          <Image source={images.buttonNote} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <Image source={images.buidingpc} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.start} style={appStyle.itemView} />
+          <Image source={images.buttonplay} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.infboard}>
-          <Text style={appStyle.labelText}>1 view = 1 turn</Text>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.exit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-          
+        <ImageBackground style={appStyle.popupImage} source={images.modal}>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.ok} style={appStyle.okBtn} />
+          </TouchableOpacity>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -89,7 +84,7 @@ export const appStyle = StyleSheet.create({
     width: windowWidth * 0.8,
     height: windowHeight * 0.4,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   labelText: {
     fontSize:30,
@@ -114,8 +109,8 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   okBtn: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   appBar: {
@@ -134,9 +129,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 30,
+    fontFamily: 'Watermelon Days',
+    color: '#3d1900',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -150,7 +145,7 @@ export const appStyle = StyleSheet.create({
   },
   itemView: {
     width: windowWidth * 0.4,
-    height: windowWidth * 0.2,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
   },
   text: {
