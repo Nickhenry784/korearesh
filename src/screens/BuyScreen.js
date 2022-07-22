@@ -20,6 +20,7 @@ import RNIap, {
 import {items, subs} from '../conf';
 import { useDispatch } from 'react-redux';
 import { images } from '../assets';
+import { appStyle } from './ItemScreen';
 
 let purchaseUpdateSubscription;
 let purchaseErrorSubscription;
@@ -119,6 +120,7 @@ export default function App() {
   };
 
   return (
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
@@ -156,6 +158,7 @@ export default function App() {
       )}
 
     </ScrollView>
+    </ImageBackground>
   );
 }
 
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
   },
   labelText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Watermelon Days',
     color: 'black',
   },
   item: {
@@ -211,14 +214,14 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   price: {
-    fontWeight: 'bold',
+    fontFamily: 'Watermelon Days',
     fontSize: 16,
     color: '#212121',
   },
   descr: {
     fontSize: 14,
     color: '#212121',
-    fontWeight: '500',
+    fontFamily: 'Watermelon Days',
   },
   itemList: {},
   item2: {

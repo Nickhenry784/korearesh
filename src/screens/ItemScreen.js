@@ -13,7 +13,7 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.chest1},
+  {id: 1, bg: images.img1},
   {id: 2, bg: images.img2},
   {id: 3, bg: images.img3},
   {id: 4, bg: images.img4},
@@ -22,41 +22,45 @@ const dataBg = [
   {id: 7, bg: images.img7},
   {id: 8, bg: images.img8},
   {id: 9, bg: images.img9},
-  {id: 10, bg: images.img10},
+]
+
+const dataWater = [
+  {id: 1, bg: images.waterspray},
+  {id: 2, bg: images.waterspray2},
+  {id: 3, bg: images.waterspray3},
+  {id: 4, bg: images.waterspray4},
+  {id: 5, bg: images.waterspray5},
+  {id: 6, bg: images.waterspray6},
+  {id: 7, bg: images.waterspray7},
+  {id: 8, bg: images.waterspray8},
+  {id: 9, bg: images.waterspray9},
 ]
 
 const ItemScreen = ({navigation, route}) => {
 
   const [index, setIndex] = useState(0);
-  const [play, setPlay] = useState(false);
-  const [deg, setDeg] = useState(0);
-  const [time, setTime] = useState(Math.floor(Math.random() * 20 + 10));
+  const [indexWater, setIndexWater] = useState(0);
 
   useEffect(() => {
-    const timeOut = setTimeout(() => {
-      if(time > 0 && play){
-        setTime(time - 1);
-        setDeg(Math.floor(Math.random() * 10 - 10));
-      }
-      if(time === 0 && play){
-        setIndex(Math.floor(Math.random() * 9 + 1));
-        setPlay(false);
-        setTime(Math.floor(Math.random() * 20 + 10));
-        setTimeout(() => {
-          setIndex(0);
-        }, 5000);
-        clearTimeout(timeOut);
-      }
-    }, 1000);
-
+    const timeOut = setInterval(() => {
+      setIndexWater(Math.floor(Math.random() * 8));
+    }, 500);
     return () => {
-      clearTimeout(timeOut);
+      clearInterval(timeOut);
     }
-  }, [time, play]);
+  }, [indexWater]);
 
-  const onClickChestBtn = () => {
-    setPlay(true);
+  const onClickLeftBtn = () => {
+    if(index !== 0){
+      setIndex(index - 1);
+    }
   };
+
+  const onClickRightBtn = () => {
+    if(index !== dataBg.length - 1){
+      setIndex(index + 1);
+    }
+  }
 
   const onClickCloseBtn = () => {
     navigation.goBack();
@@ -64,19 +68,24 @@ const ItemScreen = ({navigation, route}) => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg2}>
-      <View style={appStyle.centerView}>
-        <TouchableOpacity disabled={play} onPress={() => onClickChestBtn()}>
-          <Animated.Image source={dataBg[index].bg} style={[appStyle.btnClose, {
-              transform: [{
-                rotate: `${deg} deg`,
-              }]
-            }]} />
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
+      <View style={appStyle.closeView}>
+        <TouchableOpacity onPress={() => onClickCloseBtn()}>
+          <Image source={images.buttonexit} style={appStyle.btnCl} />
         </TouchableOpacity>
       </View>
+      <View style={appStyle.centerView}>
+        <View style={appStyle.waterView}>
+          <Image source={dataWater[indexWater].bg} style={appStyle.waterImage} />
+        </View>
+        <Image source={dataBg[index].bg} style={appStyle.btnClose} />
+      </View>
       <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickCloseBtn()}>
-          <Image source={images.buttonhome} style={appStyle.btn} />
+        <TouchableOpacity onPress={() => onClickLeftBtn()}>
+          <Image source={images.arrowleft} style={appStyle.btn} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onClickRightBtn()}>
+          <Image source={images.arrowright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -92,15 +101,47 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  closeView: {
+    width: windowWidth * 0.15,
+    height: windowWidth * 0.15,
+    borderRadius: windowWidth * 0.07,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: '5%',
+    left: '5%',
+    backgroundColor: 'white',
+  },
   centerView: {
-    width: '100%',
+    width: '70%',
     height: windowHeight * 0.5,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  waterView: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.1,
+    position: 'absolute',
+    top: '8%',
+    left: '0%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
   },
   btnClose: {
     width: windowWidth * 0.6,
-    height: windowHeight * 0.3,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
+  },
+  btnCl: {
+    width: windowWidth * 0.1,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  waterImage: {
+    width: windowWidth * 0.25,
+    height: windowHeight * 0.08,
     resizeMode: 'contain',
   },
   btn: {
@@ -112,7 +153,7 @@ export const appStyle = StyleSheet.create({
     width: windowWidth,
     height: windowHeight * 0.2,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
 });

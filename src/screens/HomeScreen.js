@@ -50,9 +50,10 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.buttonNote} style={appStyle.buyImage} />
+          <Image source={images.buttonbote} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
+      <Image style={appStyle.imageLabel} source={images.iconperfume} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.buttonplay} style={appStyle.itemView} />
@@ -61,9 +62,12 @@ const HomeScreen = () => {
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.modal}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.ok} style={appStyle.okBtn} />
-          </TouchableOpacity>
+          <View style={appStyle.closeView}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.buttonexit} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </View>
+          <Text style={appStyle.labelText}>1 Play = 1 Turn</Text>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -80,16 +84,21 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
+  imageLabel: {
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+  },
   popupImage: {
-    width: windowWidth * 0.8,
+    width: windowWidth * 0.85,
     height: windowHeight * 0.4,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   labelText: {
-    fontSize:30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
+    fontSize: 30,
+    fontFamily: 'Watermelon Days',
+    color: '#3d1900',
   },
   closeView: {
     position: 'absolute',
@@ -109,8 +118,8 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   okBtn: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   appBar: {
