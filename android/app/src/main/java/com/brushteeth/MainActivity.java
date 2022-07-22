@@ -1,4 +1,4 @@
-package com.amazon.buildingpcappca;
+package com.amazon.funnycatwallpapers;
 
 import com.facebook.react.ReactActivity;
 

@@ -41,30 +41,34 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+            <Image source={images.buttonbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.buttonnote} style={appStyle.buyImage} />
+          <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
       <Image source={images.buidingpc} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watchnow} style={appStyle.itemView} />
+          <Image source={images.start} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.bangnote}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.buttonok} style={appStyle.okBtn} />
-          </TouchableOpacity>
+        <ImageBackground style={appStyle.popupImage} source={images.infboard}>
+          <Text style={appStyle.labelText}>1 view = 1 turn</Text>
+          <View style={appStyle.closeView}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.exit} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </View>
+          
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -83,9 +87,19 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.8,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.4,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+  },
+  labelText: {
+    fontSize:30,
+    fontWeight: 'bold',
+    color: '#d8b58a',
+  },
+  closeView: {
+    position: 'absolute',
+    top: '5%',
+    right: '0%',
   },
   popupView: {
     width: windowWidth,

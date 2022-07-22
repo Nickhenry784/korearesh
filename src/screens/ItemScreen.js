@@ -23,6 +23,8 @@ const dataBg = [
   {id: 8, bg: images.img8},
   {id: 9, bg: images.img9},
   {id: 10, bg: images.img10},
+  {id: 11, bg: images.img11},
+  {id: 12, bg: images.img12},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -35,22 +37,29 @@ const ItemScreen = ({navigation, route}) => {
     }
   }
 
+  const onClickCloseBtn = () => {
+    navigation.goBack();
+  }
+
   const onClickBackBtn = () => {
     if(index !== 0){
       setIndex(index - 1);
-    }else{
-      navigation.goBack();
     }
   }
 
   return (
     <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+      <View style={appStyle.closeView}>
+        <TouchableOpacity onPress={() => onClickCloseBtn()}>
+          <Image source={images.exit} style={appStyle.btnClose} />
+        </TouchableOpacity>
+      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
+          <Image source={images.buttonleft} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
+          <Image source={images.buttonright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -65,6 +74,16 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     resizeMode: 'cover',
+  },
+  closeView: {
+    position: 'absolute',
+    top: '3%',
+    left: '3%',
+  },
+  btnClose: {
+    width: windowWidth * 0.1,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
   },
   btn: {
     width: windowWidth * 0.3,
