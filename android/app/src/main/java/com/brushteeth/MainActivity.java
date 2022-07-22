@@ -1,4 +1,4 @@
-package com.amazon.mysterioustreasure;
+package com.amazon.wordsoflove;
 
 import com.facebook.react.ReactActivity;
 

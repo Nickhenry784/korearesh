@@ -38,10 +38,19 @@ const HomeScreen = () => {
     navigation.navigate("Item");
   }
 
+  const onClickStartButton1 = () => {
+    if(points.value <= 0){
+      Alert.alert("Please buy more turn!");
+      return false;
+    }
+    dispatch(decrement());
+    navigation.navigate("Item1");
+  }
+
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -50,20 +59,26 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.buttonNote} style={appStyle.buyImage} />
+          <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.buttonplay} style={appStyle.itemView} />
+          <Image source={images.heart1} style={appStyle.itemView} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onClickStartButton1()}>
+          <Image source={images.heart2} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.modal}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.ok} style={appStyle.okBtn} />
-          </TouchableOpacity>
+        <ImageBackground style={appStyle.popupImage} source={images.infboard}>
+          <View style={appStyle.closeView}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.buttonexit} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </View>
+          <Text style={appStyle.labelText}>1 View = 1 Turn</Text>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -77,19 +92,19 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
   popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.15,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
   labelText: {
     fontSize:30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
+    fontFamily: 'IndieFlower',
+    color: 'black',
   },
   closeView: {
     position: 'absolute',
@@ -109,8 +124,8 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   okBtn: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   appBar: {
@@ -130,8 +145,8 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'Watermelon Days',
-    color: '#3d1900',
+    fontFamily: 'IndieFlower',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -154,10 +169,11 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   bottomView: {
-    flex: 0.3,
+    marginTop: 20,
+    flex: 0.7,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   phoneImage: {
     width: windowWidth * 0.5,
