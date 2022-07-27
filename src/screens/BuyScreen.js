@@ -20,7 +20,7 @@ import RNIap, {
 import {items, subs} from '../conf';
 import { useDispatch } from 'react-redux';
 import { images } from '../assets';
-import { appStyle } from './ItemScreen';
+import {increamentByAmount} from '../redux/pointSlice';
 
 let purchaseUpdateSubscription;
 let purchaseErrorSubscription;
@@ -120,7 +120,7 @@ export default function App() {
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={styles.homeView} source={images.bg}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
