@@ -24,6 +24,7 @@ const dataButton = [
 
 const Home = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const points = useSelector(state => state.points);
 
@@ -34,6 +35,7 @@ const Home = () => {
       Alert.alert('Please buy more turn');
       return false;
     }
+    dispatch(decrement());
     navigation.navigate("Item");
   }
 
@@ -44,11 +46,11 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buttonbuy} style={appStyle.scoreStyle} />
+            <Image source={images.button_buy} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -58,15 +60,16 @@ const Home = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.buttonstart} style={appStyle.startBtn} />
+          <Image source={images.button_play} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
+        <ImageBackground style={appStyle.popupImage} source={images.inf_board}>
+          <Text style={appStyle.turnText}>1 Play = 1 Turn</Text>
           <View style={appStyle.closeView}>
             <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonexit} style={appStyle.okBtn} />
+              <Image source={images.button_return} style={appStyle.okBtn} />
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -88,7 +91,7 @@ export const appStyle = StyleSheet.create({
   closeView: {
     position: 'absolute',
     top: '3%',
-    right: '5%',
+    right: '10%',
   },
   appBar: {
     flex: 0.1,
@@ -102,7 +105,7 @@ export const appStyle = StyleSheet.create({
     width: windowWidth,
     height: windowHeight * 0.3,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   popupView: {
     width: windowWidth,
@@ -127,10 +130,10 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   bottomView: {
-    flex: 0.2,
+    flex: 0.5,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   centerView: {
     flex: 0.4,
@@ -161,9 +164,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   turnText: {
-    fontSize: 50,
+    fontSize: 30,
     color: 'white',
-    fontFamily: 'ReenieBeanie',
   },
   labelText: {
     fontSize: 20,

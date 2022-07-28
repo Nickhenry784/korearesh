@@ -1,4 +1,4 @@
-package com.amazon.funnysticker;
+package com.amazon.trafficlights;
 
 import com.facebook.react.ReactActivity;
 

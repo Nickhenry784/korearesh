@@ -183,9 +183,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   labelText: {
-    fontSize: 50,
-    fontFamily: 'ReenieBeanie',
-    color: 'white',
+    fontSize: 30,
+    color: 'black',
+    fontWeight: 'bold',
   },
   item: {
     margin: 5,
