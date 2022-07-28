@@ -44,7 +44,7 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -58,7 +58,7 @@ const Home = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.buttonwatch} style={appStyle.startBtn} />
+          <Image source={images.buttonstart} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
       {popup && (
@@ -99,8 +99,8 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
   },
   popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth,
+    height: windowHeight * 0.3,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -122,8 +122,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   okBtn: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   bottomView: {
@@ -161,9 +161,9 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   turnText: {
-    fontSize: 30,
+    fontSize: 50,
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'ReenieBeanie',
   },
   labelText: {
     fontSize: 20,

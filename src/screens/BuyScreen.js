@@ -120,7 +120,7 @@ export default function App() {
   };
 
   return (
-    <ImageBackground source={images.bg1} style={styles.homeView}>
+    <ImageBackground source={images.bg} style={styles.homeView}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
@@ -183,8 +183,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   labelText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 50,
+    fontFamily: 'ReenieBeanie',
     color: 'white',
   },
   item: {

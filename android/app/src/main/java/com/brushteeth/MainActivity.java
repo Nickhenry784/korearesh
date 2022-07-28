@@ -1,4 +1,4 @@
-package com.amazon.robotmechawallpaper;
+package com.amazon.funnysticker;
 
 import com.facebook.react.ReactActivity;
 
