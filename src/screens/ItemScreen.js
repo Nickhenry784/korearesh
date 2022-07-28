@@ -45,15 +45,15 @@ const ItemScreen = ({navigation, route}) => {
     <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
       <View style={appStyle.closeview}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.return} style={appStyle.btnReturn} />
+          <Image source={images.buttonexit} style={appStyle.btnReturn} />
         </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
+          <Image source={images.buttonleft} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
+          <Image source={images.buttonright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>

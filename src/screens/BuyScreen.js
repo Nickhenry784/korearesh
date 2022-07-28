@@ -120,7 +120,7 @@ export default function App() {
   };
 
   return (
-    <ImageBackground source={images.background} style={styles.homeView}>
+    <ImageBackground source={images.bg1} style={styles.homeView}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   labelText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   item: {
     margin: 5,
