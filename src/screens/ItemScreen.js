@@ -13,7 +13,7 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bg1},
+  {id: 1, bg: images.bg11},
   {id: 2, bg: images.bg2},
   {id: 3, bg: images.bg3},
   {id: 4, bg: images.bg4},
@@ -38,13 +38,16 @@ const ItemScreen = ({navigation, route}) => {
   const onClickBackBtn = () => {
     if(index !== 0){
       setIndex(index - 1);
-    }else{
-      navigation.goBack();
     }
   }
 
   return (
     <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+      <View style={appStyle.closeview}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.return} style={appStyle.btnReturn} />
+        </TouchableOpacity>
+      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
           <Image source={images.back} style={appStyle.btn} />
@@ -66,8 +69,18 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  closeview: {
+    position: 'absolute',
+    top: '3%',
+    left: '3%',
+  },
   btn: {
     width: windowWidth * 0.3,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  btnReturn: {
+    width: windowWidth * 0.1,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
