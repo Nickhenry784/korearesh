@@ -47,6 +47,9 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
+      <View style={{position: 'absolute', top: '20%'}}>
+        <Image source={images.textstart} style={appStyle.brokenImage} />
+      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.watch} style={appStyle.itemView} />
@@ -92,7 +95,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.4,
+    width: windowWidth * 0.6,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },

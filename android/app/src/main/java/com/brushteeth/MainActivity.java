@@ -1,4 +1,4 @@
-package com.amazon.carwallpapermoa;
+package com.amazon.trafficsignsmi;
 
 import com.facebook.react.ReactActivity;
 
