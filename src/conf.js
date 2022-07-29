@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.signsmi_100t',
+    sku: 'com.amazon.tattoo_1',
     value: 100,
   },
   {
-    sku: 'com.amazon.signsmi_200t',
+    sku: 'com.amazon.tattoo_2',
     value: 200,
   },
   {
-    sku: 'com.amazon.signsmi_300t',
+    sku: 'com.amazon.tattoo_3',
     value: 300,
   },
   {
-    sku: 'com.amazon.signsmi_400t',
+    sku: 'com.amazon.tattoo_4',
     value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_signsmi_1',
+    sku: 'com.amazon.weekly_tattoo_1',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_signsmi_2',
+    sku: 'com.amazon.weekly_tattoo_2',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_signsmi_1',
+    sku: 'com.amazon.monthly_tattoo_1',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_signsmi_2',
+    sku: 'com.amazon.monthly_tattoo_2',
     value: 700,
   },
 ];

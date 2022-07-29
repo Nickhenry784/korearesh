@@ -44,13 +44,21 @@ const ItemScreen = ({navigation, route}) => {
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+    <ImageBackground style={appStyle.homeView} source={images.background}>
+      <View style={appStyle.appBar}>
+        <TouchableOpacity onPress={() => navigation.goBack()} >
+          <Image source={images.buttonback} style={appStyle.btn} />
+        </TouchableOpacity>
+      </View>
+      <View style={appStyle.centerView}>
+        <Image source={dataBg[index].bg} style={appStyle.tatooImage}/>
+      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
+          <Image source={images.buttonleft} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
+          <Image source={images.buttonright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -66,10 +74,27 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  appBar: {
+    position: 'absolute',
+    top: '3%',
+    left: '5%',
+  },
+  tatooImage: {
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.8,
+    resizeMode: 'contain',
+  },
   btn: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
+  },
+  centerView: {
+    width: windowWidth,
+    height: windowHeight * 0.5,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bottomView: {
     width: windowWidth,

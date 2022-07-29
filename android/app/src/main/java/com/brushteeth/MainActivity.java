@@ -1,4 +1,4 @@
-package com.amazon.trafficsignsmi;
+package com.amazon.reftattoo;
 
 import com.facebook.react.ReactActivity;
 
