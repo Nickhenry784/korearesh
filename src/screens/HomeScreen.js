@@ -26,6 +26,7 @@ const Home = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
+  const dispatch = useDispatch();
 
   const [popup, setPopup] = useState(false);
 
@@ -34,6 +35,7 @@ const Home = () => {
       Alert.alert('Please buy more turn');
       return false;
     }
+    dispatch(decrement());
     navigation.navigate("Item");
   }
 
@@ -58,17 +60,15 @@ const Home = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.buttonwatch} style={appStyle.startBtn} />
+          <Image source={images.buttonstart} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.buttonok} style={appStyle.okBtn} />
+          </TouchableOpacity>
         </ImageBackground>
       </View>)}
     </ImageBackground>

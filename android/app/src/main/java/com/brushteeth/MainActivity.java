@@ -1,4 +1,4 @@
-package com.amazon.robotmechawallpaper;
+package com.amazon.elementalmagic;
 
 import com.facebook.react.ReactActivity;
 
