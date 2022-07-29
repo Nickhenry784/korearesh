@@ -29,11 +29,14 @@ const Home = () => {
 
   const [popup, setPopup] = useState(false);
 
+  const dispatch = useDispatch();
+
   const onClickStartButton = (item) => {
     if (points.value === 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
+    dispatch(decrement());
     navigation.navigate("Item");
   }
 
