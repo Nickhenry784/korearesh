@@ -121,7 +121,7 @@ const PlayScreen = ({navigation, route}) => {
               ) : (
                 <Image
                   source={
-                    startGameState[index] ? item.image : images.question
+                    startGameState[index] ? item.image : images.icon
                   }
                   style={appStyle.iconImage}
                 />
@@ -129,11 +129,15 @@ const PlayScreen = ({navigation, route}) => {
             </TouchableOpacity>
           )}
         />
-        {startGameState.length === 0 && (
+        {startGameState.length === 0 ? (
           <TouchableOpacity
-            onPress={onClickOKButton}
-            onLongPress={onClickOKButton}>
-            <Image source={images.ok} style={appStyle.startImage} />
+            onPress={onClickOKButton}>
+            <Image source={images.start} style={appStyle.startImage} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}>
+            <Image source={images.back} style={appStyle.startImage} />
           </TouchableOpacity>
         )}
       </View>
@@ -161,8 +165,7 @@ export const appStyle = StyleSheet.create({
   turn: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'red',
-    fontFamily: 'Mat Saleh',
+    color: 'white',
   },
   centerView: {
     flex: 0.9,
@@ -173,8 +176,7 @@ export const appStyle = StyleSheet.create({
   timeText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'blue',
-    fontFamily: 'Mat Saleh',
+    color: 'white',
     textAlign: 'center',
   },
   iconButton: {
@@ -188,7 +190,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   startImage: {
-    width: windowWidth * 0.2,
+    width: windowWidth * 0.3,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },

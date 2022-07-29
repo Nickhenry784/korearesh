@@ -61,12 +61,4 @@ export const iconData = [
     id: 15,
     image: images.a15,
   },
-  {
-    id: 16,
-    image: images.a16,
-  },
-  {
-    id: 17,
-    image: images.a17,
-  },
 ];

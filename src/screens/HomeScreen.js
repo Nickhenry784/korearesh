@@ -43,13 +43,11 @@ const Home = () => {
 
   const handleRandomListIcon = () => {
     const list = [...iconData];
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < 5; index++) {
+    for (let index = 0; index < 3; index++) {
       list.splice(randomIntFromInterval(0, list.length - 1), 1);
     }
     const list1 = [...list];
     const list2 = list.concat(list1);
-    // eslint-disable-next-line no-plusplus
     for (let index = 0; index < list2.length; index++) {
       const element = list2[index];
       list2.splice(index, 1);
@@ -65,18 +63,16 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background}>
+    <ImageBackground style={appStyle.homeView} source={images.background0}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.heart} style={appStyle.scoreStyle} />
+            <Image source={images.icon} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View style={appStyle.centerView}>
-        <Text style={appStyle.labelText}>You have to choose the same pairs of pictures to win</Text>
-        <Text style={appStyle.labelText}>Are you ready?</Text>
         <TouchableOpacity onPress={onClickStartButton}>
           <Image source={images.start} style={appStyle.startBtn} />
         </TouchableOpacity>
@@ -99,11 +95,12 @@ export const appStyle = StyleSheet.create({
   },
   appBar: {
     position: 'absolute',
+    left: '5%',
     width: '100%',
-    top: '0%',
+    top: '3%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   popupImage: {
     width: windowWidth,
@@ -143,7 +140,7 @@ export const appStyle = StyleSheet.create({
     flex: 0.4,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   turnView: {
     width: windowWidth * 0.15,
@@ -169,15 +166,8 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'red',
-    fontFamily: 'Mat Saled',
-  },
-  labelText: {
-    fontSize: 25,
-    color: 'blue',
-    width: windowWidth * 0.8,
-    textAlign: 'center',
-    fontFamily: 'Mat Saled',
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
