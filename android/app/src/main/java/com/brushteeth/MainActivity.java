@@ -1,4 +1,4 @@
-package com.amazon.trafficlights;
+package com.amazon.findpicmemorychallgame;
 
 import com.facebook.react.ReactActivity;
 

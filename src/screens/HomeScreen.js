@@ -11,7 +11,8 @@ import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import { images } from "../assets";
+import { images } from "../assets/images";
+import { iconData } from "../assets/icon";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -28,16 +29,34 @@ const Home = () => {
 
   const points = useSelector(state => state.points);
 
-  const [popup, setPopup] = useState(false);
-
   const onClickStartButton = (item) => {
     if (points.value === 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
     dispatch(decrement());
-    navigation.navigate("Item");
+    const list = handleRandomListIcon();
+    navigation.navigate("Play",{
+      data: list,
+    });
   }
+
+  const handleRandomListIcon = () => {
+    const list = [...iconData];
+    // eslint-disable-next-line no-plusplus
+    for (let index = 0; index < 5; index++) {
+      list.splice(randomIntFromInterval(0, list.length - 1), 1);
+    }
+    const list1 = [...list];
+    const list2 = list.concat(list1);
+    // eslint-disable-next-line no-plusplus
+    for (let index = 0; index < list2.length; index++) {
+      const element = list2[index];
+      list2.splice(index, 1);
+      list2.splice(randomIntFromInterval(0, 22), 0, element);
+    }
+    return list2;
+  };
 
 
   const onClickTurnButton = () => {
@@ -46,38 +65,28 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.button_buy} style={appStyle.scoreStyle} />
+            <Image source={images.heart} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
-        </TouchableOpacity>
       </View>
-      <View style={appStyle.bottomView}>
+      <View style={appStyle.centerView}>
+        <Text style={appStyle.labelText}>You have to choose the same pairs of pictures to win</Text>
+        <Text style={appStyle.labelText}>Are you ready?</Text>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.button_play} style={appStyle.startBtn} />
+          <Image source={images.start} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.inf_board}>
-          <Text style={appStyle.turnText}>1 Play = 1 Turn</Text>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.button_return} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>)}
     </ImageBackground>
   );
 };
 
+export const randomIntFromInterval = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -85,21 +94,16 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     resizeMode: 'cover',
   },
-  closeView: {
-    position: 'absolute',
-    top: '3%',
-    right: '10%',
-  },
   appBar: {
-    flex: 0.1,
+    position: 'absolute',
     width: '100%',
-    paddingHorizontal: 10,
+    top: '0%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   popupImage: {
     width: windowWidth,
@@ -139,7 +143,7 @@ export const appStyle = StyleSheet.create({
     flex: 0.4,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
   },
   turnView: {
     width: windowWidth * 0.15,
@@ -154,7 +158,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   startBtn: {
-    width: windowWidth * 0.4,
+    width: windowWidth * 0.5,
     height: windowHeight * 0.3,
     resizeMode: 'contain',
   },
@@ -165,12 +169,15 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'white',
+    color: 'red',
+    fontFamily: 'Mat Saled',
   },
   labelText: {
-    fontSize: 20,
-    color: 'black',
-    fontWeight: 'bold',
+    fontSize: 25,
+    color: 'blue',
+    width: windowWidth * 0.8,
+    textAlign: 'center',
+    fontFamily: 'Mat Saled',
   },
 });
 
