@@ -19,7 +19,6 @@ import RNIap, {
 
 import {items, subs} from '../conf';
 import { useDispatch } from 'react-redux';
-import { images } from '../assets';
 import {increamentByAmount} from '../redux/pointSlice';
 
 let purchaseUpdateSubscription;
@@ -120,7 +119,6 @@ export default function App() {
   };
 
   return (
-    <ImageBackground source={images.bgstart} style={styles.homeView}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
@@ -158,7 +156,6 @@ export default function App() {
       )}
 
     </ScrollView>
-    </ImageBackground>
   );
 }
 

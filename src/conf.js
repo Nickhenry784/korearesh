@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.signsmi_100t',
+    sku: 'com.amazon.rsssimulator_50',
+    value: 50,
+  },
+  {
+    sku: 'com.amazon.rsssimulator_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.signsmi_200t',
+    sku: 'com.amazon.rsssimulator_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.signsmi_300t',
+    sku: 'com.amazon.rsssimulator_300',
     value: 300,
-  },
-  {
-    sku: 'com.amazon.signsmi_400t',
-    value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_signsmi_1',
+    sku: 'com.amazon.weekly_rsssimulator_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_signsmi_2',
+    sku: 'com.amazon.weekly_rsssimulator_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_signsmi_1',
-    value: 400,
+    sku: 'com.amazon.monthly_rsssimulator_500',
+    value: 500,
   },
   {
-    sku: 'com.amazon.monthly_signsmi_2',
-    value: 700,
+    sku: 'com.amazon.monthly_rsssimulator_800',
+    value: 800,
   },
 ];

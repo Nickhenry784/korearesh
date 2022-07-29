@@ -11,7 +11,10 @@ import BuyScreen from './screens/BuyScreen';
 
 import {store, persistor} from './redux/store';
 import {LogBox} from 'react-native';
-import ItemScreen from './screens/ItemScreen';
+import SummerScreen from './screens/SummerScreen';
+import FallScreen from './screens/FallScreen';
+import WinterScreen from './screens/WinterScreen';
+import SpringScreen from './screens/SpringScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,9 +37,24 @@ export default function App() {
               options={{title: 'BUY'}}
             />
             <Stack.Screen
-              name="Item"
-              component={ItemScreen}
-              options={{headerShown: false}}
+              name="Summer"
+              component={SummerScreen}
+              options={{title: 'Summer'}}
+            />
+            <Stack.Screen
+              name="Fall"
+              component={FallScreen}
+              options={{title: 'Fall'}}
+            />
+            <Stack.Screen
+              name="Spring"
+              component={SpringScreen}
+              options={{title: 'Spring'}}
+            />
+            <Stack.Screen
+              name="Winter"
+              component={WinterScreen}
+              options={{title: 'Winter'}}
             />
           </Stack.Navigator>
         </NavigationContainer>

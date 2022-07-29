@@ -1,4 +1,4 @@
-package com.amazon.trafficsignsmi;
+package com.amazon.lookfoursssimulator;
 
 import com.facebook.react.ReactActivity;
 
