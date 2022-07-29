@@ -11,7 +11,7 @@ import BuyScreen from './screens/BuyScreen';
 
 import {store, persistor} from './redux/store';
 import {LogBox} from 'react-native';
-import ItemScreen from './screens/ItemScreen';
+import PlayScreen from './screens/PlayScreen';
 
 const Stack = createStackNavigator();
 
@@ -35,7 +35,7 @@ export default function App() {
             />
             <Stack.Screen
               name="Item"
-              component={ItemScreen}
+              component={PlayScreen}
               options={{headerShown: false}}
             />
           </Stack.Navigator>

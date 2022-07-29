@@ -15,12 +15,6 @@ import { images } from "../assets";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-const dataButton = [
-  {id: 1, image: images.teaceremony, background: images.teamau}, 
-  {id: 2, image: images.sakura, background: images.sakuramau}, 
-  {id: 3, image: images.phusimoutain, background: images.mautea}, 
-  {id: 4, image: images.kimono, background: images.kimonobackground}
-];
 
 const Home = () => {
   const navigation = useNavigation();
@@ -60,14 +54,14 @@ const Home = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.buttonstart} style={appStyle.startBtn} />
+          <Image source={images.buttonplay} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
           <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.buttonok} style={appStyle.okBtn} />
+            <Image source={images.buttonexit} style={appStyle.okBtn} />
           </TouchableOpacity>
         </ImageBackground>
       </View>)}
@@ -99,8 +93,9 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
   },
   popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },

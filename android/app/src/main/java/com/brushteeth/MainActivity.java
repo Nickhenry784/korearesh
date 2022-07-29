@@ -1,4 +1,4 @@
-package com.amazon.elementalmagic;
+package com.amazon.likethewind;
 
 import com.facebook.react.ReactActivity;
 
