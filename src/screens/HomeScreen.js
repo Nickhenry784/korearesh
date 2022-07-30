@@ -43,7 +43,7 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -57,17 +57,15 @@ const Home = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.buttonplay} style={appStyle.bullImage} />
+          <Image source={images.buttonstart} style={appStyle.bullImage} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.buttonexit} style={appStyle.okBtn} />
+          </TouchableOpacity>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -100,7 +98,7 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.8,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -123,7 +121,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   okBtn: {
-    width: windowWidth * 0.1,
+    width: windowWidth * 0.3,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
@@ -165,7 +163,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
   },
   labelText: {

@@ -1,4 +1,4 @@
-package com.amazon.aniworld;
+package com.amazon.fruitsandvegetables;
 
 import com.facebook.react.ReactActivity;
 
