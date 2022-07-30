@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.ethewind_1',
+    sku: 'com.amazon.forfun_1t',
     value: 50,
   },
   {
-    sku: 'com.amazon.ethewind_2',
+    sku: 'com.amazon.forfun_2t',
     value: 100,
   },
   {
-    sku: 'com.amazon.ethewind_3',
+    sku: 'com.amazon.forfun_3t',
     value: 200,
   },
   {
-    sku: 'com.amazon.ethewind_4',
+    sku: 'com.amazon.forfun_4t',
     value: 300,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_ethewind_100',
+    sku: 'com.amazon.weekly_forfun_1',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_ethewind_200',
+    sku: 'com.amazon.weekly_forfun_2',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_ethewind_400',
+    sku: 'com.amazon.monthly_forfun_1',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_ethewind_800',
+    sku: 'com.amazon.monthly_forfun_2',
     value: 800,
   },
 ];
