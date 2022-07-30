@@ -29,7 +29,7 @@ const ItemScreen = ({navigation, route}) => {
   const [index, setIndex] = useState(0);
 
   const onClickNextBtn = () => {
-    if(index !== 9){
+    if(index !== dataBg.length - 1){
       setIndex(index + 1);
     }
   }
