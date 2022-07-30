@@ -13,6 +13,5 @@ export const images = {
   bg7: require('./images/img/7.png'),
   bg8: require('./images/img/8.png'),
   bg9: require('./images/img/9.png'),
-  bg10: require('./images/img/10.png'),
   bg1: require('./images/img/1.png'),
 }

@@ -22,7 +22,6 @@ const dataBg = [
   {id: 7, bg: images.bg7},
   {id: 8, bg: images.bg8},
   {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
 ]
 
 const ItemScreen = ({navigation, route}) => {

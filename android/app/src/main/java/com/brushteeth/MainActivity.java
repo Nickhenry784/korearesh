@@ -1,4 +1,4 @@
-package com.amazon.trafficsignsmi;
+package com.amazon.typescoffeemao;
 
 import com.facebook.react.ReactActivity;
 
