@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.dvegetables_50',
-    value: 50,
-  },
-  {
-    sku: 'com.amazon.dvegetables_100',
+    sku: 'com.amazon.larsystem_100t',
     value: 100,
   },
   {
-    sku: 'com.amazon.dvegetables_200',
+    sku: 'com.amazon.larsystem_200t',
     value: 200,
   },
   {
-    sku: 'com.amazon.dvegetables_300',
+    sku: 'com.amazon.larsystem_300t',
     value: 300,
+  },
+  {
+    sku: 'com.amazon.larsystem_400t',
+    value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_dvegetables_100',
+    sku: 'com.amazon.weekly_larsystem_100t',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_dvegetables_200',
+    sku: 'com.amazon.weekly_larsystem_200t',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_dvegetables_400',
+    sku: 'com.amazon.monthly_larsystem_400t',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_dvegetables_800',
+    sku: 'com.amazon.monthly_larsystem_800t',
     value: 800,
   },
 ];

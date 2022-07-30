@@ -12,7 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets";
-import Sound from 'react-native-sound';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -43,7 +42,7 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -64,7 +63,7 @@ const Home = () => {
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
           <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.buttonexit} style={appStyle.okBtn} />
+            <Image source={images.btnok} style={appStyle.okBtn} />
           </TouchableOpacity>
         </ImageBackground>
       </View>)}
@@ -163,7 +162,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
   labelText: {

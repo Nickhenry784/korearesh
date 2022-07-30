@@ -183,9 +183,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   labelText: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   item: {
     margin: 5,

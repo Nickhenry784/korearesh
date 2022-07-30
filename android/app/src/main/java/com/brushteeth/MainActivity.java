@@ -1,4 +1,4 @@
-package com.amazon.fruitsandvegetables;
+package com.amazon.thesolarsystem;
 
 import com.facebook.react.ReactActivity;
 
