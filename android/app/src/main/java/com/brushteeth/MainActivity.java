@@ -1,4 +1,4 @@
-package com.amazon.barkforfun;
+package com.amazon.hoothoot;
 
 import com.facebook.react.ReactActivity;
 

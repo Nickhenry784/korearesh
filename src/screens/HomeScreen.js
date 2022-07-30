@@ -19,7 +19,7 @@ const windowHeight = Dimensions.get('screen').height;
 
 Sound.setCategory('Playback');
 
-var whoosh = new Sound('tiengbokeu.mp3', Sound.MAIN_BUNDLE, (error) => {
+var whoosh = new Sound('tiengchuongxedap.mp3', Sound.MAIN_BUNDLE, (error) => {
   if (error) {
     console.log('failed to load the sound', error);
     return;
@@ -28,12 +28,12 @@ var whoosh = new Sound('tiengbokeu.mp3', Sound.MAIN_BUNDLE, (error) => {
 });
 
 const dataBg = [
-  {id: 1, bg: images.btncat, music: 'tiengmeokeu.mp3'},
-  {id: 2, bg: images.btncow, music: 'tiengbokeu.mp3'},
-  {id: 3, bg: images.btndog, music: 'tiengchosua.mp3'},
-  {id: 4, bg: images.btneagle, music: 'tiengdaibang.mp3'},
-  {id: 5, bg: images.btnhorse, music: 'tiengnguahi.mp3'},
-  {id: 6, bg: images.btngecko, music: 'tiengcontatke.mp3'},
+  {id: 1, bg: images.btnbicycle, music: 'tiengchuongxedap.mp3'},
+  {id: 2, bg: images.btnfiretruck, music: 'tiengcoicuuhoa.mp3'},
+  {id: 3, bg: images.btntrain, music: 'tiengcoitauhoa.mp3'},
+  {id: 4, bg: images.btnpolicecar, music: 'tiengcoixecanhsat.mp3'},
+  {id: 5, bg: images.btnambulance, music: 'tiengcoixecuuthuong.mp3'},
+  {id: 6, bg: images.btnhelicopter, music: 'tiengmaybaytructhang.mp3'},
 ]
 
 const numCol = 2;
@@ -78,7 +78,7 @@ const Home = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buttonbuy} style={appStyle.scoreStyle} />
+            <Image source={images.butotnbuy} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -87,7 +87,7 @@ const Home = () => {
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.buttonloudspeaker} style={appStyle.bullImage} />
+        <Image source={images.btnloudspeaker} style={appStyle.bullImage} />
       </TouchableOpacity>
       <FlatList 
         data={dataBg}
@@ -104,7 +104,7 @@ const Home = () => {
         <ImageBackground style={appStyle.popupImage} source={images.board}>
           <View style={appStyle.closeView}>
             <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonexit} style={appStyle.okBtn} />
+              <Image source={images.bthexit} style={appStyle.okBtn} />
             </TouchableOpacity>
           </View>
         </ImageBackground>
