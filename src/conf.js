@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.forfun_1t',
+    sku: 'com.amazon.fstream_50',
     value: 50,
   },
   {
-    sku: 'com.amazon.forfun_2t',
+    sku: 'com.amazon.fstream_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.forfun_3t',
+    sku: 'com.amazon.fstream_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.forfun_4t',
-    value: 300,
+    sku: 'com.amazon.fstream_400',
+    value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_forfun_1',
+    sku: 'com.amazon.weekly_fstream_1',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_forfun_2',
+    sku: 'com.amazon.weekly_fstream_2',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_forfun_1',
+    sku: 'com.amazon.monthly_fstream_1',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_forfun_2',
+    sku: 'com.amazon.monthly_fstream_2',
     value: 800,
   },
 ];

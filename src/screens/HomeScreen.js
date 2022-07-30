@@ -19,7 +19,7 @@ const windowHeight = Dimensions.get('screen').height;
 
 Sound.setCategory('Playback');
 
-var whoosh = new Sound('tiengbokeu.mp3', Sound.MAIN_BUNDLE, (error) => {
+var whoosh = new Sound('tiengsuoichay.mp3', Sound.MAIN_BUNDLE, (error) => {
   if (error) {
     console.log('failed to load the sound', error);
     return;
@@ -27,16 +27,6 @@ var whoosh = new Sound('tiengbokeu.mp3', Sound.MAIN_BUNDLE, (error) => {
   whoosh.setVolume(1);
 });
 
-const dataBg = [
-  {id: 1, bg: images.btncat, music: 'tiengmeokeu.mp3'},
-  {id: 2, bg: images.btncow, music: 'tiengbokeu.mp3'},
-  {id: 3, bg: images.btndog, music: 'tiengchosua.mp3'},
-  {id: 4, bg: images.btneagle, music: 'tiengdaibang.mp3'},
-  {id: 5, bg: images.btnhorse, music: 'tiengnguahi.mp3'},
-  {id: 6, bg: images.btngecko, music: 'tiengcontatke.mp3'},
-]
-
-const numCol = 2;
 
 const Home = () => {
   const navigation = useNavigation();
@@ -45,7 +35,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [popup, setPopup] = useState(false);
-  const [sound, setSound] = useState(whoosh);
 
   const onClickStartButton = () => {
     if (points.value === 0) {
@@ -53,20 +42,8 @@ const Home = () => {
       return false;
     }
     dispatch(decrement());
-    sound.play();
+    whoosh.play();
   }
-
-  const onClickItemBtn = (val) => {
-    var whoosh = new Sound(val, Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-        return;
-      }
-      whoosh.setVolume(1);
-    });
-    setSound(whoosh);
-  }
-
 
   const onClickTurnButton = () => {
     navigation.navigate("BUY");
@@ -87,18 +64,11 @@ const Home = () => {
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.buttonloudspeaker} style={appStyle.bullImage} />
+        <Image source={images.buttonplay} style={appStyle.bullImage} />
       </TouchableOpacity>
-      <FlatList 
-        data={dataBg}
-        scrollEnabled={false}
-        numColumns={numCol}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => onClickItemBtn(item.music)} key={item.id}>
-            <Image source={item.bg} style={appStyle.startBtn} />
-          </TouchableOpacity>
-        )}
-      />
+      <TouchableOpacity onPress={() => whoosh.pause()}>
+        <Image source={images.buttonstop} style={appStyle.bullImage} />
+      </TouchableOpacity>
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
@@ -204,7 +174,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
   labelText: {
