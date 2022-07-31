@@ -1,4 +1,4 @@
-package com.amazon.hoothoot;
+package com.amazon.justanothersimplenote;
 
 import com.facebook.react.ReactActivity;
 

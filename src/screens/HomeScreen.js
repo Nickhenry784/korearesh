@@ -12,40 +12,18 @@ import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets";
-import Sound from 'react-native-sound';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-Sound.setCategory('Playback');
-
-var whoosh = new Sound('tiengchuongxedap.mp3', Sound.MAIN_BUNDLE, (error) => {
-  if (error) {
-    console.log('failed to load the sound', error);
-    return;
-  }
-  whoosh.setVolume(1);
-});
-
-const dataBg = [
-  {id: 1, bg: images.btnbicycle, music: 'tiengchuongxedap.mp3'},
-  {id: 2, bg: images.btnfiretruck, music: 'tiengcoicuuhoa.mp3'},
-  {id: 3, bg: images.btntrain, music: 'tiengcoitauhoa.mp3'},
-  {id: 4, bg: images.btnpolicecar, music: 'tiengcoixecanhsat.mp3'},
-  {id: 5, bg: images.btnambulance, music: 'tiengcoixecuuthuong.mp3'},
-  {id: 6, bg: images.btnhelicopter, music: 'tiengmaybaytructhang.mp3'},
-]
-
-const numCol = 2;
 
 const Home = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
+  const note = useSelector(state => state.note);
+  
   const dispatch = useDispatch();
-
-  const [popup, setPopup] = useState(false);
-  const [sound, setSound] = useState(whoosh);
 
   const onClickStartButton = () => {
     if (points.value === 0) {
@@ -53,18 +31,9 @@ const Home = () => {
       return false;
     }
     dispatch(decrement());
-    sound.play();
-  }
-
-  const onClickItemBtn = (val) => {
-    var whoosh = new Sound(val, Sound.MAIN_BUNDLE, (error) => {
-      if (error) {
-        console.log('failed to load the sound', error);
-        return;
-      }
-      whoosh.setVolume(1);
+    navigation.navigate("Note", {
+      note: null,
     });
-    setSound(whoosh);
   }
 
 
@@ -72,43 +41,46 @@ const Home = () => {
     navigation.navigate("BUY");
   }
 
+  const onClickNoteItem = (item) => {
+    navigation.navigate("Note", {
+      note: item,
+    })
+  }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg12}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.butotnbuy} style={appStyle.scoreStyle} />
+            <Image source={images.number_of_times_button} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
-        </TouchableOpacity>
+          <Image source={images.magnifying_glass_icon} style={appStyle.bullImage} />
+
       </View>
-      <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.btnloudspeaker} style={appStyle.bullImage} />
-      </TouchableOpacity>
+      <Text style={appStyle.labelText}>List Note:</Text>
+      {note.length !== 0 && 
       <FlatList 
-        data={dataBg}
-        scrollEnabled={false}
-        numColumns={numCol}
+        data={note}
         renderItem={({item}) => (
-          <TouchableOpacity onPress={() => onClickItemBtn(item.music)} key={item.id}>
-            <Image source={item.bg} style={appStyle.startBtn} />
+          <TouchableOpacity onPress={() => onClickNoteItem(item)} style={{borderBottomWidth: 1, marginHorizontal: 10, width: windowWidth * 0.9}}>
+            <View style={appStyle.titleView}>
+              <Text style={appStyle.titleText}>Title:</Text>
+              <Text style={appStyle.titleText}>{item.title}</Text>
+            </View>
+            <View style={appStyle.contentView}>
+              <Text style={appStyle.titleText}>Content:</Text>
+              <Text style={appStyle.titleText}>{item.noteText}</Text>
+            </View>
           </TouchableOpacity>
         )}
-      />
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.bthexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>)}
+      />}
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.plus_icon} style={appStyle.bullImage} />
+        </TouchableOpacity>
+      </View>
     </ImageBackground>
   );
 };
@@ -119,9 +91,25 @@ export const appStyle = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  titleText: {
+    color: 'rgba(1,1,1,0.8)',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  titleView: {
+    width: windowWidth * 0.9,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    borderBottomWidth: 1,
+  },
+  contentView: {
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.3,
   },
   closeView: {
     position: 'absolute',
@@ -129,13 +117,13 @@ export const appStyle = StyleSheet.create({
     right: '5%',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     width: '100%',
     paddingHorizontal: 10,
-    marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: 'black',
   },
   popupImage: {
     width: windowWidth * 0.8,
@@ -167,8 +155,13 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   bottomView: {
-    flex: 0.2,
-    width: '100%',
+    position: 'absolute',
+    bottom: '5%',
+    right: '5%',
+    width: windowWidth * 0.15,
+    height: windowWidth * 0.15,
+    borderRadius: windowWidth * 0.07,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -186,9 +179,8 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   bullImage: {
-    marginVertical: 20,
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.3,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   startBtn: {
@@ -204,11 +196,12 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
   labelText: {
-    fontSize: 20,
+    fontSize: 30,
+    paddingLeft: 20,
     color: 'black',
     fontWeight: 'bold',
   },

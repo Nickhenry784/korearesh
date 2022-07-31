@@ -4,6 +4,7 @@ import {combineReducers} from 'redux';
 import {persistStore, persistReducer} from 'redux-persist';
 
 import pointsReducer from './pointSlice';
+import noteSlice from './noteSlice';
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +14,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   points: pointsReducer,
+  note: noteSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
