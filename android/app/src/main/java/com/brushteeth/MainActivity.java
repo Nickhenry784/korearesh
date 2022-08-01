@@ -1,4 +1,4 @@
-package com.amazon.citywallpaperls;
+package com.amazon.kitchentipskta;
 
 import com.facebook.react.ReactActivity;
 

@@ -16,6 +16,13 @@ import { images } from "../assets";
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+const brokenData= [
+  {id: 1, image: images.chooseTheRightPanWhenCooking, background: images.bgChooseTheRight, title: "Choose The Right Pan When Cooking"},
+  {id: 2, image: images.coolDownTheCoffee, background: images.bgCoolDown, title: "Cool Down The Coffee"},
+  {id: 3, image: images.useTheFreezerToStoreFoodLonger, background: images.bgUseTheFreezer, title: "Use The Freezer To Store Food Longer"},
+  {id: 4, image: images.tipsToPeelGarlicQuickly, background: images.bgTipsToPeel, title: "Tips To Peel Garlic Quickly"},
+];
+
 const HomeScreen = () => {
   const navigation = useNavigation();
 
@@ -27,30 +34,40 @@ const HomeScreen = () => {
     navigation.navigate("BUY");
   }
 
-  const onClickStartButton = () => {
+  const onClickStartButton = (backgrou, titleN) => {
     if(points.value <= 0){
       Alert.alert("Please buy more turn!");
       return false;
     }
     dispatch(decrement());
-    navigation.navigate("Item");
+    navigation.navigate("Item", {
+      background: backgrou,
+      name: titleN,
+    });
   }
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg5}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+            <Image source={images.pan} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.start} style={appStyle.itemView} />
-        </TouchableOpacity>
+      <Image source={images.kitchenTips} style={appStyle.labelImage} />
+      <View style={appStyle.centerView}>
+        <FlatList 
+          data={brokenData}
+          scrollEnabled={false}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => onClickStartButton(item.background, item.title)}>
+              <Image source={item.image} style={appStyle.itemView} />
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </ImageBackground>
   );
@@ -63,7 +80,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
   appBar: {
@@ -76,7 +93,7 @@ export const appStyle = StyleSheet.create({
   },
   turnView: {
     flexDirection: 'row',
-    width: windowWidth * 0.15,
+    width: windowWidth * 0.2,
     height: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -84,7 +101,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -97,8 +114,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   itemView: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   text: {
@@ -106,18 +123,17 @@ export const appStyle = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  bottomView: {
-    flex: 0.3,
+  labelImage: {
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.2,
+    resizeMode: 'contain',
+  },
+  centerView: {
+    flex: 0.9,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
-    resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
+    justifyContent: 'flex-end',
+    resizeMode: 'cover',
   },
 });
 
