@@ -5,52 +5,56 @@ import {
   Image, 
   Alert,  
   ImageBackground,
-  TouchableOpacity} from "react-native";
+  TouchableOpacity,
+  Animated} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.bg1},
-  {id: 2, bg: images.bg2},
-  {id: 3, bg: images.bg3},
-  {id: 4, bg: images.bg4},
-  {id: 5, bg: images.bg5},
-  {id: 6, bg: images.bg6},
-  {id: 7, bg: images.bg7},
-  {id: 8, bg: images.bg8},
-  {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
-]
 
 const ItemScreen = ({navigation, route}) => {
 
-  const [index, setIndex] = useState(0);
+  const [deg, setDeg] = useState(0);
 
-  const onClickNextBtn = () => {
-    if(index !== 9){
-      setIndex(index + 1);
-    }
-  }
+  const [play, setPlay] = useState(false);
 
-  const onClickBackBtn = () => {
-    if(index !== 0){
-      setIndex(index - 1);
-    }else{
-      navigation.goBack();
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if(play && deg !== 390){
+        setDeg(deg + 30);
+      }
+      if(play && deg === 390){
+        setDeg(30);
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeOut);
     }
-  }
+  },[play, deg])
+
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+      <View style={appStyle.exitBtn}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.btnback} style={appStyle.backImage} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
+      </View>
+      <View style={appStyle.centerView}>
+        <Animated.Image source={images.moon} style={[appStyle.moonImage,{
+            transform: [{
+              rotate: `${deg}deg`
+            }]
+          }]}/>
+        <View style={appStyle.earthView}>
+          <Image source={images.earth} style={appStyle.earthImage} />
+        </View>
+      </View>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => setPlay(!play)}>
+          <Image source={!play ? images.btnplay : images.btnpause} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -71,12 +75,43 @@ export const appStyle = StyleSheet.create({
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
+  centerView: {
+    width: windowWidth,
+    height: windowHeight * 0.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  earthImage: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.3,
+    resizeMode: 'contain',
+  },
+  earthView: {
+    position: 'absolute',
+    top: '35%',
+  },
+  moonImage: {
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.8,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   bottomView: {
     width: windowWidth,
     height: windowHeight * 0.2,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  exitBtn: {
+    position: 'absolute',
+    top: '5%',
+    left: '5%',
+  },
+  backImage: {
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
   },
 });
 
