@@ -1,4 +1,4 @@
-package com.amazon.kitchentipskta;
+package com.amazon.soccertipssta;
 
 import com.facebook.react.ReactActivity;
 

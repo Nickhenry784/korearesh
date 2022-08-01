@@ -17,10 +17,10 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.chooseTheRightPanWhenCooking, background: images.bgChooseTheRight, title: "Choose The Right Pan When Cooking"},
-  {id: 2, image: images.coolDownTheCoffee, background: images.bgCoolDown, title: "Cool Down The Coffee"},
-  {id: 3, image: images.useTheFreezerToStoreFoodLonger, background: images.bgUseTheFreezer, title: "Use The Freezer To Store Food Longer"},
-  {id: 4, image: images.tipsToPeelGarlicQuickly, background: images.bgTipsToPeel, title: "Tips To Peel Garlic Quickly"},
+  {id: 1, image: images.passTheBallFurther, background: images.bgPassTheBall, title: "Pass The Ball Further"},
+  {id: 2, image: images.practiceDribbling, background: images.bgPractiveDribb, title: "Practice Dribbling"},
+  {id: 3, image: images.jugglingWithTheBall, background: images.bgJuggling, title: "Juggling With The Ball"},
+  {id: 4, image: images.practiceReceivingTheBall, background: images.bgPractiveReceiving, title: "Practice Receiving The Ball"},
 ];
 
 const HomeScreen = () => {
@@ -52,12 +52,14 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.pan} style={appStyle.buyImage} />
+            <Image source={images.ball} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.kitchenTips} style={appStyle.labelImage} />
+      <View style={{position: 'absolute', top: '0%'}}>
+        <Image source={images.soccerTips} style={appStyle.labelImage} />
+      </View>
       <View style={appStyle.centerView}>
         <FlatList 
           data={brokenData}
@@ -80,20 +82,17 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
   appBar: {
-    flex: 0.1,
-    paddingHorizontal: 20,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    position: 'absolute',
+    top: '5%',
+    right: '3%',
   },
   turnView: {
     flexDirection: 'row',
-    width: windowWidth * 0.2,
+    width: windowWidth * 0.15,
     height: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -129,7 +128,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   centerView: {
-    flex: 0.9,
+    flex: 0.8,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
