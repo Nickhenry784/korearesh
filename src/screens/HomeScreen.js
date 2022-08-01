@@ -54,7 +54,7 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buttonbuy} style={appStyle.buyImage} />
+            <Image source={images.btnbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -64,21 +64,20 @@ const HomeScreen = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.heart1} style={appStyle.itemView} />
+          <Image source={images.btnboy} style={appStyle.itemView} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickStartButton1()}>
-          <Image source={images.heart2} style={appStyle.itemView} />
+          <Image source={images.btngirl} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.infboard}>
+        <ImageBackground style={appStyle.popupImage} source={images.board}>
           <View style={appStyle.closeView}>
             <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonexit} style={appStyle.okBtn} />
+              <Image source={images.btnexit} style={appStyle.okBtn} />
             </TouchableOpacity>
           </View>
-          <Text style={appStyle.labelText}>1 View = 1 Turn</Text>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -92,7 +91,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     resizeMode: 'cover',
   },
   popupImage: {
@@ -129,7 +128,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -169,8 +168,7 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   bottomView: {
-    marginTop: 20,
-    flex: 0.7,
+    height: windowHeight * 0.6,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',

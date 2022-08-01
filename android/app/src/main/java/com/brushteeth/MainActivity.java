@@ -1,4 +1,4 @@
-package com.amazon.wordsoflove;
+package com.amazon.flawedface;
 
 import com.facebook.react.ReactActivity;
 

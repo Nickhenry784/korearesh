@@ -13,21 +13,26 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 11, bg: images.img11},
-  {id: 12, bg: images.img12},
-  {id: 13, bg: images.img13},
-  {id: 14, bg: images.img14},
-  {id: 15, bg: images.img15},
-  {id: 16, bg: images.img16},
-  {id: 17, bg: images.img17},
-  {id: 18, bg: images.img18},
-  {id: 19, bg: images.img19},
-  {id: 20, bg: images.img20},
+  {id: 1, bg: images.eyegirl1},
+  {id: 2, bg: images.eyegirl2},
+  {id: 3, bg: images.eyegirl3},
+  {id: 4, bg: images.eyegirl4},
+  {id: 5, bg: images.mouthgirl1},
+  {id: 6, bg: images.mouthgirl2},
+  {id: 7, bg: images.mouthgirl3},
+  {id: 8, bg: images.mouthgirl4},
+  {id: 9, bg: images.nosegirl1},
+  {id: 10, bg: images.nosegirl2},
+  {id: 11, bg: images.nosegirl3},
+  {id: 12, bg: images.nosegirl4},
 ]
 
 const ItemScreen = ({navigation, route}) => {
 
   const [index, setIndex] = useState(0);
+  const [eye, setEye] = useState(null);
+  const [mouth, setMouth] = useState(null);
+  const [nose, setNose] = useState(null);
 
   const onClickNextBtn = () => {
     if(index !== 9){
@@ -45,19 +50,43 @@ const ItemScreen = ({navigation, route}) => {
     }
   }
 
+  const onClickItemBtn = (id) => {
+    if(id <= 3){
+      setEye(dataBg[id].bg);
+    }else if(id<=7){
+      setMouth(dataBg[id].bg);
+    } else{
+      setNose(dataBg[id].bg);
+    }
+  }
+
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.closeView}>
         <TouchableOpacity onPress={() => onClickCloseBtn()}>
-          <Image source={images.arrowback} style={appStyle.btnClose} />
+          <Image source={images.btnback} style={appStyle.btnClose} />
         </TouchableOpacity>
       </View>
+      <ImageBackground source={images.facegirl} style={appStyle.faceImage} >
+        {eye !== null && <View style={appStyle.eyeView}>
+          <Image source={eye} style={appStyle.eyeImage} />
+        </View>}
+        {nose !== null && <View style={appStyle.noiseView}>
+          <Image source={nose} style={appStyle.noseImage} />
+        </View>}
+        {mouth !== null && <View style={appStyle.monthView}>
+          <Image source={mouth} style={appStyle.mouthImage} />
+        </View>}
+      </ImageBackground>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.buttonleft} style={appStyle.btn} />
+          <Image source={images.btnletf} style={appStyle.btn} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onClickItemBtn(index)}>
+          <Image source={dataBg[index].bg} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.buttonright} style={appStyle.btn} />
+          <Image source={images.btnright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -73,6 +102,25 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  faceImage: {
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  eyeView: {
+    position: 'absolute',
+    top: '30%',
+  },
+  monthView: {
+    position: 'absolute',
+    top: '58%',
+  },
+  noiseView: {
+    position: 'absolute',
+    top: '43%',
+  },
   closeView: {
     position: 'absolute',
     top: '3%',
@@ -85,6 +133,21 @@ export const appStyle = StyleSheet.create({
   },
   btn: {
     width: windowWidth * 0.3,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  eyeImage: {
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  noseImage: {
+    width: windowWidth * 0.15,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  mouthImage: {
+    width: windowWidth * 0.2,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
