@@ -1,4 +1,4 @@
-package com.amazon.soccertipssta;
+package com.amazon.volleyballtipsvla;
 
 import com.facebook.react.ReactActivity;
 

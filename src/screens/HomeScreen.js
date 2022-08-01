@@ -17,10 +17,10 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.passTheBallFurther, background: images.bgPassTheBall, title: "Pass The Ball Further"},
-  {id: 2, image: images.practiceDribbling, background: images.bgPractiveDribb, title: "Practice Dribbling"},
-  {id: 3, image: images.jugglingWithTheBall, background: images.bgJuggling, title: "Juggling With The Ball"},
-  {id: 4, image: images.practiceReceivingTheBall, background: images.bgPractiveReceiving, title: "Practice Receiving The Ball"},
+  {id: 1, image: images.passTheBallHigh, background: images.bgPass, title: "Pass The Ball High"},
+  {id: 2, image: images.kickTheBall, background: images.bgKick, title: "Kick The Ball"},
+  {id: 3, image: images.hitTheBall, background: images.bgHit, title: "Hit The Ball"},
+  {id: 4, image: images.blockTheBall, background: images.bgBlock, title: "Block The Ball"},
 ];
 
 const HomeScreen = () => {
@@ -57,8 +57,8 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '0%'}}>
-        <Image source={images.soccerTips} style={appStyle.labelImage} />
+      <View style={{position: 'absolute', top: '10%'}}>
+        <Image source={images.volleyballTips} style={appStyle.labelImage} />
       </View>
       <View style={appStyle.centerView}>
         <FlatList 
@@ -87,8 +87,8 @@ export const appStyle = StyleSheet.create({
   },
   appBar: {
     position: 'absolute',
-    top: '5%',
-    right: '3%',
+    top: '3%',
+    left: '3%',
   },
   turnView: {
     flexDirection: 'row',
