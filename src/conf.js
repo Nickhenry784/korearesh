@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.world_50start',
+    sku: 'com.amazon.callappvc_50',
     value: 50,
   },
   {
-    sku: 'com.amazon.world_100start',
+    sku: 'com.amazon.callappvc_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.world_200start',
+    sku: 'com.amazon.callappvc_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.world_300start',
+    sku: 'com.amazon.callappvc_300',
     value: 300,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_world_1start',
+    sku: 'com.amazon.weekly_callappvc_1',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_world_2start',
+    sku: 'com.amazon.weekly_callappvc_2',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_world_1start',
+    sku: 'com.amazon.monthly_callappvc_1',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_world_2start',
+    sku: 'com.amazon.monthly_callappvc_2',
     value: 800,
   },
 ];

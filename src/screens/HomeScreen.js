@@ -6,13 +6,15 @@ import {
   ImageBackground, 
   Image,
   FlatList, 
-  Alert  } from "react-native";
+  Alert,  
+  TextInput} from "react-native";
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets";
 import Sound from 'react-native-sound';
+import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -26,6 +28,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [popup, setPopup] = useState(false);
+  const [text, onChangeText] = useState("");
 
   const onClickStartButton = () => {
     if (points.value === 0) {
@@ -33,7 +36,12 @@ const Home = () => {
       return false;
     }
     dispatch(decrement());
-    navigation.navigate('Play');
+    if(text === ''){
+      navigation.navigate('Call',{ value: "Unknown"});
+    }else{
+      navigation.navigate('Call',{ value: text});
+    }
+    
   }
 
 
@@ -43,11 +51,11 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buttonbuy} style={appStyle.scoreStyle} />
+            <Image source={images.turn} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -55,19 +63,27 @@ const Home = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
+      <View style={appStyle.textView}>
+        <Image source={images.namephone} style={appStyle.okBtn} />
+        <TextInput
+          style={appStyle.input}
+          onChangeText={onChangeText}
+          placeholder={"Text Here!"}
+          placeholderTextColor={'rgba(255,255,255,0.7)'}
+          value={text}
+        />
+      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.buttonplay} style={appStyle.bullImage} />
+          <Image source={images.callme} style={appStyle.bullImage} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
+        <ImageBackground style={appStyle.popupImage} source={images.bangnote}>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.OK} style={appStyle.okBtn} />
+          </TouchableOpacity>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -84,6 +100,21 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
+  input: {
+    height: 40,
+    margin: 12,
+    width: windowWidth * 0.8,
+    borderBottomWidth: 1,
+    padding: 10,
+    borderColor: 'rgba(255,255,255,0.7)',
+    color: 'rgba(255,255,255,0.7)',
+  },
+  textView: {
+    position: 'absolute',
+    top: '15%',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
   closeView: {
     position: 'absolute',
     top: '3%',
@@ -93,14 +124,14 @@ export const appStyle = StyleSheet.create({
     flex: 0.1,
     width: '100%',
     paddingHorizontal: 10,
-    marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: 'rgba(1,1,1,0.3)'
   },
   popupImage: {
     width: windowWidth * 0.8,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -123,7 +154,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   okBtn: {
-    width: windowWidth * 0.1,
+    width: windowWidth * 0.3,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
