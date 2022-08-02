@@ -1,4 +1,4 @@
-package com.amazon.trafficsignsmi;
+package com.amazon.seawallpaper;
 
 import com.facebook.react.ReactActivity;
 

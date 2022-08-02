@@ -75,7 +75,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   turnView: {
     flexDirection: 'row',
@@ -87,7 +87,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
