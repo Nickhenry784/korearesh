@@ -1,4 +1,4 @@
-package com.amazon.serectpick;
+package com.amazon.connectpictureswithletterscpwl;
 
 import com.facebook.react.ReactActivity;
 

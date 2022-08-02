@@ -20,10 +20,12 @@ const PlayScreen = ({navigation, route}) => {
   const [startGameState, setStartGameState] = useState([]);
   const [score, setScore] = useState(0);
   const [heart, setHeart] = useState(3);
-  const [minutesCoutdown, setMinutesCoutdown] = useState(2);
+  const [minutesCoutdown, setMinutesCoutdown] = useState(0);
   const [secondsCoutdown, setSecondsCoutdown] = useState(60);
   const [doubleClick, setDoubleClick] = useState(false);
   const [result, setResult] = useState(null);
+  const [popup,setPopup] = useState(false);
+  const [win, setWin] = useState(true); 
   const num = 4;
   const indexOld = useRef(-1);
 
@@ -56,18 +58,22 @@ const PlayScreen = ({navigation, route}) => {
       setStartGameState(list);
       return false;
     }
-    if (result.id === value.id) {
+    if (result.id + 1 === value.id || result.id - 1 === value.id) {
       setScore(score + 10);
     } else {
-      setHeart(heart - 1);
+      if(heart !== 0){
+        setHeart(heart - 1);
+      }
       list[indexOld.current] = false;
       list[index] = false;
     }
     if (heart === 0) {
-      navigation.goBack();
+      setPopup(true);
+      setWin(false);
     }
-    if (score === 110) {
-      navigation.goBack();
+    if (score === 70) {
+      setPopup(true);
+      setWin(true);
     }
     setDoubleClick(false);
     setResult(null);
@@ -85,7 +91,7 @@ const PlayScreen = ({navigation, route}) => {
     setStartGameState(list);
   };
   return (
-    <ImageBackground source={images.background} style={appStyle.homeView}>
+    <ImageBackground source={images.bg} style={appStyle.homeView}>
       <View style={appStyle.appBar}>
         <Text style={appStyle.turn}>
           SCORE:
@@ -100,47 +106,62 @@ const PlayScreen = ({navigation, route}) => {
       </View>
       <View style={appStyle.centerView}>
         {startGameState.length === 0 && (
-          <Text style={appStyle.timeText}>
-            {`${minutesCoutdown} : ${secondsCoutdown}`}
-          </Text>
+          <ImageBackground source={images.time} style={appStyle.timeImage}>
+            <Text style={appStyle.timeText}>
+              {`${minutesCoutdown} : ${secondsCoutdown}`}
+            </Text>
+          </ImageBackground>
         )}
-        <FlatList
-          data={data}
-          numColumns={num}
-          scrollEnabled={false}
-          renderItem={({ item, index }) => (
+        <View style={appStyle.labelView}>
+          <ImageBackground style={appStyle.labelImage} source={images.label}>
+            <FlatList
+            data={data}
+            numColumns={num}
+            style={{marginTop: 50,}}
+            scrollEnabled={false}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                onPress={() => onClickIconImage(item, index)}
+                disabled={
+                  startGameState.length === 0 ? true : startGameState[index]
+                }>
+                {startGameState.length === 0 ? (
+                  <Image source={item.image} style={appStyle.iconImage} />
+                ) : (
+                  <Image
+                    source={
+                      startGameState[index] ? item.image : images.button
+                    }
+                    style={appStyle.iconImage}
+                  />
+                )}
+              </TouchableOpacity>
+            )}
+            />
+          </ImageBackground>
+        </View>
+        <View style={appStyle.bottomView}>
+          {startGameState.length === 0 ? (
             <TouchableOpacity
-              onPress={() => onClickIconImage(item, index)}
-              onLongPress={() => onClickIconImage(item, index)}
-              disabled={
-                startGameState.length === 0 ? true : startGameState[index]
-              }
-              style={appStyle.iconButton}>
-              {startGameState.length === 0 ? (
-                <Image source={item.image} style={appStyle.iconImage} />
-              ) : (
-                <Image
-                  source={
-                    startGameState[index] ? item.image : images.icon
-                  }
-                  style={appStyle.iconImage}
-                />
-              )}
+              onPress={onClickOKButton}>
+              <Image source={images.play} style={appStyle.startImage} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}>
+              <Image source={images.home} style={appStyle.startImage} />
             </TouchableOpacity>
           )}
-        />
-        {startGameState.length === 0 ? (
-          <TouchableOpacity
-            onPress={onClickOKButton}>
-            <Image source={images.start} style={appStyle.startImage} />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}>
-            <Image source={images.back} style={appStyle.startImage} />
-          </TouchableOpacity>
-        )}
+        </View>
       </View>
+      {
+        popup && <View style={appStyle.popupView}>
+          <Image source={win ? images.girlHappy : images.girlSad} style={appStyle.girlImage} />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={images.return} style={appStyle.startImage} />
+          </TouchableOpacity>
+        </View>
+      }
     </ImageBackground>
   );
 };
@@ -154,6 +175,38 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  popupView: {
+    width: windowWidth,
+    height: windowHeight,
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+    backgroundColor: 'rgba(1,1,1,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  girlImage: {
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
+  },
+  labelView: {
+    width: windowWidth,
+    height: windowHeight * 0.5,
+    position: 'absolute',
+    top: '15%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelImage: {
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.6,
+    resizeMode: 'contian',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   appBar: {
     flex: 0.1,
     width: '100%',
@@ -161,6 +214,18 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+  },
+  bottomView: {
+    position: 'absolute',
+    bottom: '5%',
+  },
+  timeImage: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.05,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
   },
   turn: {
     fontSize: 20,
@@ -179,14 +244,9 @@ export const appStyle = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
-  iconButton: {
+  iconImage: {
     width: windowWidth * 0.2,
     height: windowWidth * 0.2,
-    alignItems: 'center',
-  },
-  iconImage: {
-    width: windowWidth * 0.15,
-    height: windowWidth * 0.15,
     resizeMode: 'contain',
   },
   startImage: {

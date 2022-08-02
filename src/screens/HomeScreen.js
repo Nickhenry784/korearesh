@@ -43,17 +43,12 @@ const Home = () => {
 
   const handleRandomListIcon = () => {
     const list = [...iconData];
-    for (let index = 0; index < 3; index++) {
-      list.splice(randomIntFromInterval(0, list.length - 1), 1);
+    for (let index = 0; index < list.length; index++) {
+      const element = list[index];
+      list.splice(index, 1);
+      list.splice(randomIntFromInterval(0, 22), 0, element);
     }
-    const list1 = [...list];
-    const list2 = list.concat(list1);
-    for (let index = 0; index < list2.length; index++) {
-      const element = list2[index];
-      list2.splice(index, 1);
-      list2.splice(randomIntFromInterval(0, 22), 0, element);
-    }
-    return list2;
+    return list;
   };
 
 
@@ -63,18 +58,20 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background0}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.icon} style={appStyle.scoreStyle} />
+            <Image source={images.shop} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
+      <Image source={images.textlabel} style={appStyle.textLabel} />
+      <Image source={images.girlHappy} style={appStyle.girlImage} />
       <View style={appStyle.centerView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.start} style={appStyle.startBtn} />
+          <Image source={images.play} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -92,6 +89,17 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     resizeMode: 'cover',
+  },
+  textLabel: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.2,
+    resizeMode: 'contain',
+  },
+  girlImage: {
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.4,
+    resizeMode: 'contain',
+    marginBottom: 30,
   },
   appBar: {
     position: 'absolute',
