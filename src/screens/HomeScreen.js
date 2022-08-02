@@ -21,6 +21,8 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
+  const [popup, setPopup] = useState(false);
+
   const dispatch = useDispatch();
 
   const onClickTurnButton = () => {
@@ -37,24 +39,36 @@ const HomeScreen = () => {
   }
 
 
+
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+            <Image source={images.btnbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-      </View>
-      <View style={{position: 'absolute', top: '20%'}}>
-        <Image source={images.textstart} style={appStyle.brokenImage} />
+        <TouchableOpacity onPress={() => setPopup(true)}>
+          <Image source={images.note} style={appStyle.buyImage} />
+        </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watch} style={appStyle.itemView} />
+          <Image source={images.btnplay} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
+      {popup && (
+      <View style={appStyle.popupView}>
+        <ImageBackground style={appStyle.popupImage} source={images.board}>
+          <View style={appStyle.closeView}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.btnexit} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </View>
+          
+        </ImageBackground>
+      </View>)}
     </ImageBackground>
   );
 };
@@ -69,13 +83,46 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
+  popupImage: {
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelText: {
+    fontSize:30,
+    fontWeight: 'bold',
+    color: '#d8b58a',
+  },
+  closeView: {
+    position: 'absolute',
+    top: '0%',
+    right: '-10%',
+  },
+  popupView: {
+    width: windowWidth,
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(1, 1, 1, 0.7)',
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+  },
+  okBtn: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
   appBar: {
     flex: 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   turnView: {
     flexDirection: 'row',
@@ -87,7 +134,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -96,7 +143,7 @@ export const appStyle = StyleSheet.create({
   },
   brokenImage: {
     width: windowWidth * 0.6,
-    height: windowWidth * 0.2,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   itemView: {
@@ -105,12 +152,12 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   text: {
-    fontSize: windowWidth > 640 ? 30 : 25,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
   },
   bottomView: {
-    flex: 0.3,
+    flex: 0.9,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
