@@ -5,7 +5,8 @@ import {
   Image, 
   Alert,  
   ImageBackground,
-  TouchableOpacity} from "react-native";
+  TouchableOpacity,
+  FlatList} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
 
@@ -13,16 +14,17 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bg1},
-  {id: 2, bg: images.bg2},
-  {id: 3, bg: images.bg3},
-  {id: 4, bg: images.bg4},
-  {id: 5, bg: images.bg5},
-  {id: 6, bg: images.bg6},
-  {id: 7, bg: images.bg7},
-  {id: 8, bg: images.bg8},
-  {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
+  {id: 1, bg: images.car1},
+  {id: 2, bg: images.car2},
+  {id: 3, bg: images.car3},
+  {id: 4, bg: images.car4},
+  {id: 5, bg: images.car5},
+  {id: 6, bg: images.car6},
+  {id: 7, bg: images.car7},
+  {id: 8, bg: images.car8},
+  {id: 9, bg: images.car9},
+  {id: 10, bg: images.car10},
+  {id: 11, bg: images.car11},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -47,10 +49,10 @@ const ItemScreen = ({navigation, route}) => {
     <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
+          <Image source={images.buttonleft} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
+          <Image source={images.buttonright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -69,6 +71,11 @@ export const appStyle = StyleSheet.create({
   btn: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  bgImage: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.4,
     resizeMode: 'contain',
   },
   bottomView: {
