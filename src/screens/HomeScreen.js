@@ -21,7 +21,6 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
-  const [popup, setPopup] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -49,26 +48,12 @@ const HomeScreen = () => {
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
-        </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnplay} style={appStyle.itemView} />
+          <Image source={images.play} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.btnexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-          
-        </ImageBackground>
-      </View>)}
     </ImageBackground>
   );
 };
@@ -80,7 +65,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     resizeMode: 'cover',
   },
   popupImage: {

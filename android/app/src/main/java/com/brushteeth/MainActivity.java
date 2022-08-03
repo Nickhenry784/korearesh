@@ -1,4 +1,4 @@
-package com.amazon.guessfood;
+package com.amazon.guessanimal;
 
 import com.facebook.react.ReactActivity;
 

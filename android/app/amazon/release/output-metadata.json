@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.amazon.guessfood",
+  "applicationId": "com.amazon.guessanimal",
   "variantName": "amazonRelease",
   "elements": [
     {
