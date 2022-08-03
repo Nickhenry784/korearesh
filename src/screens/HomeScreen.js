@@ -57,7 +57,7 @@ const HomeScreen = () => {
     },1000);
 
     return() => {
-      clearTimeout(timeOut)
+      clearTimeout(timeOut);
     }
   },[second,start]);
 
@@ -300,7 +300,7 @@ export const appStyle = StyleSheet.create({
     left: '0%',
   },
   createButton: {
-    width: windowWidth * 0.2,
+    width: windowWidth * 0.4,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
