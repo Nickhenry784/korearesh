@@ -1,4 +1,4 @@
-package com.amazon.seawallpaper;
+package com.amazon.loveratioko;
 
 import com.facebook.react.ReactActivity;
 

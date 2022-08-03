@@ -38,17 +38,13 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
+    <ImageBackground style={appStyle.homeView} source={images.bgst}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
-          <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+          <ImageBackground source={images.turn} style={appStyle.buyImage} >
             <Text style={appStyle.turnText}>{points.value}</Text>
-          </View>
+          </ImageBackground>
         </TouchableOpacity>
-      </View>
-      <View style={{position: 'absolute', top: '20%'}}>
-        <Image source={images.textstart} style={appStyle.brokenImage} />
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
@@ -85,14 +81,16 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'black',
+    fontSize: 30,
+    fontFamily: 'House Party',
+    color: 'white',
   },
   buyImage: {
-    width: windowWidth * 0.1,
+    width: windowWidth * 0.12,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   brokenImage: {
     width: windowWidth * 0.6,
@@ -103,11 +101,6 @@ export const appStyle = StyleSheet.create({
     width: windowWidth * 0.4,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
-  },
-  text: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
   },
   bottomView: {
     flex: 0.3,
