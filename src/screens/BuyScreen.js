@@ -120,7 +120,6 @@ export default function App() {
   };
 
   return (
-    <ImageBackground source={images.background} style={styles.homeView}>
     <ScrollView
       style={styles.bg}
       contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}>
@@ -160,7 +159,6 @@ export default function App() {
       )}
 
     </ScrollView>
-    </ImageBackground>
   );
 }
 

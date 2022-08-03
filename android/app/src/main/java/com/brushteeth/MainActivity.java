@@ -1,4 +1,4 @@
-package com.amazon.kutecookingstowatchapp;
+package com.amazon.clockwatchke;
 
 import com.facebook.react.ReactActivity;
 
