@@ -1,4 +1,4 @@
-package com.amazon.guesstrademarktu;
+package com.amazon.truthdareoq;
 
 import com.facebook.react.ReactActivity;
 

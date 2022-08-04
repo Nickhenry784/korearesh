@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.ademarktu_1',
+    sku: 'com.amazon.dareoq_1t',
     value: 100,
   },
   {
-    sku: 'com.amazon.ademarktu_2',
+    sku: 'com.amazon.dareoq_2t',
     value: 200,
   },
   {
-    sku: 'com.amazon.ademarktu_3',
+    sku: 'com.amazon.dareoq_3t',
     value: 300,
   },
   {
-    sku: 'com.amazon.ademarktu_4',
+    sku: 'com.amazon.dareoq_4t',
     value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_ademarktu_1',
+    sku: 'com.amazon.weekly_dareoq_1t',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_ademarktu_2',
+    sku: 'com.amazon.weekly_dareoq_2t',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_ademarktu_1',
+    sku: 'com.amazon.monthly_dareoq_1t',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_ademarktu_2',
+    sku: 'com.amazon.monthly_dareoq_2t',
     value: 700,
   },
 ];

@@ -1,51 +1,53 @@
 import { 
   StyleSheet, 
   View, Dimensions, 
-  ScrollView,
   Image, 
   Alert,  
   ImageBackground,
   TouchableOpacity,
-  TextInput,
-  Text} from "react-native";
+  Text,
+  Animated} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.BurberryTB, text: "BurberryTB"},
-  {id: 2, bg: images.CALVINKLEIN, text: "Calvin Klein"},
-  {id: 3, bg: images.CHANEL, text: "Chanel"},
-  {id: 4, bg: images.DIOR, text: "Dior"},
-  {id: 5, bg: images.EmporioArmani, text: "Emporio Armani"},
-  {id: 6, bg: images.JORDAN, text: "Jordan"},
-  {id: 7, bg: images.LOUISVUITTON, text: "Louis Vuitton"},
-  {id: 8, bg: images.NewYorkYankees, text: "NewYork Yankees"},
-  {id: 9, bg: images.NIKE, text: "Nike"},
-  {id: 10, bg: images.PUMA, text: "Puma"},
-]
-
 const ItemScreen = ({navigation, route}) => {
 
-  const [index, setIndex] = useState(randomIntFromInterval(0,dataBg.length - 1));
-  const [text, onChangeText] = useState("");
-  const [score, setScore] = useState(0);
+  const [time, setTime] = useState(randomIntFromInterval(300,500));
+  const [deg, setDeg] = useState(0);
+  const [play, setPlay] = useState(false);
+  const [popup, setPopup] = useState(false);
 
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if(play && time > 0){
+        if(deg === 360){
+          setDeg(0);
+        }else{
+          setDeg(deg + 10);
+        }
+        setTime(time - 1);
+      }
+      if(play && time === 0){
+        setPlay(false);
+        setTimeout(() => {
+          setPopup(true);
+        },5000)
+      }
 
- const onEndChangeText = () => {
-  if(text.toLocaleLowerCase() === dataBg[index].text.toLocaleLowerCase()){
-    setScore(score + 10);
-    onChangeText("");
-    setIndex(randomIntFromInterval(0,dataBg.length - 1));
-    return () => {
-      clearTimeout(timeOut);
-    }
-  }else{
-    navigation.goBack();
+      return () => {
+        clearTimeout(timeOut);
+      }
+    }, 1);
+  },[time,play]);
+
+  const onClickBtn = () => {
+    setPopup(false);
+    setTime(randomIntFromInterval(300,500));
   }
- }
+
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg1}>
@@ -54,22 +56,34 @@ const ItemScreen = ({navigation, route}) => {
           <Image source={images.home} style={appStyle.btnBack} />
         </TouchableOpacity>
       </View>
-      <View style={appStyle.scoreView}>
-        <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
-      </View>
-      <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      <Animated.Image source={images.chai} style={{
+        width: windowWidth * 0.5,
+        height: windowWidth * 0.5,
+        resizeMode: 'contain',
+        transform: [
+          {
+            rotate: `${deg}deg`
+          }
+        ]
+      }} />
       <View style={appStyle.bottomView}>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={onChangeText}
-          value={text}
-          placeholder={"Text here"}
-          onEndEditing={() => onEndChangeText()}
-        />
-        <TouchableOpacity onPress={() => onEndChangeText()}>
-          <Image source={images.check} style={appStyle.btn} />
+        <TouchableOpacity onPress={() => setPlay(true)}>
+          <Image source={images.Spin} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
+      {popup && (
+      <View style={appStyle.popupView}>
+        <ImageBackground style={appStyle.popupImage} source={images.bang}>
+          <View style={appStyle.scoreView}>
+            <TouchableOpacity onPress={() => onClickBtn()}>
+              <Image source={images.Truth} style={appStyle.foodImage} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => onClickBtn()}>
+              <Image source={images.Dare} style={appStyle.foodImage} />
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </View>)}
     </ImageBackground>
   );
 };
@@ -86,15 +100,35 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'cover',
   },
+  popupView: {
+    width: windowWidth,
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(1, 1, 1, 0.7)',
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+  },
+  popupImage: {
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   btn: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
   scoreView: {
-    position: 'absolute',
-    top: '5%',
-    right: '10%',
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
   input: {
     height: 60,
@@ -131,8 +165,8 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   foodImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.5,
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   backBtn: {

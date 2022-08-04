@@ -121,7 +121,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
