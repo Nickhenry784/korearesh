@@ -15,17 +15,17 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.chimcanhcut, text: "penguin"},
-  {id: 2, bg: images.dadieu, text: "Ostrich"},
-  {id: 3, bg: images.gautruc, text: "Panda"},
-  {id: 4, bg: images.hama, text: "hippo"},
-  {id: 5, bg: images.ho, text: "Tiger"},
-  {id: 6, bg: images.huucaoco, text: "giraffe"},
-  {id: 7, bg: images.khi, text: "monkey"},
-  {id: 8, bg: images.ngua, text: "horse"},
-  {id: 9, bg: images.rua, text: "turtle"},
-  {id: 10, bg: images.sutu, text: "lion"},
-  {id: 10, bg: images.voi, text: "elephants"},
+  {id: 1, bg: images.arsenal, text: "Arsenal"},
+  {id: 2, bg: images.barcelona, text: "Barcelona"},
+  {id: 3, bg: images.borussiadortmund, text: "Borussia Dortmund"},
+  {id: 4, bg: images.chelsea, text: "Chelsea"},
+  {id: 5, bg: images.everton, text: "Everton"},
+  {id: 6, bg: images.juventus, text: "Juventus"},
+  {id: 7, bg: images.liverpool, text: "Liverpool"},
+  {id: 8, bg: images.manchestercity, text: "Manchester City"},
+  {id: 9, bg: images.manchesterunited, text: "Manchester United"},
+  {id: 10, bg: images.realmadrid, text: "Real Madrid"},
+  {id: 10, bg: images.westhamunited, text: "Westham United"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -68,7 +68,7 @@ const ItemScreen = ({navigation, route}) => {
           onEndEditing={() => onEndChangeText()}
         />
         <TouchableOpacity onPress={() => onEndChangeText()}>
-          <Image source={images.Check} style={appStyle.btn} />
+          <Image source={images.check} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
