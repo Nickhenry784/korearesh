@@ -15,16 +15,17 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.BurberryTB, text: "BurberryTB"},
-  {id: 2, bg: images.CALVINKLEIN, text: "Calvin Klein"},
-  {id: 3, bg: images.CHANEL, text: "Chanel"},
-  {id: 4, bg: images.DIOR, text: "Dior"},
-  {id: 5, bg: images.EmporioArmani, text: "Emporio Armani"},
-  {id: 6, bg: images.JORDAN, text: "Jordan"},
-  {id: 7, bg: images.LOUISVUITTON, text: "Louis Vuitton"},
-  {id: 8, bg: images.NewYorkYankees, text: "NewYork Yankees"},
-  {id: 9, bg: images.NIKE, text: "Nike"},
-  {id: 10, bg: images.PUMA, text: "Puma"},
+  {id: 1, bg: images.bmw, text: "Bmw"},
+  {id: 2, bg: images.chevrolet, text: "Chevrolet"},
+  {id: 3, bg: images.ford, text: "Ford"},
+  {id: 4, bg: images.honda, text: "Honda"},
+  {id: 5, bg: images.hyundai, text: "Hyundai"},
+  {id: 6, bg: images.lamborghini, text: "Lamborghini"},
+  {id: 7, bg: images.lexus, text: "Lexus"},
+  {id: 8, bg: images.mazda, text: "Mazda"},
+  {id: 9, bg: images.mercedes, text: "Mercedes"},
+  {id: 10, bg: images.nissan, text: "Nissan"},
+  {id: 11, bg: images.rollsroyce, text: "Rollsroyce"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -57,7 +58,9 @@ const ItemScreen = ({navigation, route}) => {
       <View style={appStyle.scoreView}>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      <ImageBackground source={images.bang} style={appStyle.bangImage}>
+        <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      </ImageBackground>
       <View style={appStyle.bottomView}>
         <TextInput
           style={appStyle.input}
@@ -86,6 +89,13 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'cover',
   },
+  bangImage: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.4,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   btn: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
@@ -100,7 +110,6 @@ export const appStyle = StyleSheet.create({
     height: 60,
     width: windowWidth * 0.7,
     backgroundColor: 'white',
-    borderRadius: 15,
     margin: 12,
     fontSize: 20,
     padding: 10,

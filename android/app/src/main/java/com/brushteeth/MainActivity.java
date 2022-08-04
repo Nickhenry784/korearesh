@@ -1,4 +1,4 @@
-package com.amazon.guesstrademarktu;
+package com.amazon.guesslogoiw;
 
 import com.facebook.react.ReactActivity;
 
