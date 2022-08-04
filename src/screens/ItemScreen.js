@@ -15,17 +15,16 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.arsenal, text: "Arsenal"},
-  {id: 2, bg: images.barcelona, text: "Barcelona"},
-  {id: 3, bg: images.borussiadortmund, text: "Borussia Dortmund"},
-  {id: 4, bg: images.chelsea, text: "Chelsea"},
-  {id: 5, bg: images.everton, text: "Everton"},
-  {id: 6, bg: images.juventus, text: "Juventus"},
-  {id: 7, bg: images.liverpool, text: "Liverpool"},
-  {id: 8, bg: images.manchestercity, text: "Manchester City"},
-  {id: 9, bg: images.manchesterunited, text: "Manchester United"},
-  {id: 10, bg: images.realmadrid, text: "Real Madrid"},
-  {id: 10, bg: images.westhamunited, text: "Westham United"},
+  {id: 1, bg: images.BurberryTB, text: "BurberryTB"},
+  {id: 2, bg: images.CALVINKLEIN, text: "Calvin Klein"},
+  {id: 3, bg: images.CHANEL, text: "Chanel"},
+  {id: 4, bg: images.DIOR, text: "Dior"},
+  {id: 5, bg: images.EmporioArmani, text: "Emporio Armani"},
+  {id: 6, bg: images.JORDAN, text: "Jordan"},
+  {id: 7, bg: images.LOUISVUITTON, text: "Louis Vuitton"},
+  {id: 8, bg: images.NewYorkYankees, text: "NewYork Yankees"},
+  {id: 9, bg: images.NIKE, text: "Nike"},
+  {id: 10, bg: images.PUMA, text: "Puma"},
 ]
 
 const ItemScreen = ({navigation, route}) => {

@@ -1,4 +1,4 @@
-package com.amazon.guessfootballlo;
+package com.amazon.guesstrademarktu;
 
 import com.facebook.react.ReactActivity;
 
