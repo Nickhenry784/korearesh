@@ -1149,6 +1149,11 @@
   dependencies:
     merge-options "^3.0.4"
 
+"@react-native-community/cameraroll@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cameraroll/-/cameraroll-4.1.2.tgz#489c6bb6137571540d93c543d5fcf8c652b548ec"
+  integrity sha512-jkdhMByMKD2CZ/5MPeBieYn8vkCfC4MOTouPpBpps3I8N6HUYJk+1JnDdktVYl2WINnqXpQptDA2YptVyifYAg==
+
 "@react-native-community/checkbox@^0.5.12":
   version "0.5.12"
   resolved "https://registry.yarnpkg.com/@react-native-community/checkbox/-/checkbox-0.5.12.tgz#1f55a38bbcd5f10ca853db0c6a9f1c4beccc37af"
@@ -5977,6 +5982,11 @@ react-native-screens@^3.9.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-view-shot@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-3.3.0.tgz#7f0c6d2e09e5af770f5b74231a72625b379d60f8"
+  integrity sha512-dc3ZHCd0lvn1jtSI8bPQDta8YxzCvZ73vA8zzFH4S3TRlXLe8r5DF3wUUBlWv1p/bxbEa/A0J4kMUPeVt/v8TQ==
 
 react-native@0.66.3:
   version "0.66.3"

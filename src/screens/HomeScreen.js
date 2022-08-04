@@ -38,21 +38,18 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
+    <ImageBackground style={appStyle.homeView} source={images.loading}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+            <Image source={images.turn} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '20%'}}>
-        <Image source={images.textstart} style={appStyle.brokenImage} />
-      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watch} style={appStyle.itemView} />
+          <Image source={images.play} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -85,8 +82,8 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
+    fontSize: 30,
+    fontFamily: 'Boss babe',
     color: 'black',
   },
   buyImage: {
@@ -101,7 +98,7 @@ export const appStyle = StyleSheet.create({
   },
   itemView: {
     width: windowWidth * 0.4,
-    height: windowWidth * 0.2,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
   },
   text: {

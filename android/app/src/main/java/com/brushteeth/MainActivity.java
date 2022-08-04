@@ -1,4 +1,4 @@
-package com.amazon.seawallpaper;
+package com.amazon.writingcakeappzx;
 
 import com.facebook.react.ReactActivity;
 
