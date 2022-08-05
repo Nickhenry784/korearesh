@@ -1,4 +1,4 @@
-package com.amazon.funnydecoscarecroww;
+package com.amazon.luckcatqa;
 
 import com.facebook.react.ReactActivity;
 

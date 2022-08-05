@@ -6,65 +6,109 @@ import {
   ImageBackground, 
   Image,
   FlatList, 
-  Alert  } from "react-native";
+  Alert,  
+  Animated,
+  Easing} from "react-native";
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets";
+import { useRef } from "react";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const brokenData= [
-  {id: 1, image: images.a1},
-  {id: 2, image: images.a2},
-  {id: 3, image: images.a3},
-  {id: 4, image: images.a4},
-  {id: 5, image: images.a5},
-  {id: 6, image: images.a6},
-  {id: 7, image: images.a7},
-  {id: 8, image: images.a8},
-  {id: 9, image: images.a9},
-  {id: 10, image: images.a10},
-  {id: 11, image: images.a11},
-  {id: 12, image: images.a12},
-  {id: 13, image: images.a13},
-  {id: 14, image: images.a14},
-  {id: 15, image: images.a15},
-];
+const CAT_WIDTH = windowWidth * 0.8;
+const CAT_RATIO = 727 / 838;
+const CAT_HEIGHT = CAT_WIDTH / CAT_RATIO;
+
+const HAND_WIDTH = windowWidth * 0.18;
+const HAND_RATIO = 177 / 391;
+const HAND_HEIGHT = HAND_WIDTH / HAND_RATIO;
 
 const ItemScreen = ({navigation, route}) => {
+  const points = useSelector(state => state.points);
+  const rotateAnimation = useRef(new Animated.Value(0)).current;
+  const yAnimation = useRef(new Animated.Value(0)).current;
 
-  const {item} = route.params;
+  const startAnimation = () => {
+    rotateAnimation.setValue(0);
+    yAnimation.setValue(0)
+    Animated.timing(rotateAnimation, {
+      toValue: 2,
+      duration: 2000,
+      easing: Easing.linear,
+      useNativeDriver: true
+    }).start(() => {
+      startAnimation();
+    });
 
-  useEffect(() => {
-    console.log(item)
-  },[])
+    Animated.timing(yAnimation, {
+      toValue: 2,
+      duration: 2000,
+      easing: Easing.linear,
+      useNativeDriver: true
+    }).start();
 
-  const onClickAgainButton = () => {
-    navigation.goBack();
   }
 
+  useEffect(() => {
+    startAnimation();
+  }, []);
 
+  const rotateStyle = rotateAnimation.interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: ['0deg', '180deg', '0deg']
+  });
+
+  const yStyle = yAnimation.interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: [0, CAT_HEIGHT / 4, 0]
+  });
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background2}>
-      <Image source={images.crow} style={appStyle.labelImage} />
-      <View style={appStyle.image1View}>
-        <Image source={item[0].image} style={appStyle.img} />
-      </View>
-      <View style={appStyle.image2View}>
-        <Image source={item[1].image} style={appStyle.img} />
-      </View>
-      <View style={appStyle.btnView}>
-        <TouchableOpacity onPress={() => onClickAgainButton()}>
-          <Image source={images.reset} style={appStyle.brokenImage} />
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+      <View style={appStyle.appBar}>
+          <View style={appStyle.turnView}>
+            <Image source={images.turn} style={appStyle.buyImage} />
+            <Text style={appStyle.turnText}>{points.value}</Text>
+          </View>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.home} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
+      <ImageBackground source={images.meo} style={appStyle.brokenImage}>
+        <Animated.View style={{
+          transform: [
+            {
+              translateY: yStyle
+            }
+          ]
+        }}>
+          <Animated.Image source={images.tay} style={{
+            position: 'absolute',
+            top: CAT_HEIGHT / 6,
+            left: 10,
+            width: HAND_WIDTH,
+            height: HAND_HEIGHT,
+            resizeMode: 'contain',
+            transform: [
+                {
+                  rotateX: rotateStyle
+                },
+              ]
+            }}
+          />
+        </Animated.View>
+      </ImageBackground>
     </ImageBackground>
   );
 };
+
+export const randomIntFromInterval = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
 
 
 export const appStyle = StyleSheet.create({
@@ -76,34 +120,15 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'contain',
   },
-  image2View: {
-    position: 'absolute',
-    top: '40%',
-    right: '20%',
-  },
-  btnView: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    bottom: '10%',
-  },
-  img: {
-    width: windowWidth * 0.2,
-    height: windowHeight * 0.1,
-    resizeMode: 'contain',
-  },
   appBar: {
     position: 'absolute',
-    top: '3%',
-    left: '3%',
-  },
-  image1View: {
-    position: 'absolute',
-    top: '45%',
-    left: '20%',
+    top: '0%',
+    width: windowWidth,
+    height: windowHeight * 0.1,
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   turnView: {
     flexDirection: 'row',
@@ -113,7 +138,7 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'black',
   },
@@ -123,33 +148,12 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
-    resizeMode: 'contain',
+    // marginTop: 60,
+    width: CAT_WIDTH,
+    height: CAT_HEIGHT,
+    // resizeMode: 'contain',
   },
-  itemView: {
-    width: windowWidth * 0.15,
-    height: windowWidth * 0.15,
-    margin: 10,
-    resizeMode: 'contain',
-  },
-  text: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  labelImage: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.5,
-    resizeMode: 'contain',
-  },
-  centerView: {
-    height: windowHeight * 0.35,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    resizeMode: 'cover',
-  },
+
 });
 
 export default ItemScreen;
