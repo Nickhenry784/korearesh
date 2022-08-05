@@ -36,7 +36,7 @@ export default function App() {
             <Stack.Screen
               name="Item"
               component={ItemScreen}
-              options={({ route }) => ({ title: route.params.name })}
+              options={{headerShown: false}}
             />
           </Stack.Navigator>
         </NavigationContainer>

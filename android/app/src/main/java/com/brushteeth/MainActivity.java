@@ -1,4 +1,4 @@
-package com.amazon.badmintontipsbta;
+package com.amazon.funnydecoscarecroww;
 
 import com.facebook.react.ReactActivity;
 
