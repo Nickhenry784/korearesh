@@ -85,7 +85,7 @@ const PlayScreen = ({navigation, route}) => {
     setStartGameState(list);
   };
   return (
-    <ImageBackground source={images.background} style={appStyle.homeView}>
+    <ImageBackground source={images.bg} style={appStyle.homeView}>
       <View style={appStyle.appBar}>
         <Text style={appStyle.turn}>
           SCORE:
@@ -99,10 +99,13 @@ const PlayScreen = ({navigation, route}) => {
         )}
       </View>
       <View style={appStyle.centerView}>
+        <Image source={images.quickandquick} style={appStyle.quickImage} />
         {startGameState.length === 0 && (
-          <Text style={appStyle.timeText}>
-            {`${minutesCoutdown} : ${secondsCoutdown}`}
-          </Text>
+          <ImageBackground source={images.time} style={appStyle.timeImg}>
+            <Text style={appStyle.timeText}>
+              {`${minutesCoutdown} : ${secondsCoutdown}`}
+            </Text>
+          </ImageBackground>
         )}
         <FlatList
           data={data}
@@ -114,8 +117,7 @@ const PlayScreen = ({navigation, route}) => {
               onLongPress={() => onClickIconImage(item, index)}
               disabled={
                 startGameState.length === 0 ? true : startGameState[index]
-              }
-              style={appStyle.iconButton}>
+              }>
               {startGameState.length === 0 ? (
                 <Image source={item.image} style={appStyle.iconImage} />
               ) : (
@@ -150,6 +152,18 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  timeImg: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.05,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  quickImage: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.2,
+    resizeMode: 'contain',
+  },
   appBar: {
     flex: 0.1,
     width: '100%',
@@ -159,10 +173,10 @@ export const appStyle = StyleSheet.create({
     flexDirection: 'row',
   },
   turn: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'red',
+    fontSize: 30,
+    color: 'blue',
     fontFamily: 'Mat Saleh',
+    textAlign: 'center',
   },
   centerView: {
     flex: 0.9,
@@ -172,19 +186,13 @@ export const appStyle = StyleSheet.create({
   },
   timeText: {
     fontSize: 30,
-    fontWeight: 'bold',
-    color: 'blue',
+    color: 'white',
     fontFamily: 'Mat Saleh',
     textAlign: 'center',
   },
-  iconButton: {
+  iconImage: {
     width: windowWidth * 0.2,
     height: windowWidth * 0.2,
-    alignItems: 'center',
-  },
-  iconImage: {
-    width: windowWidth * 0.15,
-    height: windowWidth * 0.15,
     resizeMode: 'contain',
   },
   startImage: {

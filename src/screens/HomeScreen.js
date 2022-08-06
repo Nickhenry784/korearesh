@@ -16,12 +16,6 @@ import { iconData } from "../assets/icon";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-const dataButton = [
-  {id: 1, image: images.teaceremony, background: images.teamau}, 
-  {id: 2, image: images.sakura, background: images.sakuramau}, 
-  {id: 3, image: images.phusimoutain, background: images.mautea}, 
-  {id: 4, image: images.kimono, background: images.kimonobackground}
-];
 
 const Home = () => {
   const navigation = useNavigation();
@@ -44,11 +38,8 @@ const Home = () => {
   const handleRandomListIcon = () => {
     const list = [...iconData];
     // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < 5; index++) {
-      list.splice(randomIntFromInterval(0, list.length - 1), 1);
-    }
-    const list1 = [...list];
-    const list2 = list.concat(list1);
+    const list1 = list.concat(list);
+    const list2 = list1.concat(list1);
     // eslint-disable-next-line no-plusplus
     for (let index = 0; index < list2.length; index++) {
       const element = list2[index];
@@ -65,7 +56,7 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -74,13 +65,12 @@ const Home = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={appStyle.centerView}>
-        <Text style={appStyle.labelText}>You have to choose the same pairs of pictures to win</Text>
-        <Text style={appStyle.labelText}>Are you ready?</Text>
-        <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.start} style={appStyle.startBtn} />
-        </TouchableOpacity>
-      </View>
+        <Image source={images.quickandquick} style={appStyle.bullImage} />
+        <Image source={images.guideplay} style={appStyle.popupImage} />
+
+      <TouchableOpacity onPress={onClickStartButton}>
+        <Image source={images.start} style={appStyle.startBtn} />
+      </TouchableOpacity>
     </ImageBackground>
   );
 };
@@ -94,22 +84,20 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
   appBar: {
-    position: 'absolute',
+    height: windowHeight * 0.1,
     width: '100%',
-    top: '0%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   popupImage: {
-    width: windowWidth,
-    height: windowHeight * 0.3,
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
   },
   popupView: {
     width: windowWidth,
@@ -153,13 +141,13 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   bullImage: {
-    width: windowWidth * 0.4,
-    height: windowWidth * 0.4,
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   startBtn: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.3,
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
   scoreStyle: {
@@ -168,9 +156,10 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   turnText: {
-    fontSize: 30,
-    color: 'red',
-    fontFamily: 'Mat Saled',
+    fontSize: 50,
+    color: 'blue',
+    fontFamily: 'Mat Saleh',
+    textAlign: 'center',
   },
   labelText: {
     fontSize: 25,

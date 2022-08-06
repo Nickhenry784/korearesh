@@ -1,4 +1,4 @@
-package com.amazon.findpicmemorychallgame;
+package com.amazon.quickanddquickeaglekqaq;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.icmemorychallgame_100h',
-    value: 50,
-  },
-  {
-    sku: 'com.amazon.icmemorychallgame_200h',
+    sku: 'com.amazon.dquickkqaq_100t',
     value: 100,
   },
   {
-    sku: 'com.amazon.icmemorychallgame_300h',
+    sku: 'com.amazon.dquickkqaq_200t',
     value: 200,
   },
   {
-    sku: 'com.amazon.icmemorychallgame_400h',
+    sku: 'com.amazon.dquickkqaq_300t',
     value: 300,
+  },
+  {
+    sku: 'com.amazon.dquickkqaq_400t',
+    value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_icmemorychallgame_100h',
+    sku: 'com.amazon.weekly_dquickkqaq_100t',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_icmemorychallgame_200h',
+    sku: 'com.amazon.weekly_dquickkqaq_200t',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_icmemorychallgame_400h',
+    sku: 'com.amazon.monthly_dquickkqaq_400t',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_icmemorychallgame_800h',
+    sku: 'com.amazon.monthly_dquickkqaq_800t',
     value: 800,
   },
 ];

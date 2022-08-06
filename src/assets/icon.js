@@ -3,70 +3,18 @@ import { images } from './images';
 export const iconData = [
   {
     id: 1,
-    image: images.a1,
+    image: images.eagle1,
   },
   {
     id: 2,
-    image: images.a2,
+    image: images.eagle2,
   },
   {
     id: 3,
-    image: images.a3,
+    image: images.eagle3,
   },
   {
     id: 4,
-    image: images.a4,
-  },
-  {
-    id: 5,
-    image: images.a5,
-  },
-  {
-    id: 6,
-    image: images.a6,
-  },
-  {
-    id: 7,
-    image: images.a7,
-  },
-  {
-    id: 8,
-    image: images.a8,
-  },
-  {
-    id: 9,
-    image: images.a9,
-  },
-  {
-    id: 10,
-    image: images.a10,
-  },
-  {
-    id: 11,
-    image: images.a11,
-  },
-  {
-    id: 12,
-    image: images.a12,
-  },
-  {
-    id: 13,
-    image: images.a13,
-  },
-  {
-    id: 14,
-    image: images.a14,
-  },
-  {
-    id: 15,
-    image: images.a15,
-  },
-  {
-    id: 16,
-    image: images.a16,
-  },
-  {
-    id: 17,
-    image: images.a17,
+    image: images.eagle4,
   },
 ];
