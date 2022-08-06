@@ -17,11 +17,12 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const brokenData= [
-  {id: 1, image: images.standing, background: images.bgstanding, title: "Standing"},
-  {id: 2, image: images.bridgedam, background: images.bgbridgedam, title: "Bridgedam"},
-  {id: 3, image: images.holdaracket, background: images.bgholdaracket, title: "Holdaracket"},
-  {id: 4, image: images.leavesmall, background: images.bgleavessmall, title: "Leaves Small"},
-  {id: 5, image: images.Practicetheserve, background: images.bgPracticetheserve, title: "Practice The Serve"},
+  {id: 1, image: images.basketthrowingtechniques, background: images.a3, title: "Basket Thowring Techniques"},
+  {id: 2, image: images.defense, background: images.a4, title: "Defense"},
+  {id: 3, image: images.LEADINGTHEFLAG, background: images.a2, title: "Leading The Flag"},
+  {id: 4, image: images.SHOULDSHOULDVATTHECHALLENGE, background: images.a6, title: "Should Should V At The Challenge"},
+  {id: 5, image: images.STUNNINGTECHNIQUESATTHECHAIN, background: images.a1, title: "Stunning Techniques At The Chain"},
+  {id: 6, image: images.TARGET, background: images.a5, title: "Target"},
 ];
 
 const HomeScreen = () => {
@@ -58,7 +59,7 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.BadmintonTips} style={appStyle.labelImage} />
+      <Image source={images.basketballtip} style={appStyle.labelImage} />
       <View style={appStyle.centerView}>
         <FlatList 
           data={brokenData}
@@ -127,7 +128,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   centerView: {
-    flex: 0.8,
+    height: windowHeight * 0.7,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'flex-end',
