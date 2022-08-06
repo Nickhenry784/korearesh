@@ -1,4 +1,4 @@
-package com.amazon.guesslogoiw;
+package com.amazon.guessofthethreekingdomsgot;
 
 import com.facebook.react.ReactActivity;
 

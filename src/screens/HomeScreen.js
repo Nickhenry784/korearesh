@@ -40,15 +40,16 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.turn} style={appStyle.buyImage} />
+            <Image source={images.heart} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
+      <Image source={images.GuessOfThethreeKingdoms} style={appStyle.phoneImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.start} style={appStyle.itemView} />
@@ -152,11 +153,9 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
   },
 });
 

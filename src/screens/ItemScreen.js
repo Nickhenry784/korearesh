@@ -15,17 +15,13 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bmw, text: "Bmw"},
-  {id: 2, bg: images.chevrolet, text: "Chevrolet"},
-  {id: 3, bg: images.ford, text: "Ford"},
-  {id: 4, bg: images.honda, text: "Honda"},
-  {id: 5, bg: images.hyundai, text: "Hyundai"},
-  {id: 6, bg: images.lamborghini, text: "Lamborghini"},
-  {id: 7, bg: images.lexus, text: "Lexus"},
-  {id: 8, bg: images.mazda, text: "Mazda"},
-  {id: 9, bg: images.mercedes, text: "Mercedes"},
-  {id: 10, bg: images.nissan, text: "Nissan"},
-  {id: 11, bg: images.rollsroyce, text: "Rollsroyce"},
+  {id: 1, bg: images.bangtong, text: "PangTong"},
+  {id: 2, bg: images.GuanYu, text: "GuanYu"},
+  {id: 3, bg: images.LiuBei, text: "LiuBei"},
+  {id: 4, bg: images.machao, text: "MaChao"},
+  {id: 5, bg: images.ZhangFei, text: "ZhangFei"},
+  {id: 6, bg: images.ZhugeLiang, text: "ZhugeLiang"},
+  {id: 7, bg: images.shaoyun, text: "ZhaoYun"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -47,9 +43,22 @@ const ItemScreen = ({navigation, route}) => {
     navigation.goBack();
   }
  }
+ useEffect(() => {
+  console.log(makeid());
+ }, [])
+
+ const makeid = ()  => {
+  var text = "";
+  var possible = dataBg[index].text;
+
+  for (var i = 0; i < dataBg[index].text.length; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.backBtn}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={images.home} style={appStyle.btnBack} />
@@ -58,9 +67,10 @@ const ItemScreen = ({navigation, route}) => {
       <View style={appStyle.scoreView}>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <ImageBackground source={images.bang} style={appStyle.bangImage}>
+      <View style={appStyle.bangImage}>
         <Image source={dataBg[index].bg} style={appStyle.foodImage} />
-      </ImageBackground>
+      </View>
+      
       <View style={appStyle.bottomView}>
         <TextInput
           style={appStyle.input}
@@ -95,6 +105,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'red',
   },
   btn: {
     width: windowWidth * 0.3,
@@ -140,8 +152,8 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   foodImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.5,
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.4,
     resizeMode: 'contain',
   },
   backBtn: {
