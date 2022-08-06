@@ -7,7 +7,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   TextInput,
-  Text} from "react-native";
+  Text,
+  FlatList} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
 
@@ -31,46 +32,49 @@ const ItemScreen = ({navigation, route}) => {
   const [score, setScore] = useState(0);
 
 
- const onEndChangeText = () => {
-  if(text.toLocaleLowerCase() === dataBg[index].text.toLocaleLowerCase()){
-    setScore(score + 10);
-    onChangeText("");
-    setIndex(randomIntFromInterval(0,dataBg.length - 1));
-    return () => {
-      clearTimeout(timeOut);
+  const onEndChangeText = () => {
+    if(text.toLocaleLowerCase() === dataBg[index].text.toLocaleLowerCase()){
+      setScore(score + 10);
+      onChangeText("");
+      setIndex(randomIntFromInterval(0,dataBg.length - 1));
+      return () => {
+        clearTimeout(timeOut);
+      }
+    }else{
+      navigation.goBack();
     }
-  }else{
-    navigation.goBack();
   }
- }
- useEffect(() => {
-  console.log(makeid());
- }, [])
 
- const makeid = ()  => {
-  var text = "";
-  var possible = dataBg[index].text;
-
-  for (var i = 0; i < dataBg[index].text.length; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
-}
+  const makeUnique = (value)  => {
+    var list = [];
+    for (var i = 0; i < value.length; i++){
+      const element = value.substring(i,i + 1);
+      list.push(element);
+    }
+    for (let t = 0; t < list.length; t++) {
+      const element = list[t];
+      list.splice(t,1);
+      list.splice(randomIntFromInterval(0,list.length),0,element);
+    }
+    return list;
+  }
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg}>
-      <View style={appStyle.backBtn}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.home} style={appStyle.btnBack} />
-        </TouchableOpacity>
-      </View>
-      <View style={appStyle.scoreView}>
+      <View style={appStyle.appBar}>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <View style={appStyle.bangImage}>
-        <Image source={dataBg[index].bg} style={appStyle.foodImage} />
-      </View>
-      
+      <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      <FlatList 
+        data={makeUnique(dataBg[index].text)}
+        style={{marginTop: 20}}
+        horizontal={true}
+        renderItem={({item}) => (
+          <ImageBackground source={images.squarelong} style={appStyle.squareImage}>
+            <Text style={appStyle.textLabel}>{item.toUpperCase()}</Text>
+          </ImageBackground>
+        )}
+      />
       <View style={appStyle.bottomView}>
         <TextInput
           style={appStyle.input}
@@ -96,8 +100,29 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  appBar: {
+    height: windowHeight * 0.1,
+    paddingHorizontal: 20,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  squareImage: {
+    width: windowWidth * 0.08,
+    height: windowWidth * 0.08,
+    marginHorizontal: 10,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textLabel: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
   },
   bangImage: {
     width: windowWidth * 0.8,
@@ -124,6 +149,7 @@ export const appStyle = StyleSheet.create({
     backgroundColor: 'white',
     margin: 12,
     fontSize: 20,
+    textAlign: 'center',
     padding: 10,
   },
   boardImage: {

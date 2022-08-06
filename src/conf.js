@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.logoiw_100',
+    sku: 'com.amazon.hreekingdomsgot_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.logoiw_200',
+    sku: 'com.amazon.hreekingdomsgot_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.logoiw_300',
+    sku: 'com.amazon.hreekingdomsgot_300',
     value: 300,
   },
   {
-    sku: 'com.amazon.logoiw_400',
+    sku: 'com.amazon.hreekingdomsgot_400',
     value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_logoiw_100',
+    sku: 'com.amazon.weekly_hreekingdomsgot_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_logoiw_200',
+    sku: 'com.amazon.weekly_hreekingdomsgot_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_logoiw_400',
+    sku: 'com.amazon.monthly_hreekingdomsgot_400',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_logoiw_700',
+    sku: 'com.amazon.monthly_hreekingdomsgot_700',
     value: 700,
   },
 ];
