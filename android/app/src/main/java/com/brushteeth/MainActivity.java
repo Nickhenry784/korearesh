@@ -1,4 +1,4 @@
-package com.amazon.basketballtipsaps;
+package com.amazon.samuraiimysterii;
 
 import com.facebook.react.ReactActivity;
 
