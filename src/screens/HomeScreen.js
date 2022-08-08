@@ -42,17 +42,14 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+            <Image source={images.turn} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '20%'}}>
-        <Image source={images.textstart} style={appStyle.brokenImage} />
-      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watch} style={appStyle.itemView} />
+          <Image source={images.start} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -75,7 +72,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   turnView: {
     flexDirection: 'row',
@@ -85,9 +82,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,

@@ -1,4 +1,4 @@
-package com.amazon.seawallpaper;
+package com.amazon.technoscreenlqa;
 
 import com.facebook.react.ReactActivity;
 

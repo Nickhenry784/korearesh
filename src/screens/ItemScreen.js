@@ -5,57 +5,76 @@ import {
   Image, 
   Alert,  
   ImageBackground,
-  TouchableOpacity} from "react-native";
+  TouchableOpacity,
+  Text} from "react-native";
 import React, {useEffect, useState} from 'react';
-import { images } from "../assets";
+import { images, jsonfile } from "../assets";
+import { useSelector } from "react-redux";
+import Lottie from 'lottie-react-native';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-
-const dataBg = [
-  {id: 1, bg: images.bg1},
-  {id: 2, bg: images.bg2},
-  {id: 3, bg: images.bg3},
-  {id: 4, bg: images.bg4},
-  {id: 5, bg: images.bg5},
-  {id: 6, bg: images.bg6},
-  {id: 7, bg: images.bg7},
-  {id: 8, bg: images.bg8},
-  {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
-]
 
 const ItemScreen = ({navigation, route}) => {
 
   const [index, setIndex] = useState(0);
 
-  const onClickNextBtn = () => {
-    if(index !== 9){
-      setIndex(index + 1);
-    }
-  }
+  const points = useSelector(state => state.points);
 
-  const onClickBackBtn = () => {
-    if(index !== 0){
-      setIndex(index - 1);
-    }else{
-      navigation.goBack();
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setIndex(randomIntFromInterval(0,300));
+    }, 3000);
+    return () => {
+      clearInterval(timeInterval);
     }
-  }
+  },[index])
+
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
-        </TouchableOpacity>
-      </View>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+      <ScrollView style={{width: windowWidth}} contentContainerStyle={{alignItems: 'center'}}>
+        <View style={appStyle.appBar}>
+          <View style={appStyle.turnView}>
+              <Image source={images.turn} style={appStyle.buyImage} />
+              <Text style={appStyle.turnText}>{points.value}</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={images.home} style={appStyle.buyImage} />
+          </TouchableOpacity>
+        </View>
+        <ImageBackground source={images.h1} style={appStyle.h1Image}>
+          <Text style={appStyle.textNumber}>{index}</Text>
+        </ImageBackground>
+        <View style={appStyle.centerView}>
+          <View style={appStyle.leftView}>
+            <Image source={images.h2} style={appStyle.h2Image} />
+            <ImageBackground source={images.earth} style={appStyle.earth}>
+              <Lottie source={jsonfile.fire} autoPlay loop/>
+            </ImageBackground>
+          </View>
+          <View style={appStyle.leftView}>
+            <Lottie source={jsonfile.scan} autoPlay loop style={{width: windowWidth * 0.3, height: windowWidth * 0.3}}/>
+            <ImageBackground source={images.khungscan2} style={appStyle.khungscan2}>
+              <Lottie source={jsonfile.scan2} autoPlay loop/>
+            </ImageBackground>
+          </View>
+        </View>
+        <View style={appStyle.bottomView}>
+          <ImageBackground source={images.khungwave} style={appStyle.khungwave}>
+            <Lottie source={jsonfile.wave1} autoPlay loop/>
+          </ImageBackground>
+          <ImageBackground source={images.khungball} style={appStyle.khungball}>
+            <Lottie source={jsonfile.ball1} autoPlay loop/>
+          </ImageBackground>
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 };
+
+export const randomIntFromInterval = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -63,8 +82,85 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  h2Image: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  khungscan2: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+  },
+  earth: {
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
+  },
+  khungball: {
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.4,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  khungwave: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.15,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  centerView: {
+    width: windowWidth,
+    height: windowHeight * 0.6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  leftView: {
+    width: windowWidth * 0.45,
+    alignItems: 'center',
+  },
+  textNumber: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  h1Image: {
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  turnView: {
+    flexDirection: 'row',
+    width: windowWidth * 0.15,
+    height: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  buyImage: {
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
+  turnText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  appBar: {
+    height: windowHeight * 0.1,
+    paddingHorizontal: 20,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   btn: {
     width: windowWidth * 0.3,
