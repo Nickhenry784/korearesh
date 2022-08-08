@@ -49,9 +49,9 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.name} style={appStyle.phoneImage} />
-      <ImageBackground source={images.square2} style={appStyle.squareImage}>
-        <Image source={images.orange} style={appStyle.orangeImage} />
+      <Image source={images.label} style={appStyle.phoneImage} />
+      <ImageBackground source={images.square1} style={appStyle.squareImage}>
+        <Image source={images.lion} style={appStyle.orangeImage} />
       </ImageBackground>    
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
@@ -73,8 +73,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'cover',
   },
   squareImage: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.3,
+    width: windowWidth * 0.65,
+    height: windowHeight * 0.35,
     alignItems: 'center',
     justifyContent: 'center',
   },
