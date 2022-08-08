@@ -49,10 +49,13 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.GuessOfThethreeKingdoms} style={appStyle.phoneImage} />
+      <Image source={images.name} style={appStyle.phoneImage} />
+      <ImageBackground source={images.square2} style={appStyle.squareImage}>
+        <Image source={images.orange} style={appStyle.orangeImage} />
+      </ImageBackground>    
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.start} style={appStyle.itemView} />
+          <Image source={images.play} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -66,12 +69,12 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
-  popupImage: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.2,
+  squareImage: {
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -97,6 +100,11 @@ export const appStyle = StyleSheet.create({
     right: '0%',
     bottom: '0%',
   },
+  orangeImage: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+  },
   okBtn: {
     width: windowWidth * 0.3,
     height: windowWidth * 0.1,
@@ -109,8 +117,6 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    position: 'absolute',
-    top: '0%',
   },
   turnView: {
     flexDirection: 'row',
@@ -149,8 +155,6 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
-    bottom: '0%',
   },
   phoneImage: {
     width: windowWidth * 0.8,

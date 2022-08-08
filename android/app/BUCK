@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.amazon.guessofthethreekingdomsgot",
+    package = "com.amazon.guessoftheefruittgts",
 )
 
 android_resource(
     name = "res",
-    package = "com.amazon.guessofthethreekingdomsgot",
+    package = "com.amazon.guessoftheefruittgts",
     res = "src/main/res",
 )
 

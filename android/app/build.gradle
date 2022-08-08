@@ -140,7 +140,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.amazon.guessofthethreekingdomsgot"
+        applicationId "com.amazon.guessoftheefruittgts"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

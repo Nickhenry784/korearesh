@@ -16,13 +16,18 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bangtong, text: "PangTong"},
-  {id: 2, bg: images.GuanYu, text: "GuanYu"},
-  {id: 3, bg: images.LiuBei, text: "LiuBei"},
-  {id: 4, bg: images.machao, text: "MaChao"},
-  {id: 5, bg: images.ZhangFei, text: "ZhangFei"},
-  {id: 6, bg: images.ZhugeLiang, text: "ZhugeLiang"},
-  {id: 7, bg: images.shaoyun, text: "ZhaoYun"},
+  {id: 1, bg: images.apple, text: "Apple"},
+  {id: 2, bg: images.Apricot, text: "Apricot"},
+  {id: 3, bg: images.avocado, text: "Avocado"},
+  {id: 4, bg: images.banana, text: "Banana"},
+  {id: 5, bg: images.mango, text: "Mango"},
+  {id: 6, bg: images.melon, text: "Melon"},
+  {id: 7, bg: images.orange, text: "Orange"},
+  {id: 8, bg: images.cherries, text: "Cherries"},
+  {id: 9, bg: images.grapes, text: "Grapes"},
+  {id: 10, bg: images.kiwi, text: "Kiwi"},
+  {id: 11, bg: images.papaya, text: "Papaya"},
+  {id: 12, bg: images.pear, text: "Pear"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -62,6 +67,9 @@ const ItemScreen = ({navigation, route}) => {
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.close} style={appStyle.btnBack} />
+        </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
       <Image source={dataBg[index].bg} style={appStyle.foodImage} />
@@ -70,7 +78,7 @@ const ItemScreen = ({navigation, route}) => {
         style={{marginTop: 20}}
         horizontal={true}
         renderItem={({item}) => (
-          <ImageBackground source={images.squarelong} style={appStyle.squareImage}>
+          <ImageBackground source={images.square2} style={appStyle.squareImage}>
             <Text style={appStyle.textLabel}>{item.toUpperCase()}</Text>
           </ImageBackground>
         )}
@@ -109,7 +117,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   squareImage: {
     width: windowWidth * 0.08,
@@ -122,7 +130,7 @@ export const appStyle = StyleSheet.create({
   textLabel: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   bangImage: {
     width: windowWidth * 0.8,
