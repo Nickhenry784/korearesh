@@ -45,7 +45,7 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buttonbuy} style={appStyle.buyImage} />
+            <Image source={images.btnbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -56,19 +56,15 @@ const HomeScreen = () => {
       <Image source={images.buidingpc} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.start} style={appStyle.itemView} />
+          <Image source={images.btnplay} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
       <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.infboard}>
-          <Text style={appStyle.labelText}>1 view = 1 turn</Text>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.exit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-          
+        <ImageBackground style={appStyle.popupImage} source={images.board}>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.btnexit} style={appStyle.okBtn} />
+          </TouchableOpacity>
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -86,10 +82,10 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'cover',
   },
   popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.15,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   labelText: {
     fontSize:30,
@@ -134,9 +130,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 30,
+    fontFamily: 'fengardo-neue.regular',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,

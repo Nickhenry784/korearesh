@@ -5,66 +5,64 @@ import {
   Image, 
   Alert,  
   ImageBackground,
-  TouchableOpacity} from "react-native";
+  TouchableOpacity,
+  Text,
+  TextInput} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
+
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.img1},
-  {id: 2, bg: images.img2},
-  {id: 3, bg: images.img3},
-  {id: 4, bg: images.img4},
-  {id: 5, bg: images.img5},
-  {id: 6, bg: images.img6},
-  {id: 7, bg: images.img7},
-  {id: 8, bg: images.img8},
-  {id: 9, bg: images.img9},
-  {id: 10, bg: images.img10},
-  {id: 11, bg: images.img11},
-  {id: 12, bg: images.img12},
-]
 
 const ItemScreen = ({navigation, route}) => {
 
-  const [index, setIndex] = useState(0);
+  const [text, setText] = useState(randomIntFromInterval(0,1000));
+  const [score, setScore] = useState(0);
+  const [number, onChangeNumber] = useState(null);
 
-  const onClickNextBtn = () => {
-    if(index !== 9){
-      setIndex(index + 1);
-    }
-  }
-
-  const onClickCloseBtn = () => {
-    navigation.goBack();
-  }
-
-  const onClickBackBtn = () => {
-    if(index !== 0){
-      setIndex(index - 1);
+  const handleClickCheckBtn = async () => {
+    var converter = require('number-to-words');
+    const result = converter.toWords(text);
+    if(result.toLocaleLowerCase() === number.toLocaleLowerCase()){
+      setScore(score + 10);
+      setText(randomIntFromInterval(0,1000));
+      onChangeNumber(null);
+    }else{
+      navigation.goBack();
     }
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.closeView}>
-        <TouchableOpacity onPress={() => onClickCloseBtn()}>
-          <Image source={images.exit} style={appStyle.btnClose} />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.btnback} style={appStyle.btnClose} />
         </TouchableOpacity>
+        <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
+      <View style={appStyle.centerView}>
+        <Text style={appStyle.labelText}>{text}</Text>
+      </View>
+      <Text style={appStyle.label}>Input your value </Text>
       <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.buttonleft} style={appStyle.btn} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.buttonright} style={appStyle.btn} />
+        <TextInput
+          style={appStyle.input}
+          onChangeText={onChangeNumber}
+          value={number}
+          placeholder="text here"
+        />
+        <TouchableOpacity onPress={() => handleClickCheckBtn()}>
+          <Image source={images.btncheck} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
   );
 };
+
+export const randomIntFromInterval = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -72,13 +70,51 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
+  input: {
+    height: 60,
+    backgroundColor: 'white',
+    width: windowWidth * 0.7,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    fontSize: 30,
+    fontFamily: 'fengardo-neue.regular',
+    color: 'black',
+  },
   closeView: {
-    position: 'absolute',
-    top: '3%',
-    left: '3%',
+    width: windowWidth,
+    height: windowHeight * 0.1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+  },
+  centerView: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 16,
+  },
+  labelText: {
+    fontSize: 120,
+    fontFamily: 'fengardo-neue.regular',
+    color: 'black',
+  },
+  label: {
+    fontSize: 30,
+    fontFamily: 'fengardo-neue.regular',
+    color: 'black',
+    marginVertical: 20,
+  },
+  scoreText: {
+    fontSize: 30,
+    fontFamily: 'fengardo-neue.regular',
+    color: 'black',
   },
   btnClose: {
     width: windowWidth * 0.1,
@@ -86,16 +122,15 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   btn: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.1,
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
   },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.4,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 
