@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.amazon.guessoftheefruittgts",
+    package = "com.amazon.guessdogiq",
 )
 
 android_resource(
     name = "res",
-    package = "com.amazon.guessoftheefruittgts",
+    package = "com.amazon.guessdogiq",
     res = "src/main/res",
 )
 

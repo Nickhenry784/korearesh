@@ -16,18 +16,17 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.apple, text: "Apple"},
-  {id: 2, bg: images.Apricot, text: "Apricot"},
-  {id: 3, bg: images.avocado, text: "Avocado"},
-  {id: 4, bg: images.banana, text: "Banana"},
-  {id: 5, bg: images.mango, text: "Mango"},
-  {id: 6, bg: images.melon, text: "Melon"},
-  {id: 7, bg: images.orange, text: "Orange"},
-  {id: 8, bg: images.cherries, text: "Cherries"},
-  {id: 9, bg: images.grapes, text: "Grapes"},
-  {id: 10, bg: images.kiwi, text: "Kiwi"},
-  {id: 11, bg: images.papaya, text: "Papaya"},
-  {id: 12, bg: images.pear, text: "Pear"},
+  {id: 1, bg: images.bulldog, text: "bulldog"},
+  {id: 2, bg: images.chowchow, text: "chowchow"},
+  {id: 3, bg: images.collie, text: "collie"},
+  {id: 4, bg: images.Corgi, text: "corgi"},
+  {id: 5, bg: images.GoldenRetriever, text: "GoldenRetriever"},
+  {id: 6, bg: images.LabradorRetriever, text: "LabradorRetriever"},
+  {id: 7, bg: images.poodle, text: "poodle"},
+  {id: 8, bg: images.pug, text: "pug"},
+  {id: 9, bg: images.samoyed, text: "samoyed"},
+  {id: 10, bg: images.ShibaInu, text: "ShibaInu"},
+  {id: 11, bg: images.ShihTzu, text: "ShihTzu"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -65,10 +64,10 @@ const ItemScreen = ({navigation, route}) => {
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.close} style={appStyle.btnBack} />
+          <Image source={images.home} style={appStyle.btnBack} />
         </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
@@ -89,7 +88,6 @@ const ItemScreen = ({navigation, route}) => {
           onChangeText={onChangeText}
           value={text}
           placeholder={"Text here"}
-          onEndEditing={() => onEndChangeText()}
         />
         <TouchableOpacity onPress={() => onEndChangeText()}>
           <Image source={images.check} style={appStyle.btn} />
@@ -153,7 +151,7 @@ export const appStyle = StyleSheet.create({
   },
   input: {
     height: 60,
-    width: windowWidth * 0.7,
+    width: windowWidth * 0.5,
     backgroundColor: 'white',
     margin: 12,
     fontSize: 20,
@@ -184,6 +182,7 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     bottom: '0%',
+    flexDirection: 'row',
   },
   foodImage: {
     width: windowWidth * 0.8,
