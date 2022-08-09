@@ -16,17 +16,16 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.aphrodite, text: "aphrodite"},
-  {id: 2, bg: images.apollo, text: "apollo"},
-  {id: 3, bg: images.ares, text: "ares"},
-  {id: 4, bg: images.artemis, text: "artemis"},
-  {id: 5, bg: images.athena, text: "athena"},
-  {id: 6, bg: images.demeter, text: "demeter"},
-  {id: 7, bg: images.hades, text: "hades"},
-  {id: 8, bg: images.hera, text: "hera"},
-  {id: 9, bg: images.hermes, text: "hermes"},
-  {id: 10, bg: images.poseidon, text: "poseidon"},
-  {id: 11, bg: images.zeus, text: "zeus"},
+  {id: 1, question: "Who always drives his customers away?", text: "A taxi-driver"},
+  {id: 2, question: "What is the longest word in the English language?", text: "Smiles, because there is a mile between the beginning and the end of it."},
+  {id: 3, question: "Why is the letter E so important?", text: "Because it is the beginning of everything"},
+  {id: 4, question: "Where can you always find money?", text: "In the dictionary"},
+  {id: 5, question: "What has ears but can not hear?", text: "Corn"},
+  {id: 6, question: "What has arms but can not hug?", text: "Armchair"},
+  {id: 7, question: "What month do soldiers hate?", text: "March"},
+  {id: 8, question: "What clothing is always sad?", text: "Blue jeans"},
+  {id: 9, question: "Why are dogs afraid to sunbathe?", text: "They don’t want to be hot-dogs"},
+  {id: 10, question: "What makes opening piano so hard?", text: "All the keys are inside."},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -49,51 +48,31 @@ const ItemScreen = ({navigation, route}) => {
     }
   }
 
-  const makeUnique = (value)  => {
-    var list = [];
-    for (var i = 0; i < value.length; i++){
-      const element = value.substring(i,i + 1);
-      list.push(element);
-    }
-    for (let t = 0; t < list.length; t++) {
-      const element = list[t];
-      list.splice(t,1);
-      list.splice(randomIntFromInterval(0,list.length),0,element);
-    }
-    return list;
-  }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.false} style={appStyle.btnBack} />
+          <Image source={images.home} style={appStyle.btnBack} />
         </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <ImageBackground source={images.square2} style={appStyle.square2}>
-        <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      <ImageBackground source={images.bang} style={appStyle.square2}>
+        <Text style={appStyle.textLabel}>{dataBg[index].question}</Text>
       </ImageBackground>
       
-      <FlatList 
-        data={makeUnique(dataBg[index].text)}
-        style={{marginTop: 20}}
-        horizontal={true}
-        renderItem={({item}) => (
-          <ImageBackground source={images.square3} style={appStyle.squareImage}>
-            <Text style={appStyle.textLabel}>{item.toUpperCase()}</Text>
-          </ImageBackground>
-        )}
-      />
       <View style={appStyle.bottomView}>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={onChangeText}
-          value={text}
-          placeholder={"Text here"}
-        />
+        <View style={appStyle.inputView}>
+          <Text style={appStyle.textLabel}>Result: </Text>
+          <TextInput
+            style={appStyle.input}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder={"Text here"}
+          />
+        </View>
         <TouchableOpacity onPress={() => onEndChangeText()}>
-          <Image source={images.true} style={appStyle.btn} />
+          <Image source={images.check} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -111,6 +90,11 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  textLabel: {
+    fontSize: 30,
+    fontFamily: 'Write Nice',
+    color: 'black',
   },
   square2: {
     width: windowWidth * 0.8,
@@ -135,11 +119,6 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  textLabel: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'white',
-  },
   bangImage: {
     width: windowWidth * 0.8,
     height: windowHeight * 0.4,
@@ -161,7 +140,7 @@ export const appStyle = StyleSheet.create({
   },
   input: {
     height: 60,
-    width: windowWidth * 0.5,
+    width: windowWidth * 0.6,
     backgroundColor: 'white',
     margin: 12,
     fontSize: 20,
@@ -173,25 +152,18 @@ export const appStyle = StyleSheet.create({
     height: windowHeight * 0.2,
     resizeMode: 'contain',
   },
-  boardView: {
-    width: windowWidth * 0.4,
-    height: windowWidth * 0.3,
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    top: '30%',
-    left: '10%',
-    transform: [{
-      rotate: '-20deg',
-    }]
-  },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.3,
+    height: windowHeight * 0.4,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
     bottom: '0%',
+  },
+  inputView: {
+    width: windowWidth * 0.9,
+    alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   foodImage: {
@@ -205,9 +177,9 @@ export const appStyle = StyleSheet.create({
     left: '3%'
   },
   scoreText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 25,
+    fontFamily: 'Write Nice',
+    color: 'black',
   },
   btnBack: {
     width: windowWidth * 0.1,

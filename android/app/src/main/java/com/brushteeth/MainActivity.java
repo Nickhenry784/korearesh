@@ -1,4 +1,4 @@
-package com.amazon.guessthenameofthegreekgodssgtof;
+package com.amazon.fuquestionpq;
 
 import com.facebook.react.ReactActivity;
 
