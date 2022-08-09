@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.dogiq_1',
+    sku: 'com.amazon.greekgodssgtof_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.dogiq_2',
+    sku: 'com.amazon.greekgodssgtof_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.dogiq_3',
+    sku: 'com.amazon.greekgodssgtof_300',
     value: 300,
   },
   {
-    sku: 'com.amazon.dogiq_4',
+    sku: 'com.amazon.greekgodssgtof_400',
     value: 400,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_dogiq_100',
+    sku: 'com.amazon.weekly_greekgodssgtof_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_dogiq_200',
+    sku: 'com.amazon.weekly_greekgodssgtof_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_dogiq_400',
+    sku: 'com.amazon.monthly_greekgodssgtof_400',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_dogiq_700',
+    sku: 'com.amazon.monthly_greekgodssgtof_700',
     value: 700,
   },
 ];

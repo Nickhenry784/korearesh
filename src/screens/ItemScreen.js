@@ -16,17 +16,17 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bulldog, text: "bulldog"},
-  {id: 2, bg: images.chowchow, text: "chowchow"},
-  {id: 3, bg: images.collie, text: "collie"},
-  {id: 4, bg: images.Corgi, text: "corgi"},
-  {id: 5, bg: images.GoldenRetriever, text: "GoldenRetriever"},
-  {id: 6, bg: images.LabradorRetriever, text: "LabradorRetriever"},
-  {id: 7, bg: images.poodle, text: "poodle"},
-  {id: 8, bg: images.pug, text: "pug"},
-  {id: 9, bg: images.samoyed, text: "samoyed"},
-  {id: 10, bg: images.ShibaInu, text: "ShibaInu"},
-  {id: 11, bg: images.ShihTzu, text: "ShihTzu"},
+  {id: 1, bg: images.aphrodite, text: "aphrodite"},
+  {id: 2, bg: images.apollo, text: "apollo"},
+  {id: 3, bg: images.ares, text: "ares"},
+  {id: 4, bg: images.artemis, text: "artemis"},
+  {id: 5, bg: images.athena, text: "athena"},
+  {id: 6, bg: images.demeter, text: "demeter"},
+  {id: 7, bg: images.hades, text: "hades"},
+  {id: 8, bg: images.hera, text: "hera"},
+  {id: 9, bg: images.hermes, text: "hermes"},
+  {id: 10, bg: images.poseidon, text: "poseidon"},
+  {id: 11, bg: images.zeus, text: "zeus"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -64,20 +64,23 @@ const ItemScreen = ({navigation, route}) => {
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.home} style={appStyle.btnBack} />
+          <Image source={images.false} style={appStyle.btnBack} />
         </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      <ImageBackground source={images.square2} style={appStyle.square2}>
+        <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      </ImageBackground>
+      
       <FlatList 
         data={makeUnique(dataBg[index].text)}
         style={{marginTop: 20}}
         horizontal={true}
         renderItem={({item}) => (
-          <ImageBackground source={images.square2} style={appStyle.squareImage}>
+          <ImageBackground source={images.square3} style={appStyle.squareImage}>
             <Text style={appStyle.textLabel}>{item.toUpperCase()}</Text>
           </ImageBackground>
         )}
@@ -90,7 +93,7 @@ const ItemScreen = ({navigation, route}) => {
           placeholder={"Text here"}
         />
         <TouchableOpacity onPress={() => onEndChangeText()}>
-          <Image source={images.check} style={appStyle.btn} />
+          <Image source={images.true} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -108,6 +111,13 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  square2: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.4,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   appBar: {
     height: windowHeight * 0.1,
@@ -128,7 +138,7 @@ export const appStyle = StyleSheet.create({
   textLabel: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   bangImage: {
     width: windowWidth * 0.8,
@@ -185,8 +195,8 @@ export const appStyle = StyleSheet.create({
     flexDirection: 'row',
   },
   foodImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
   },
   backBtn: {
@@ -197,6 +207,7 @@ export const appStyle = StyleSheet.create({
   scoreText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
   },
   btnBack: {
     width: windowWidth * 0.1,
