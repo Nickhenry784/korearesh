@@ -1,4 +1,4 @@
-package com.amazon.emotionallaptop;
+package com.amazon.pickgarbageuq;
 
 import com.facebook.react.ReactActivity;
 

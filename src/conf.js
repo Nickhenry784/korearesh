@@ -1,37 +1,37 @@
 export const items = [
   {
-    sku: 'com.amazon.nallaptop_1',
+    sku: 'com.amazon.garbageuq_1',
     value: 50,
   },
   {
-    sku: 'com.amazon.nallaptop_2',
+    sku: 'com.amazon.garbageuq_2',
     value: 100,
   },
   {
-    sku: 'com.amazon.nallaptop_3',
+    sku: 'com.amazon.garbageuq_3',
     value: 200,
   },
   {
-    sku: 'com.amazon.nallaptop_4',
+    sku: 'com.amazon.garbageuq_4',
     value: 300,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_nallaptop_100',
+    sku: 'com.amazon.weekly_garbageuq_100',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_nallaptop_200',
+    sku: 'com.amazon.weekly_garbageuq_200',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_nallaptop_400',
+    sku: 'com.amazon.monthly_garbageuq_400',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_nallaptop_800',
+    sku: 'com.amazon.monthly_garbageuq_800',
     value: 800,
   },
 ];

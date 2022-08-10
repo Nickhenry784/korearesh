@@ -32,11 +32,11 @@ const Home = () => {
   const [popup, setPopup] = useState(false);
 
   const onClickStartButton = (item) => {
-    if (points.value === 0) {
-      Alert.alert('Please buy more turn');
-      return false;
-    }
-    dispatch(decrement());
+    // if (points.value === 0) {
+    //   Alert.alert('Please buy more turn');
+    //   return false;
+    // }
+    // dispatch(decrement());
     navigation.navigate("Item");
   }
 
@@ -47,33 +47,20 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.btnbuy} style={appStyle.scoreStyle} />
+            <Image source={images.turn} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.btnplay} style={appStyle.startBtn} />
+          <Image source={images.play} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.btnexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>)}
     </ImageBackground>
   );
 };
@@ -85,7 +72,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     resizeMode: 'cover',
   },
   closeView: {
@@ -94,7 +81,9 @@ export const appStyle = StyleSheet.create({
     right: '5%',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
+    position: 'absolute',
+    top: '0%',
     width: '100%',
     paddingHorizontal: 10,
     alignItems: 'center',
