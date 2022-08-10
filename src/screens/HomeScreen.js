@@ -21,8 +21,6 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
-  const [popup, setPopup] = useState(false);
-
   const dispatch = useDispatch();
 
   const onClickTurnButton = () => {
@@ -45,28 +43,15 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.btnbuy} style={appStyle.buyImage} />
+            <Image source={images.heart} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
-        </TouchableOpacity>
       </View>
-      <Image source={images.text} style={appStyle.brokenImage} />
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnplay} style={appStyle.itemView} />
-        </TouchableOpacity>
-      </View>
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.btnexit} style={appStyle.okBtn} />
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>)}
+      <TouchableOpacity onPress={() => onClickStartButton()}>
+        <Image source={images.play} style={appStyle.itemView} />
+      </TouchableOpacity>
+      <Image source={images.name} style={appStyle.brokenImage} />
     </ImageBackground>
   );
 };
@@ -115,7 +100,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -131,8 +116,8 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'MontserratAlternates-Black',
-    color: 'white',
+    fontFamily: 'Fruitz Demo',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -140,8 +125,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.8,
-    height: windowWidth * 0.4,
+    width: windowWidth,
+    height: windowHeight * 0.5,
     resizeMode: 'contain',
   },
   itemView: {

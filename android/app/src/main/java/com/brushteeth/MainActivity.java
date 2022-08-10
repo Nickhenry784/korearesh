@@ -1,4 +1,4 @@
-package com.amazon.selectednumbergenerate;
+package com.amazon.fasthandsorfastbrainsfhfb;
 
 import com.facebook.react.ReactActivity;
 
