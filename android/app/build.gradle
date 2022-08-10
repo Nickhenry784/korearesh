@@ -140,7 +140,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.amazon.randonumber"
+        applicationId "com.amazon.lookingforpigsslfpg"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

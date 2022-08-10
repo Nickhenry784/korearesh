@@ -21,7 +21,7 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
-  const [popup, setPopup] = useState(false);
+
 
   const dispatch = useDispatch();
 
@@ -45,28 +45,17 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.btnbuy} style={appStyle.buyImage} />
+            <Image source={images.heart} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
-        </TouchableOpacity>
       </View>
-      <Image source={images.buidingpc} style={appStyle.brokenImage} />
+      <Image source={images.name} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnplay} style={appStyle.itemView} />
+          <Image source={images.play} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.btnexit} style={appStyle.okBtn} />
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>)}
     </ImageBackground>
   );
 };
@@ -140,7 +129,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.6,
+    width: windowWidth * 0.8,
     height: windowWidth * 0.3,
     resizeMode: 'contain',
   },

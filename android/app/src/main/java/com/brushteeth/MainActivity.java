@@ -1,4 +1,4 @@
-package com.amazon.randonumber;
+package com.amazon.lookingforpigsslfpg;
 
 import com.facebook.react.ReactActivity;
 
