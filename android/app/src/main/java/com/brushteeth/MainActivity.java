@@ -1,4 +1,4 @@
-package com.amazon.fuquestionpq;
+package com.amazon.questionfireprotectionnfpf;
 
 import com.facebook.react.ReactActivity;
 
