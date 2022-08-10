@@ -7,10 +7,11 @@ import {
   ImageBackground,
   TouchableOpacity,
   Text,
-  TextInput} from "react-native";
+  TextInput,
+  FlatList} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
-
+var converter = require('number-to-words');
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -18,24 +19,22 @@ const windowHeight = Dimensions.get('screen').height;
 
 const ItemScreen = ({navigation, route}) => {
 
-  const [text, setText] = useState(randomIntFromInterval(0,1000));
+  const [text, setText] = useState([randomIntFromInterval(0,1000),randomIntFromInterval(0,1000),randomIntFromInterval(0,1000),randomIntFromInterval(0,1000)]);
+  const [index, setIndex] = useState(randomIntFromInterval(0,3));
   const [score, setScore] = useState(0);
-  const [number, onChangeNumber] = useState(null);
 
-  const handleClickCheckBtn = async () => {
-    var converter = require('number-to-words');
-    const result = converter.toWords(text);
-    if(result.toLocaleLowerCase() === number.toLocaleLowerCase()){
+  const handleClickCheckBtn = (val) => {
+    if(val === converter.toWords(text[index])){
       setScore(score + 10);
-      setText(randomIntFromInterval(0,1000));
-      onChangeNumber(null);
+      setText([randomIntFromInterval(0,1000),randomIntFromInterval(0,1000),randomIntFromInterval(0,1000),randomIntFromInterval(0,1000)]);
+      setIndex(randomIntFromInterval(0,3))
     }else{
       navigation.goBack();
     }
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.closeView}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={images.btnback} style={appStyle.btnClose} />
@@ -43,19 +42,21 @@ const ItemScreen = ({navigation, route}) => {
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
       <View style={appStyle.centerView}>
-        <Text style={appStyle.labelText}>{text}</Text>
+        <Text style={appStyle.labelText}>{text[index]}</Text>
       </View>
-      <Text style={appStyle.label}>Input your value </Text>
+      <Text style={appStyle.label}>Your answer</Text>
       <View style={appStyle.bottomView}>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="text here"
+        <FlatList 
+          data={text}
+          scrollEnabled
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => handleClickCheckBtn(converter.toWords(item))}>
+              <ImageBackground source={images.answerbox1} style={appStyle.btn}>
+                <Text style={appStyle.labelAnswer}>{converter.toWords(item)}</Text>
+              </ImageBackground>
+            </TouchableOpacity>
+          )}
         />
-        <TouchableOpacity onPress={() => handleClickCheckBtn()}>
-          <Image source={images.btncheck} style={appStyle.btn} />
-        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -81,7 +82,7 @@ export const appStyle = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
+    fontFamily: 'MontserratAlternates-Black',
     color: 'black',
   },
   closeView: {
@@ -102,19 +103,19 @@ export const appStyle = StyleSheet.create({
   },
   labelText: {
     fontSize: 120,
-    fontFamily: 'fengardo-neue.regular',
+    fontFamily: 'MontserratAlternates-Black',
     color: 'black',
   },
   label: {
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
+    fontFamily: 'MontserratAlternates-Black',
     color: 'black',
     marginVertical: 20,
   },
   scoreText: {
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
-    color: 'black',
+    fontFamily: 'MontserratAlternates-Black',
+    color: 'white',
   },
   btnClose: {
     width: windowWidth * 0.1,
@@ -122,9 +123,16 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   btn: {
-    width: windowWidth * 0.4,
-    height: windowHeight * 0.2,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.15,
     resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelAnswer: {
+    fontSize: 20,
+    fontFamily: 'MontserratAlternates-Black',
+    color: 'black',
   },
   bottomView: {
     width: windowWidth,

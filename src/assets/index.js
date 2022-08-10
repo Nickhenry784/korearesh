@@ -1,12 +1,13 @@
 export const images = {
-  bg1: require('./images/bg1.png'),
+  bg: require('./images/bg.png'),
   board: require('./images/board.png'),
   btnback: require('./images/btnback.png'),
   btnbuy: require('./images/btnbuy.png'),
   btnexit: require('./images/btnexit.png'),
   btnplay: require('./images/btnplay.png'),
-  iconsearch: require('./images/iconsearch.png'),
+  answerbox1: require('./images/answerbox1.png'),
   bg: require('./images/bg.png'),
   note: require('./images/note.png'),
-  btncheck: require('./images/btncheck.png'),
+  textbox: require('./images/textbox.png'),
+  text: require('./images/text.png'),
 }

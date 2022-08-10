@@ -53,7 +53,7 @@ const HomeScreen = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <Image source={images.buidingpc} style={appStyle.brokenImage} />
+      <Image source={images.text} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.btnplay} style={appStyle.itemView} />
@@ -131,8 +131,8 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
-    color: 'black',
+    fontFamily: 'MontserratAlternates-Black',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -140,8 +140,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.3,
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
   },
   itemView: {

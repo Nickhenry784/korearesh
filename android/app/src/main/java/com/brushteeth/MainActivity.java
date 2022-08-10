@@ -1,4 +1,4 @@
-package com.amazon.randonumber;
+package com.amazon.selectednumbergenerate;
 
 import com.facebook.react.ReactActivity;
 
