@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   labelText: {
     fontSize: 50,
     fontFamily: 'ReenieBeanie',
-    color: 'white',
+    color: 'black',
   },
   item: {
     margin: 5,

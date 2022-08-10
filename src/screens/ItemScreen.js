@@ -13,16 +13,16 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataStamp = [
-  {id: 1, image: images.stamp1},
-  {id: 2, image: images.stamp2},
-  {id: 3, image: images.stamp3},
-  {id: 4, image: images.stamp4},
-  {id: 5, image: images.stamp5},
-  {id: 6, image: images.stamp6},
-  {id: 7, image: images.stamp7},
-  {id: 8, image: images.stamp8},
-  {id: 9, image: images.stamp9},
-  {id: 10, image: images.stamp10},
+  {id: 1, image: images.feeling1},
+  {id: 2, image: images.feeling2},
+  {id: 3, image: images.feeling3},
+  {id: 4, image: images.feeling4},
+  {id: 5, image: images.feeling5},
+  {id: 6, image: images.feeling6},
+  {id: 7, image: images.feeling7},
+  {id: 8, image: images.feeling8},
+  {id: 9, image: images.feeling9},
+  {id: 10, image: images.feeling10},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -45,24 +45,23 @@ const ItemScreen = ({navigation, route}) => {
     <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.closeview}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.buttonexit} style={appStyle.btnReturn} />
+          <Image source={images.btnback} style={appStyle.btnReturn} />
         </TouchableOpacity>
       </View>
       <View style={appStyle.centerView}>
-        <ImageBackground source={images.iconletters} style={appStyle.lettersImage}>
+        <ImageBackground source={images.iconlaptop} style={appStyle.lettersImage}>
           <View style={appStyle.topView}>
             <Image source={dataStamp[index].image} style={appStyle.stampSmall} />
           </View>
         </ImageBackground>
-
-        <Image source={dataStamp[index].image} style={appStyle.stampHigher} />
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.buttonleft} style={appStyle.btn} />
+          <Image source={images.btnleft} style={appStyle.btn} />
         </TouchableOpacity>
+        <Image source={dataStamp[index].image} style={appStyle.stampHigher} />
         <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.buttonright} style={appStyle.btn} />
+          <Image source={images.btnright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -87,7 +86,7 @@ export const appStyle = StyleSheet.create({
     width: windowWidth,
     height: windowHeight * 0.6,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   lettersImage: {
     width: windowWidth,
@@ -98,7 +97,6 @@ export const appStyle = StyleSheet.create({
   topView: {
     position: 'absolute',
     top: '5%',
-    right: '-3%',
   },
   stampHigher: {
     width: windowWidth * 0.3,
@@ -106,8 +104,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   stampSmall: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.1,
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
   },
   btn: {
