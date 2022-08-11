@@ -5,7 +5,8 @@ import {
   Image, 
   Alert,  
   ImageBackground,
-  TouchableOpacity} from "react-native";
+  TouchableOpacity,
+  Text} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
 
@@ -13,19 +14,19 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bg1},
-  {id: 2, bg: images.bg2},
-  {id: 3, bg: images.bg3},
-  {id: 4, bg: images.bg4},
-  {id: 5, bg: images.bg5},
-  {id: 6, bg: images.bg6},
-  {id: 7, bg: images.bg7},
-  {id: 8, bg: images.bg8},
-  {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
+  {id: 1, bg: images.card1},
+  {id: 2, bg: images.card2},
+  {id: 3, bg: images.card3},
+  {id: 4, bg: images.card4},
+  {id: 5, bg: images.card5},
 ]
 
 const ItemScreen = ({navigation, route}) => {
+
+  const {male} = route.params;
+  const {female} = route.params;
+  const {address} = route.params;
+  const {date} = route.params;
 
   const [index, setIndex] = useState(0);
 
@@ -44,7 +45,19 @@ const ItemScreen = ({navigation, route}) => {
   }
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+      <View style={{position: 'absolute', top: '0%', left: '2%'}}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.home} style={appStyle.back} />
+        </TouchableOpacity>
+      </View>
+      <ImageBackground source={dataBg[index].bg} style={appStyle.backg}>
+        <Text style={[appStyle.labelText, {position: 'absolute', top: '25%'}]}>{male}</Text>
+        <Text style={[appStyle.labelText, {position: 'absolute', top: '35%'}]}>{`&`}</Text>
+        <Text style={[appStyle.labelText, {position: 'absolute', top: '45%'}]}>{female}</Text>
+        <Text style={[appStyle.labelText1, {position: 'absolute', top: '60%'}]}>{date}</Text>
+        <Text style={[appStyle.labelText1, {position: 'absolute', top: '75%'}]}>{address}</Text>
+      </ImageBackground>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
           <Image source={images.back} style={appStyle.btn} />
@@ -66,6 +79,22 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
+  backg: {
+    width: windowWidth,
+    height: windowHeight * 0.7,
+    resizeMode: 'contain',
+    alignItems: 'center',
+  },
+  labelText: {
+    fontSize: 50,
+    fontFamily: 'Belligo',
+    color: '#d3a869',
+  },
+  labelText1: {
+    fontSize: 30,
+    fontFamily: 'Belligo',
+    color: '#d3a869',
+  },
   btn: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
@@ -73,10 +102,15 @@ export const appStyle = StyleSheet.create({
   },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.1,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+  },
+  back: {
+    width: windowWidth * 0.1,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
   },
 });
 

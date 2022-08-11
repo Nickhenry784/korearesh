@@ -6,7 +6,8 @@ import {
   ImageBackground, 
   Image,
   FlatList, 
-  Alert  } from "react-native";
+  Alert,  
+  TextInput} from "react-native";
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
@@ -21,6 +22,11 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
+  const [male, setMale] = useState("");
+  const [female, setFemale] = useState("");
+  const [address, setAddress] = useState("");
+  const [date, setDate] = useState("");
+
   const dispatch = useDispatch();
 
   const onClickTurnButton = () => {
@@ -32,8 +38,17 @@ const HomeScreen = () => {
       Alert.alert("Please buy more turn!");
       return false;
     }
+    if(male === "" || female === "" || address === "" || date === ""){
+      Alert.alert("Please input your information!");
+      return false;
+    }
     dispatch(decrement());
-    navigation.navigate("Item");
+    navigation.navigate("Item",{
+      male: male,
+      female: female,
+      address: address,
+      date: date,
+    });
   }
 
 
@@ -42,17 +57,43 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.view} style={appStyle.buyImage} />
+            <Image source={images.turn} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '20%'}}>
+      <View style={{position: 'absolute', top: '5%'}}>
         <Image source={images.textstart} style={appStyle.brokenImage} />
+      </View>
+      <View style={{position: 'absolute',top: '15%'}}>
+        <Text style={appStyle.labelText}>Male</Text>
+        <TextInput
+          style={appStyle.input}
+          onChangeText={setMale}
+          value={male}
+        />
+        <Text style={appStyle.labelText}>Female</Text>
+        <TextInput
+          style={appStyle.input}
+          onChangeText={setFemale}
+          value={female}
+        />
+        <Text style={appStyle.labelText}>Address</Text>
+        <TextInput
+          style={appStyle.input}
+          onChangeText={setAddress}
+          value={address}
+        />
+        <Text style={appStyle.labelText}>Date</Text>
+        <TextInput
+          style={appStyle.input}
+          onChangeText={setDate}
+          value={date}
+        />
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watch} style={appStyle.itemView} />
+          <Image source={images.Start} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -69,13 +110,22 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
+  input: {
+    height: 50,
+    width: windowWidth * 0.6,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: 'white',
+    fontSize: 20,
+  },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   turnView: {
     flexDirection: 'row',
@@ -85,8 +135,8 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
+    fontSize: 30,
+    fontFamily: 'Belligo',
     color: 'black',
   },
   buyImage: {
@@ -104,13 +154,13 @@ export const appStyle = StyleSheet.create({
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
-  text: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
+  labelText: {
+    fontSize: 30,
+    fontFamily: 'Belligo',
+    color: 'black',
   },
   bottomView: {
-    flex: 0.3,
+    height: windowHeight * 0.2,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
