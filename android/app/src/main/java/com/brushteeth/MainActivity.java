@@ -1,4 +1,4 @@
-package com.amazon.questionfireprotectionnfpf;
+package com.amazon.questionenvironmentalprotectionqv;
 
 import com.facebook.react.ReactActivity;
 

@@ -49,12 +49,10 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.name} style={appStyle.phoneImage} />  
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.play} style={appStyle.itemView} />
-        </TouchableOpacity>
-      </View>
+      <Image source={images.name} style={appStyle.phoneImage} />
+      <TouchableOpacity onPress={() => onClickStartButton()}>
+        <Image source={images.play} style={appStyle.itemView} />
+      </TouchableOpacity>  
     </ImageBackground>
   );
 };

@@ -16,18 +16,21 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, question: "Home Fires are...", text: ["Loud,hot and dark","Quiet, hot and dark","Quiet,hot, and bright","Loud,cool and dark",], reulst: "Loud,hot and dark"},
-  {id: 2, question: "When you hear a smoke alarm, you should..", text: ["Follow your escape plan and get out fast","Hide in your room","Gather you stuff before getting out","Call 9-1-1",], reulst: "Follow your escape plan and get out fast"},
-  {id: 3, question: "How often should grown-ups should test smoke alarms?", text: ["Every day","Every month","Every week","Every year",], reulst: "Every month"},
-  {id: 4, question: "A smoke alarm can tell if there is________ in the air.", text: ["Aust","Smoke","A bug","Pollution",], reulst: "Smoke"},
-  {id: 5, question: "The best way to exit from a smoky place is to:", text: ["Run quickly but don't panic","Use the nearest stairs","Crawl on your hands and knees","Crawl on your stomach",], reulst: "Crawl on your hands and knees"},
-  {id: 6, question: "Most serious burns are caused by:", text: ["Hot water","Flames","Chemicals","Electricity",], reulst: "Hot water"},
-  {id: 7, question: "You should have at least ____ escape routes from each room in your house.", text: ["0","1","3","2",], reulst: "2"},
-  {id: 8, question: "If your clothing catches on fire you should:", text: ["Run for help","Soak yourself in water","Try to put it out with your hands","Stop, drop and roll, while covering your face",], reulst: "Stop, drop and roll, while covering your face"},
-  {id: 9, question: "If you burn yourself you should immediately put____ on it.", text: ["Butter","Warm water","Cold water","Ice",], reulst: "Cold water"},
-  {id: 10, question: "If you cannot leave a room in a burning building you should:", text: ["Stuff a blanket under the closed door","Open the window and stay low as possible","Hang something out the window and yell for help","All of these answers",], reulst: "All of these answers"},
-  {id: 11, question: "If a fire occurred in your home, the time you have to escape could be as little as:", text: ["1 minute","12 minutes","3 minutes","30 minutes",], reulst: "1 minute"},
-  {id: 12, question: "What 3 things does a fire need to burn?", text: ["Oxygen","Fuel","Heat","All of these answers",], reulst: "All of these answers"},
+  {id: 1, question: "What is the main cause of Soil erosion?", text: ["Industrialization  ","Defforestation","Earthquake","Roads Construction",], reulst: "Defforestation"},
+  {id: 2, question: "Where is situated Dudhwa National Park?", text: ["Madhya Pradesh","Uttar Pradesh","Rajasthan","Haryana",], reulst: "Uttar Pradesh"},
+  {id: 3, question: "The name of India derived from which river?", text: ["Indus River","Ganges River","Brahmaputra River","Sutlej River",], reulst: "Indus River"},
+  {id: 4, question: "Which is the biggest thermal power plant in India?", text: ["Vindhyachal Thermal Power Station","Renusagar Thermal Power Plant","Anpara Thermal Power Plant","Reliance Sasan Ultra Mega Power",], reulst: "Vindhyachal Thermal Power Station"},
+  {id: 5, question: "When was established National Defence Academy?", text: ["1951","1952","1953","1954",], reulst: "1954"},
+  {id: 6, question: "What is the percentage of CO2 in atmosphere?", text: ["0.0391 percent","0.1001 Percent","1.0001 Percent","0.1001 Percent",], reulst: "0.0391 percent"},
+  {id: 7, question: "Which is the most polluted city in the world?", text: ["Faridabad","Varanasi","Kanpur","Lucknow",], reulst: "Kanpur"},
+  {id: 8, question: "Who is known as the father of Indian environmental science?", text: ["Ramdeo Mishra","Sunderlal Bahuguna","Vinobha Bhave","Raja Ram Mohan Roy",], reulst: "Ramdeo Mishra"},
+  {id: 9, question: "Which of the following animal has the highest blood pressure?", text: ["Elephant","Giraffe","Lion","Rabbit",], reulst: "Giraffe"},
+  {id: 10, question: "Where is located Silent Valley National Park?", text: ["Odisha","Kerala","Tamil Nadu","West Bengal",], reulst: "Kerala"},
+  {id: 11, question: "Grand Central Terminal, Park Avenue, New York is the world’s_______?", text: ["Longest railway station","Highest railway station","Largest Railway Station","None of the above",], reulst: "Largest Railway Station"},
+  {id: 12, question: "The world’s first ever thermal battery plant has been inaugurated in which Indian state?", text: ["Andhra Pradesh","Himachal Pradesh","Karnataka","Odisha",], reulst: "Andhra Pradesh"},
+  {id: 13, question: "What is the name of the world’s first Greenhouse gases Observing Satellite launched by Japan in 2009?", text: ["Ibuki","Tadami","Akatsuki","Hayabusa",], reulst: "Ibuki"},
+  {id: 14, question: "Fathometer is used to measure________?", text: ["Earthquakes","Rainfalls","Ocean Depth","Sound Intensity",], reulst: "Ocean Depth"},
+  {id: 15, question: "What is the largest land in the human body?", text: ["Liver","Adrenal","Pituitary","Pineal",], reulst: "Liver"},
 ]
 
 const ItemScreen = ({navigation, route}) => {
@@ -50,7 +53,7 @@ const ItemScreen = ({navigation, route}) => {
     <ImageBackground style={appStyle.homeView} source={images.bg2}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.home} style={appStyle.btnBack} />
+          <Image source={images.false} style={appStyle.btnBack} />
         </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
@@ -63,7 +66,7 @@ const ItemScreen = ({navigation, route}) => {
           data={randomAnswer(dataBg[index].text)}
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => onEndChangeText(item)}>
-              <ImageBackground source={images.answer} style={appStyle.foodImage}>
+              <ImageBackground source={images.square1} style={appStyle.foodImage}>
                 <Text style={appStyle.label}>{item}</Text>
               </ImageBackground>
             </TouchableOpacity>
@@ -106,8 +109,8 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   square2: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
@@ -163,7 +166,7 @@ export const appStyle = StyleSheet.create({
   },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.4,
+    height: windowHeight * 0.45,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
@@ -176,8 +179,9 @@ export const appStyle = StyleSheet.create({
     flexDirection: 'row',
   },
   foodImage: {
-    width: windowWidth * 0.8,
+    width: windowWidth * 0.9,
     height: windowHeight * 0.1,
+    marginVertical: 4,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',

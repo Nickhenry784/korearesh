@@ -19,7 +19,6 @@ import RNIap, {
 
 import {items, subs} from '../conf';
 import { useDispatch } from 'react-redux';
-import { images } from '../assets';
 import {increamentByAmount} from '../redux/pointSlice';
 
 let purchaseUpdateSubscription;
@@ -181,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   labelText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
   },
