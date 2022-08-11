@@ -12,19 +12,6 @@ import { images } from "../assets";
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.bg1},
-  {id: 2, bg: images.bg2},
-  {id: 3, bg: images.bg3},
-  {id: 4, bg: images.bg4},
-  {id: 5, bg: images.bg5},
-  {id: 6, bg: images.bg6},
-  {id: 7, bg: images.bg7},
-  {id: 8, bg: images.bg8},
-  {id: 9, bg: images.bg9},
-  {id: 10, bg: images.bg10},
-]
-
 const ItemScreen = ({navigation, route}) => {
 
 
