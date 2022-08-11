@@ -1,4 +1,4 @@
-package com.amazon.wedcardoq;
+package com.amazon.bircardiz;
 
 import com.facebook.react.ReactActivity;
 

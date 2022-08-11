@@ -24,14 +24,13 @@ const dataBg = [
 const ItemScreen = ({navigation, route}) => {
 
   const {male} = route.params;
-  const {female} = route.params;
   const {address} = route.params;
   const {date} = route.params;
 
   const [index, setIndex] = useState(0);
 
   const onClickNextBtn = () => {
-    if(index !== 9){
+    if(index !== 4){
       setIndex(index + 1);
     }
   }
@@ -39,8 +38,6 @@ const ItemScreen = ({navigation, route}) => {
   const onClickBackBtn = () => {
     if(index !== 0){
       setIndex(index - 1);
-    }else{
-      navigation.goBack();
     }
   }
 
@@ -52,11 +49,16 @@ const ItemScreen = ({navigation, route}) => {
         </TouchableOpacity>
       </View>
       <ImageBackground source={dataBg[index].bg} style={appStyle.backg}>
-        <Text style={[appStyle.labelText, {position: 'absolute', top: '25%'}]}>{male}</Text>
-        <Text style={[appStyle.labelText, {position: 'absolute', top: '35%'}]}>{`&`}</Text>
-        <Text style={[appStyle.labelText, {position: 'absolute', top: '45%'}]}>{female}</Text>
-        <Text style={[appStyle.labelText1, {position: 'absolute', top: '60%'}]}>{date}</Text>
-        <Text style={[appStyle.labelText1, {position: 'absolute', top: '75%'}]}>{address}</Text>
+        {index === 2 ? <View style={{position: 'absolute', right: '40%', height: windowHeight * 0.8}}>
+          <Text style={[appStyle.labelText, {position: 'absolute', top: index !== 4 && index !== 3 ? '25%' : '50%' }]}>{male}</Text>
+          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '40%' : '65%'}]}>{date}</Text>
+          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '50%' : '75%'}]}>{address}</Text>
+        </View> : (<>
+          <Text style={[appStyle.labelText, {position: 'absolute', top: index !== 4 && index !== 3 ? '25%' : '50%' }]}>{male}</Text>
+          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '40%' : '65%'}]}>{date}</Text>
+          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '50%' : '75%'}]}>{address}</Text>
+          </>
+        )}
       </ImageBackground>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
