@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.amazon.bircardiz",
+    package = "com.amazon.vicardlq",
 )
 
 android_resource(
     name = "res",
-    package = "com.amazon.bircardiz",
+    package = "com.amazon.vicardlq",
     res = "src/main/res",
 )
 

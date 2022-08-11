@@ -9,6 +9,7 @@ import {
   Text} from "react-native";
 import React, {useEffect, useState} from 'react';
 import { images } from "../assets";
+import { posData } from "../assets/pos";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -23,11 +24,15 @@ const dataBg = [
 
 const ItemScreen = ({navigation, route}) => {
 
-  const {male} = route.params;
+  const {company} = route.params;
   const {address} = route.params;
-  const {date} = route.params;
+  const {web} = route.params;
+  const {email} = route.params;
+  const {phone} = route.params;
 
   const [index, setIndex] = useState(0);
+
+ 
 
   const onClickNextBtn = () => {
     if(index !== 4){
@@ -49,16 +54,11 @@ const ItemScreen = ({navigation, route}) => {
         </TouchableOpacity>
       </View>
       <ImageBackground source={dataBg[index].bg} style={appStyle.backg}>
-        {index === 2 ? <View style={{position: 'absolute', right: '40%', height: windowHeight * 0.8}}>
-          <Text style={[appStyle.labelText, {position: 'absolute', top: index !== 4 && index !== 3 ? '25%' : '50%' }]}>{male}</Text>
-          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '40%' : '65%'}]}>{date}</Text>
-          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '50%' : '75%'}]}>{address}</Text>
-        </View> : (<>
-          <Text style={[appStyle.labelText, {position: 'absolute', top: index !== 4 && index !== 3 ? '25%' : '50%' }]}>{male}</Text>
-          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '40%' : '65%'}]}>{date}</Text>
-          <Text style={[appStyle.labelText1, {position: 'absolute', top: index !== 4 && index !== 3 ? '50%' : '75%'}]}>{address}</Text>
-          </>
-        )}
+        <Text style={textLabel(posData[index][0].x,posData[index][0].y,posData[index][0].size,posData[index][index].color)}>{company}</Text>
+        <Text style={textLabel(posData[index][1].x,posData[index][1].y,posData[index][1].size,posData[index][1].color)}>{email}</Text>
+        <Text style={textLabel(posData[index][2].x,posData[index][2].y,posData[index][2].size,posData[index][2].color)}>{phone}</Text>
+        {index !== 4 && <Text style={textLabel(posData[index][3].x,posData[index][3].y,posData[index][3].size,posData[index][3].color)}>{address}</Text>}
+        <Text style={textLabel(posData[index][4].x,posData[index][4].y,posData[index][4].size,posData[index][4].color)}>{web}</Text>
       </ImageBackground>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickBackBtn()}>
@@ -72,29 +72,38 @@ const ItemScreen = ({navigation, route}) => {
   );
 };
 
+export const textLabel = (x, y, font, color) => StyleSheet.create({
+  fontSize: font,
+  fontWeight: 'bold',
+  color: color,
+  position: 'absolute',
+  top: `${x}%`,
+  left:`${y}%`,
+});
+
 export const appStyle = StyleSheet.create({
   homeView: {
     flex: 1,
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     resizeMode: 'cover',
   },
   backg: {
     width: windowWidth,
-    height: windowHeight * 0.7,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
     alignItems: 'center',
   },
   labelText: {
     fontSize: 50,
-    fontFamily: 'Belligo',
+    fontWeight: 'bold',
     color: '#d3a869',
   },
   labelText1: {
     fontSize: 30,
-    fontFamily: 'Belligo',
+    fontWeight: 'bold',
     color: '#d3a869',
   },
   btn: {
@@ -108,6 +117,8 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    position: 'absolute',
+    bottom: '0%',
   },
   back: {
     width: windowWidth * 0.1,

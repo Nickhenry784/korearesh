@@ -7,7 +7,8 @@ import {
   Image,
   FlatList, 
   Alert,  
-  TextInput} from "react-native";
+  TextInput,
+  ScrollView} from "react-native";
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
@@ -22,9 +23,11 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
-  const [male, setMale] = useState("");
+  const [company, setCompany] = useState("");
   const [address, setAddress] = useState("");
-  const [date, setDate] = useState("");
+  const [web, setWeb] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   const dispatch = useDispatch();
 
@@ -37,15 +40,17 @@ const HomeScreen = () => {
       Alert.alert("Please buy more turn!");
       return false;
     }
-    if(male === "" || address === "" || date === ""){
+    if(company === "" || address === "" || web === "" || email === "" || phone === ""){
       Alert.alert("Please input your information!");
       return false;
     }
     dispatch(decrement());
     navigation.navigate("Item",{
-      male: male,
+      company: company,
       address: address,
-      date: date,
+      web: web,
+      email: email,
+      phone: phone,
     });
   }
 
@@ -60,28 +65,45 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '20%'}}>
+      <View style={{position: 'absolute', top: '5%'}}>
         <Image source={images.textstart} style={appStyle.brokenImage} />
       </View>
-      <View style={{position: 'absolute',top: '30%'}}>
-        <Text style={appStyle.labelText}>Name</Text>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={setMale}
-          value={male}
-        />
-        <Text style={appStyle.labelText}>Address</Text>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={setAddress}
-          value={address}
-        />
-        <Text style={appStyle.labelText}>Date</Text>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={setDate}
-          value={date}
-        />
+      <View style={{position: 'absolute',top: '20%', width: windowWidth, height: windowHeight * 0.6, alignItems: 'center', backgroundColor: 'white'}}>
+        <ScrollView>
+          <Text style={appStyle.labelText}>Name Company</Text>
+          <TextInput
+            style={appStyle.input}
+            onChangeText={setCompany}
+            value={company}
+          />
+          <Text style={appStyle.labelText}>Address</Text>
+          <TextInput
+            style={appStyle.input}
+            onChangeText={setAddress}
+            value={address}
+          />
+          <Text style={appStyle.labelText}>Website</Text>
+          <TextInput
+            style={appStyle.input}
+            onChangeText={setWeb}
+            value={web}
+            keyboardType={"url"}
+          />
+          <Text style={appStyle.labelText}>Email</Text>
+          <TextInput
+            style={appStyle.input}
+            onChangeText={setEmail}
+            value={email}
+            keyboardType={"email-address"}
+          />
+          <Text style={appStyle.labelText}>Phone</Text>
+          <TextInput
+            style={appStyle.input}
+            onChangeText={setPhone}
+            value={phone}
+            keyboardType={"phone-pad"}
+          />
+        </ScrollView>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
@@ -128,7 +150,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'Belligo',
+    fontWeight: 'bold',
     color: 'white',
   },
   buyImage: {
@@ -148,11 +170,11 @@ export const appStyle = StyleSheet.create({
   },
   labelText: {
     fontSize: 30,
-    fontFamily: 'Belligo',
-    color: 'black',
+    fontWeight: 'bold',
+    color: 'black',    
   },
   bottomView: {
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.15,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
