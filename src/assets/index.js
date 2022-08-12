@@ -3,7 +3,7 @@ export const images = {
   return: require('./images/return.png'),
   buyy: require('./images/buyy.png'),
   next: require('./images/next.png'),
-  start: require('./images/start.png'),
+  start: require('./images/Start.png'),
   bg11: require('./images/img/bg11.png'),
   bg2: require('./images/img/bg2.png'),
   bg3: require('./images/img/bg3.png'),
