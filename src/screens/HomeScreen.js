@@ -23,6 +23,8 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch();
 
+  const [popup, setPopup] = useState(false);
+
   const onClickTurnButton = () => {
     navigation.navigate("BUY");
   }
@@ -39,19 +41,30 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.heart} style={appStyle.buyImage} />
+            <Image source={images.btnbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => setPopup(true)}>
+          <Image source={images.note} style={appStyle.buyImage} />
+        </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.play} style={appStyle.itemView} />
+        <Image source={images.btnplay} style={appStyle.itemView} />
       </TouchableOpacity>
-      <Image source={images.name} style={appStyle.brokenImage} />
+      {popup && (
+      <View style={appStyle.popupView}>
+        <ImageBackground style={appStyle.popupImage} source={images.board}>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.btnexit} style={appStyle.okBtn} />
+          </TouchableOpacity>
+          
+        </ImageBackground>
+      </View>)}
     </ImageBackground>
   );
 };
@@ -68,7 +81,7 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.7,
-    height: windowHeight * 0.15,
+    height: windowHeight * 0.3,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -116,7 +129,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'Fruitz Demo',
+    fontFamily: 'chela-one.regular',
     color: 'black',
   },
   buyImage: {

@@ -1,4 +1,4 @@
-package com.amazon.fasthandsorfastbrainsfhfb;
+package com.amazon.numberrivercalculator;
 
 import com.facebook.react.ReactActivity;
 
