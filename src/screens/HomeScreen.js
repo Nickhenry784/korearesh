@@ -12,16 +12,10 @@ import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { images } from "../assets/images";
-import { iconData } from "../assets/icon";
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-const dataButton = [
-  {id: 1, image: images.teaceremony, background: images.teamau}, 
-  {id: 2, image: images.sakura, background: images.sakuramau}, 
-  {id: 3, image: images.phusimoutain, background: images.mautea}, 
-  {id: 4, image: images.kimono, background: images.kimonobackground}
-];
+
 
 const Home = () => {
   const navigation = useNavigation();
@@ -36,25 +30,36 @@ const Home = () => {
     }
     dispatch(decrement());
     const list = handleRandomListIcon();
+    const max = handleMaxNumber(list);
     navigation.navigate("Play",{
       data: list,
+      max: max,
     });
   }
 
   const handleRandomListIcon = () => {
-    const list = [...iconData];
-    for (let index = 0; index < 3; index++) {
-      list.splice(randomIntFromInterval(0, list.length - 1), 1);
-    }
-    const list1 = [...list];
-    const list2 = list.concat(list1);
-    for (let index = 0; index < list2.length; index++) {
-      const element = list2[index];
-      list2.splice(index, 1);
-      list2.splice(randomIntFromInterval(0, 22), 0, element);
+    var list2 = [];
+    for (let index = 0; index < 36; index++) {
+      const element = {
+        id: index,
+        image: Math.floor(Math.random() * 2) === 0 ? Math.floor(Math.random() * 2) === 1 ? null : images.a1 : images.a2,
+        display: true,
+      }
+      list2.push(element);
     }
     return list2;
   };
+
+  const handleMaxNumber = (list) => {
+    var max = 0;
+    for (let index = 0; index < list.length; index++) {
+      const element = list[index];
+      if(element.image === 11){
+        max += 1;
+      }
+    }
+    return max;
+  }
 
 
   const onClickTurnButton = () => {
@@ -63,18 +68,21 @@ const Home = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background0}>
+    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.icon} style={appStyle.scoreStyle} />
+            <Image source={images.turn} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
+      <View style={appStyle.textView}>
+        <Image source={images.textstart} style={appStyle.bullImage} />
+      </View>
       <View style={appStyle.centerView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.start} style={appStyle.startBtn} />
+          <Image source={images.play} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -92,6 +100,10 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     resizeMode: 'cover',
+  },
+  textView: {
+    position: 'absolute',
+    top: '20%'
   },
   appBar: {
     position: 'absolute',
@@ -125,22 +137,14 @@ export const appStyle = StyleSheet.create({
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
-  okBtn: {
-    width: windowWidth * 0.1,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
-  },
-  bottomView: {
-    flex: 0.5,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
+
   centerView: {
-    flex: 0.4,
+    height: windowHeight * 0.3,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+    bottom: '0%',
   },
   turnView: {
     width: windowWidth * 0.15,

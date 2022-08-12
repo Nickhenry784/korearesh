@@ -17,27 +17,22 @@ const windowHeight = Dimensions.get('screen').height;
 const PlayScreen = ({navigation, route}) => {
 
   const {data} = route.params;
-  const [startGameState, setStartGameState] = useState([]);
+  const {max} = route.params;
   const [score, setScore] = useState(0);
   const [heart, setHeart] = useState(3);
-  const [minutesCoutdown, setMinutesCoutdown] = useState(2);
-  const [secondsCoutdown, setSecondsCoutdown] = useState(60);
-  const [doubleClick, setDoubleClick] = useState(false);
-  const [result, setResult] = useState(null);
-  const num = 4;
-  const indexOld = useRef(-1);
+  const [minutesCoutdown, setMinutesCoutdown] = useState(0);
+  const [secondsCoutdown, setSecondsCoutdown] = useState(10);
+  const [listResult, setListResult] = useState(data);
+  const [end, setEnd] = useState(0);
+  const num = 6;
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
       if (secondsCoutdown > 0) {
         setSecondsCoutdown(secondsCoutdown - 1);
       }
-      if (secondsCoutdown === 0 && minutesCoutdown > 0) {
-        setMinutesCoutdown(minutesCoutdown - 1);
-        setSecondsCoutdown(60);
-      }
       if (secondsCoutdown === 0 && minutesCoutdown === 0) {
-        onClickOKButton();
+        handelSecondsCoutdown();
       }
     }, 1000);
     return () => {
@@ -45,101 +40,72 @@ const PlayScreen = ({navigation, route}) => {
     };
   }, [secondsCoutdown, minutesCoutdown]);
 
-  const onClickIconImage = (value, index) => {
-    const list = [...startGameState];
-    list[index] = true;
 
-    if (!doubleClick) {
-      indexOld.current = index;
-      setResult(value);
-      setDoubleClick(true);
-      setStartGameState(list);
+  const handelSecondsCoutdown = () => {
+    const list = [...data];
+    for (let index = 0; index < list.length; index++) {
+      const element = list[index];
+      element.display = false;
+    }
+    setListResult([...list]);
+  }
+
+  const handleClickItem = (item,ind) => {
+    const list = [...data];
+    list[ind].display = true;
+    if(heart === 0){
+      navigation.goBack();
       return false;
     }
-    if (result.id === value.id) {
-      setScore(score + 10);
-    } else {
+    if(item.image === 10){
       setHeart(heart - 1);
-      list[indexOld.current] = false;
-      list[index] = false;
+    }else if(item.image=== 11){
+      setScore(score + 10);
+      setEnd(end + 1);
     }
-    if (heart === 0) {
+    if(end >= max){
       navigation.goBack();
+      return false;
     }
-    if (score === 110) {
-      navigation.goBack();
-    }
-    setDoubleClick(false);
-    setResult(null);
-    setStartGameState(list);
-  };
+    setListResult([...list]);
+  }
 
-  const onClickOKButton = () => {
-    setMinutesCoutdown(0);
-    setSecondsCoutdown(0);
-    const list = [...startGameState];
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < data.length; index++) {
-      list.push(false);
-    }
-    setStartGameState(list);
-  };
   return (
-    <ImageBackground source={images.background} style={appStyle.homeView}>
+    <ImageBackground source={images.bg1} style={appStyle.homeView}>
       <View style={appStyle.appBar}>
         <Text style={appStyle.turn}>
           SCORE:
           {score}
         </Text>
-        {startGameState.length !== 0 && (
-          <Text style={appStyle.turn}>
+        <Text style={appStyle.turn}>
             HEART:
             {heart}
-          </Text>
-        )}
+        </Text>
       </View>
       <View style={appStyle.centerView}>
-        {startGameState.length === 0 && (
-          <Text style={appStyle.timeText}>
-            {`${minutesCoutdown} : ${secondsCoutdown}`}
-          </Text>
-        )}
+        <Text style={appStyle.timeText}>
+          {`0${minutesCoutdown} : ${secondsCoutdown >= 10 ? secondsCoutdown : `0${secondsCoutdown}`}`}
+        </Text>
         <FlatList
-          data={data}
+          data={listResult}
           numColumns={num}
           scrollEnabled={false}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              onPress={() => onClickIconImage(item, index)}
-              onLongPress={() => onClickIconImage(item, index)}
-              disabled={
-                startGameState.length === 0 ? true : startGameState[index]
-              }
-              style={appStyle.iconButton}>
-              {startGameState.length === 0 ? (
-                <Image source={item.image} style={appStyle.iconImage} />
-              ) : (
-                <Image
-                  source={
-                    startGameState[index] ? item.image : images.icon
-                  }
-                  style={appStyle.iconImage}
-                />
-              )}
+              onPress={() => handleClickItem(item,index)}
+              disabled={item.display}
+            >
+              <ImageBackground source={images.khung} style={appStyle.iconButton}>
+                {item.display && <Image source={item.image} style={appStyle.iconImage} />}
+              </ImageBackground>
             </TouchableOpacity>
           )}
         />
-        {startGameState.length === 0 ? (
-          <TouchableOpacity
-            onPress={onClickOKButton}>
-            <Image source={images.start} style={appStyle.startImage} />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}>
-            <Image source={images.back} style={appStyle.startImage} />
-          </TouchableOpacity>
-        )}
+      </View>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={images.home} style={appStyle.okBtn} />
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -153,6 +119,14 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     resizeMode: 'cover',
+  },
+  bottomView: {
+   height: windowHeight * 0.2,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: '0%',
   },
   appBar: {
     flex: 0.1,
@@ -178,20 +152,27 @@ export const appStyle = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
+    paddingVertical: 20,
   },
   iconButton: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
-    alignItems: 'center',
-  },
-  iconImage: {
     width: windowWidth * 0.15,
     height: windowWidth * 0.15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconImage: {
+    width: windowWidth * 0.11,
+    height: windowWidth * 0.11,
     resizeMode: 'contain',
   },
   startImage: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  okBtn: {
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
 });
