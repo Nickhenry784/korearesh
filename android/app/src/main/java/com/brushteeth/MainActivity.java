@@ -1,4 +1,4 @@
-package com.amazon.randonumber;
+package com.olesimonis.randonumber;
 
 import com.facebook.react.ReactActivity;
 
